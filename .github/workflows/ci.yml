@@ -1,0 +1,46 @@
+name: Build experimental firmware
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install bare-metal toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y gcc-arm-none-eabi binutils-arm-none-eabi
+          arm-none-eabi-gcc --version
+      - name: Test host tools and driver mocks
+        run: make test
+      - name: Build and verify experimental image
+        run: make -j2 package
+      - name: Record build checksums
+        run: |
+          cd build
+          sha256sum k10pro.bin k10pro.experimental.bin k10pro.elf > SHA256SUMS
+      - name: Preserve developer artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: k10pro-experimental-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            build/k10pro.elf
+            build/k10pro.bin
+            build/k10pro.experimental.bin
+            build/k10pro.map
+            build/verification.json
+            build/package.json
+            build/SHA256SUMS

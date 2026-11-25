@@ -1,0 +1,22 @@
+This is an independent experimental implementation for the Quansheng
+UV-K10 Pro. It is not an official Quansheng or Puya release and is not
+endorsed by those companies.
+
+The code was written from public hardware documentation and observations of
+the official K10PRO_ENG_v8.02.16_publish.bin application. This is not a claim
+of a separated clean-room process. See docs/reverse-engineering.md for the
+reference sample hashes, observed addresses, sources, and uncertainty.
+
+No Quansheng firmware image, vendor disassembly, bootloader, external Flash
+dump, calibration data, font image, or Si47xx patch is included. The MIT
+license applies to the new project code and documentation, not to third-party
+reference materials or trademarks.
+
+The 128-byte firmware-container XOR constant is a protocol interoperability
+parameter, also documented by the F4HWN project's tools/serialtool/_fwcodec.py:
+https://github.com/armel/uv-k1-k5v3-firmware-custom
+The codec implementation in this repository is independently written.
+
+Register definitions are documented by Puya's PY32F071 datasheet and OpenPuya
+CMSIS/LL headers. Si47xx command definitions are documented in Skyworks AN332.
+See docs/reverse-engineering.md and docs/pinmap.md for source links.

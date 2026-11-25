@@ -1,0 +1,17 @@
+/build/
+/build-*/
+/.cache/
+/.toolchains/
+/reference/
+__pycache__/
+*.py[cod]
+*.o
+*.d
+*.su
+*.elf
+*.map
+*.bin
+*.hex
+*.zip
+*.tar.*
+.DS_Store
