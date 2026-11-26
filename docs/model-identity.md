@@ -16,6 +16,7 @@
 | UV-K10 Pro CPS 0.56 | [厂商 CMS 文件 11390][cps] → RAR → Setup Factory 7 → 真正的 .NET 主程序 | 主程序资源、方法引用、结构与 IL 常量；未运行 EXE 或 CLR |
 | `K10PRO_ENG_v8.02.16_publish.bin` 的解码应用 | 前述官方固件分析的固定 SHA-256 样本 | 原始 ARM 函数的静态分析及明确隔离的指令重放 |
 | 25Q32、MCU 与此前推测一致 | 本轮用户确认 | 来源标记为 `user-report`，不改写成新的拆机实测或电子识别结果 |
+| Si4732、ATGM336H-5N31、10 × 10 mm GPS 天线、32.768 kHz SMD3215-2P 晶振、SMA 母座 | 2026-11-26 用户补充 | 记录为本次研究对象配置；GNSS 厂商规格、模块引脚与电台接线分别核对，见 [器件补充](gnss-hardware.md)及 [原始报告记录](evidence/owner-hardware-20261126.json) |
 
 关键哈希如下；其余资产哈希见 JSON。
 

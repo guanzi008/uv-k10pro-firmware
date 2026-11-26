@@ -146,7 +146,12 @@ handoff. Opting in with `K10_ENABLE_KEYPAD=1` takes PA14 for the matrix. The
 contact model does not prove the board's diode isolation, safe arbitrary
 multiple-key shorts, ghosting behavior or external switch/connector numbering.
 
-## Optional Si4732 receiver
+## Si4732 receiver
+
+The owner reported Si4732 in this research unit on 2026-11-26. This records
+component population as a user report, not a new measurement of the bus below
+or a claim that every K10 Pro variant includes it. The full suffix, package,
+reset/power routing and reference-clock wiring remain unresolved.
 
 | Signal or field | Mapping | Evidence |
 | --- | --- | --- |
@@ -217,6 +222,20 @@ The common framing and each transport's checksum/XOR behavior are documented in
 identify the MCU. The descriptor text `K8 CPS` is a product/software clue; no
 assumption about an interchangeable K8 radio follows from that string.
 
+## Owner-reported GNSS, crystal and antenna components
+
+The owner supplied **ATGM336H-5N31**, a **10 × 10 mm GPS antenna**, a
+**32.768 kHz SMD3215-2P crystal**, and an **SMA female antenna connector** on
+2026-11-26. The manufacturer lists the GNSS variant as **ATGM336H-5N-31**.
+Its module-level UART/PPS/power pin reference and exact source boundaries are
+recorded in [gnss-hardware.md](gnss-hardware.md).
+
+No K10 MCU pin has yet been assigned to GNSS TXD0/RXD0, PPS, ON/OFF or nRESET.
+In particular, the USART3/PB10/PB11 software configuration above is not enough
+to establish that it connects to this GNSS module. The 32.768 kHz crystal's
+clock domain and the antenna connector's RF branch remain unassigned. No new
+GPIO or clock register definitions follow from the component list alone.
+
 ## Configuration and validation boundary
 
 `K10_ENABLE_SPI_NOR=0`, `K10_ENABLE_SI4732=0`, `K10_ENABLE_DISPLAY=0` and
@@ -225,8 +244,8 @@ as explicit `DISABLED` results with no register access. NOR, receiver and displa
 default to 1; keypad defaults to 0 for the PA14/SWCLK reason above. All operations
 are blocking and intended for one caller outside an ISR.
 
-Hardware work still needs the complete MCU/NOR suffixes and package markings, optional
-receiver population, real core/bus clock, pull-ups, reset/power sequencing, and
+Hardware work still needs the complete MCU/NOR suffixes and package markings,
+board revisions, real core/bus clock, pull-ups, reset/power sequencing, and
 receiver command traces. Delay accuracy follows the HAL's clock estimate;
 `hal_clock_known()` records whether that clock is established. An inherited
 bootloader clock estimate is not a measurement. The startup/receiver state also

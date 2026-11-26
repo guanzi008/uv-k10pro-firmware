@@ -1,0 +1,22 @@
+{
+  "recorded_on": "2026-11-26",
+  "timezone": "Asia/Shanghai",
+  "source_kind": "user-report",
+  "scope": "Hardware configuration supplied for this UV-K10 Pro research target; not generalized to all production variants",
+  "new_photograph_or_measurement": false,
+  "components": [
+    {"role": "broadcast_receiver", "reported_model": "Si4732", "full_suffix": null},
+    {"role": "gnss_module", "reported_manufacturer": "中科微", "reported_model": "ATGM336H-5N31", "manufacturer_catalog_model": "ATGM336H-5N-31", "mcu_uart_mapping": null},
+    {"role": "gnss_antenna", "reported_dimensions_mm": [10, 10], "height_mm": null, "active_or_passive": null},
+    {"role": "crystal", "reported_frequency_hz": 32768, "reported_package": "SMD3215-2P", "load_capacitance_pf": null, "clock_domain": null},
+    {"role": "antenna_connector", "reported_type": "SMA", "reported_gender": "female", "rf_branch": null}
+  ],
+  "manufacturer_reference": {
+    "product_url": "https://www.icofchina.com/daohang/danpin/2525.html",
+    "manual_url": "https://icofchina.com/d/file/xiazai/2020-09-22/35258a39d8050a9a32ade72ef103c8b5.pdf",
+    "manual_page_count": 18,
+    "catalog_constellations_for_31": ["GPS/QZSS", "BDS"],
+    "retrieval": "Official-source search index text; direct open returned 404; no downloaded PDF hash or page screenshot",
+    "module_specs_are_not_board_measurements": true
+  }
+}
