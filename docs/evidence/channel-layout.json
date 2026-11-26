@@ -1,0 +1,1175 @@
+{
+  "sample_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+  "schema_version": 1,
+  "scope": "Actual reference Thumb instructions above explicit NOR byte-array hooks; synthetic records only",
+  "hardware_hooks": [
+    "0x080195e4 read",
+    "0x08019588 erase 4 KiB",
+    "0x080197ec page program"
+  ],
+  "conditions": {
+    "startup": "actual 0x08002ab8 scatter initialization, then controlled globals",
+    "loader": {
+      "selected_index_at_0x200023d0": 77,
+      "side": 0,
+      "mode": 3,
+      "enabled_bands_at_0x2000019b": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "dynamic_bounds": "copied from reference 0x0801e670/0x0801e68c",
+      "attribute": 2
+    },
+    "scratch": "0x21000000 is artificial input RAM, not fitted radio SRAM",
+    "nor_capacity": "2 MiB synthetic input; not a hardware capacity result"
+  },
+  "save_modes": [
+    {
+      "index": 77,
+      "side": 0,
+      "mode": 2,
+      "rmw_calls": [
+        {
+          "address": 4928,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 69696,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536874480,
+        "r1": 536882220,
+        "instructions": 1699,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 77,
+      "side": 0,
+      "mode": 3,
+      "rmw_calls": [
+        {
+          "address": 4948,
+          "length": 4,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536878192,
+        "r1": 7936,
+        "instructions": 393,
+        "hardware_hooks": 18
+      }
+    },
+    {
+      "index": 77,
+      "side": 0,
+      "mode": 4,
+      "rmw_calls": [
+        {
+          "address": 4952,
+          "length": 16,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536878192,
+        "r1": 7936,
+        "instructions": 482,
+        "hardware_hooks": 18
+      }
+    },
+    {
+      "index": 77,
+      "side": 0,
+      "mode": 0,
+      "rmw_calls": [],
+      "execution": {
+        "r0": 4928,
+        "r1": 0,
+        "instructions": 19,
+        "hardware_hooks": 0
+      }
+    },
+    {
+      "index": 0,
+      "side": 0,
+      "mode": 2,
+      "rmw_calls": [
+        {
+          "address": 0,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 69632,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536874416,
+        "r1": 536882220,
+        "instructions": 1608,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 998,
+      "side": 1,
+      "mode": 2,
+      "rmw_calls": [
+        {
+          "address": 63872,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 70592,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536875376,
+        "r1": 536882220,
+        "instructions": 1874,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 999,
+      "side": 0,
+      "mode": 0,
+      "rmw_calls": [
+        {
+          "address": 65536,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 70592,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536875376,
+        "r1": 536882220,
+        "instructions": 1890,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 999,
+      "side": 1,
+      "mode": 4,
+      "rmw_calls": [
+        {
+          "address": 65600,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 70592,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536875376,
+        "r1": 536882220,
+        "instructions": 1888,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 1005,
+      "side": 0,
+      "mode": 2,
+      "rmw_calls": [
+        {
+          "address": 66304,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 70592,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536875376,
+        "r1": 536882220,
+        "instructions": 1930,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 1005,
+      "side": 1,
+      "mode": 2,
+      "rmw_calls": [
+        {
+          "address": 66368,
+          "length": 64,
+          "mode": 0
+        },
+        {
+          "address": 70592,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536875376,
+        "r1": 536882220,
+        "instructions": 1928,
+        "hardware_hooks": 21
+      }
+    },
+    {
+      "index": 1006,
+      "side": 0,
+      "mode": 2,
+      "rmw_calls": [],
+      "execution": {
+        "r0": 1006,
+        "r1": 0,
+        "instructions": 8,
+        "hardware_hooks": 0
+      }
+    }
+  ],
+  "attributes": {
+    "deletion": {
+      "index": 77,
+      "only_changed_offset": 69709,
+      "record_unchanged": true,
+      "rmw_calls": [
+        {
+          "address": 69696,
+          "length": 64,
+          "mode": 0
+        }
+      ],
+      "execution": {
+        "r0": 536878192,
+        "r1": 73472,
+        "instructions": 980,
+        "hardware_hooks": 19
+      }
+    },
+    "cache": {
+      "values": [
+        {
+          "index": 1,
+          "attribute": 1
+        },
+        {
+          "index": 63,
+          "attribute": 0
+        },
+        {
+          "index": 1,
+          "attribute": 1
+        },
+        {
+          "index": 64,
+          "attribute": 1
+        },
+        {
+          "index": 999,
+          "attribute": 5
+        },
+        {
+          "index": 1005,
+          "attribute": 4
+        }
+      ],
+      "nor_reads": [
+        {
+          "op": "read",
+          "address": 69632,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 69696,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 70592,
+          "length": 64
+        }
+      ]
+    },
+    "validity": [
+      {
+        "index": 0,
+        "attribute": 2,
+        "band_enabled": 1,
+        "returned": 1
+      },
+      {
+        "index": 77,
+        "attribute": 162,
+        "band_enabled": 1,
+        "returned": 1
+      },
+      {
+        "index": 998,
+        "attribute": 6,
+        "band_enabled": 1,
+        "returned": 1
+      },
+      {
+        "index": 999,
+        "attribute": 2,
+        "band_enabled": 1,
+        "returned": 0
+      },
+      {
+        "index": 77,
+        "attribute": 7,
+        "band_enabled": 1,
+        "returned": 0
+      },
+      {
+        "index": 77,
+        "attribute": 255,
+        "band_enabled": 1,
+        "returned": 0
+      },
+      {
+        "index": 77,
+        "attribute": 2,
+        "band_enabled": 0,
+        "returned": 0
+      }
+    ]
+  },
+  "loader": [
+    {
+      "reverse": 0,
+      "turbo_capability_byte": 1,
+      "execution": {
+        "r0": 255,
+        "r1": 255,
+        "instructions": 1100,
+        "hardware_hooks": 4
+      },
+      "nor_operations": [
+        {
+          "op": "read",
+          "address": 69696,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 4928,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 131120,
+          "length": 24
+        },
+        {
+          "op": "read",
+          "address": 131272,
+          "length": 10
+        }
+      ],
+      "runtime_fields": {
+        "aprs_ptt": 1,
+        "aprs_tx_channel": 3,
+        "offset_direction": 1,
+        "bandwidth": 1,
+        "step_index": 4,
+        "scrambler": 3,
+        "power": 2,
+        "busy_lockout": 1,
+        "reverse": 0,
+        "signaling_decode": 1,
+        "ptt_id": 2,
+        "modulation": 0,
+        "scan_list": 255,
+        "squelch": 4,
+        "signaling_system": 1,
+        "aprs_receive": 1
+      },
+      "rx_units": 14552500,
+      "tx_units": 14612500,
+      "rx_pointer": "0x20002b34",
+      "tx_pointer": "0x20002b40",
+      "name_hex": "4142434445464748494a000000000000",
+      "rx_tone": [
+        1,
+        885
+      ],
+      "tx_tone": [
+        2,
+        19
+      ]
+    },
+    {
+      "reverse": 1,
+      "turbo_capability_byte": 1,
+      "execution": {
+        "r0": 255,
+        "r1": 255,
+        "instructions": 1101,
+        "hardware_hooks": 4
+      },
+      "nor_operations": [
+        {
+          "op": "read",
+          "address": 69696,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 4928,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 131120,
+          "length": 24
+        },
+        {
+          "op": "read",
+          "address": 131272,
+          "length": 10
+        }
+      ],
+      "runtime_fields": {
+        "aprs_ptt": 1,
+        "aprs_tx_channel": 3,
+        "offset_direction": 1,
+        "bandwidth": 1,
+        "step_index": 4,
+        "scrambler": 3,
+        "power": 2,
+        "busy_lockout": 1,
+        "reverse": 1,
+        "signaling_decode": 1,
+        "ptt_id": 2,
+        "modulation": 0,
+        "scan_list": 255,
+        "squelch": 4,
+        "signaling_system": 1,
+        "aprs_receive": 1
+      },
+      "rx_units": 14552500,
+      "tx_units": 14612500,
+      "rx_pointer": "0x20002b40",
+      "tx_pointer": "0x20002b34",
+      "name_hex": "4142434445464748494a000000000000",
+      "rx_tone": [
+        1,
+        885
+      ],
+      "tx_tone": [
+        2,
+        19
+      ]
+    },
+    {
+      "reverse": 0,
+      "turbo_capability_byte": 0,
+      "execution": {
+        "r0": 255,
+        "r1": 255,
+        "instructions": 1099,
+        "hardware_hooks": 4
+      },
+      "nor_operations": [
+        {
+          "op": "read",
+          "address": 69696,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 4928,
+          "length": 64
+        },
+        {
+          "op": "read",
+          "address": 131120,
+          "length": 24
+        },
+        {
+          "op": "read",
+          "address": 131272,
+          "length": 10
+        }
+      ],
+      "runtime_fields": {
+        "aprs_ptt": 1,
+        "aprs_tx_channel": 3,
+        "offset_direction": 1,
+        "bandwidth": 1,
+        "step_index": 4,
+        "scrambler": 3,
+        "power": 1,
+        "busy_lockout": 1,
+        "reverse": 0,
+        "signaling_decode": 1,
+        "ptt_id": 2,
+        "modulation": 0,
+        "scan_list": 255,
+        "squelch": 4,
+        "signaling_system": 1,
+        "aprs_receive": 1
+      },
+      "rx_units": 14552500,
+      "tx_units": 14612500,
+      "rx_pointer": "0x20002b34",
+      "tx_pointer": "0x20002b40",
+      "name_hex": "4142434445464748494a000000000000",
+      "rx_tone": [
+        1,
+        885
+      ],
+      "tx_tone": [
+        2,
+        19
+      ]
+    },
+    {
+      "case": "invalid_fields",
+      "execution": {
+        "r0": 255,
+        "r1": 255,
+        "instructions": 1121,
+        "hardware_hooks": 4
+      },
+      "runtime_fields": {
+        "aprs_ptt": 0,
+        "aprs_tx_channel": 0,
+        "offset_direction": 0,
+        "bandwidth": 0,
+        "step_index": 12,
+        "scrambler": 0,
+        "power": 1,
+        "busy_lockout": 0,
+        "reverse": 0,
+        "signaling_decode": 0,
+        "ptt_id": 0,
+        "modulation": 0,
+        "scan_list": 255,
+        "squelch": 4,
+        "signaling_system": 0,
+        "aprs_receive": 0
+      },
+      "offset_units": 1000000,
+      "rx_tone": [
+        0,
+        0
+      ],
+      "tx_tone": [
+        0,
+        0
+      ]
+    },
+    {
+      "case": "non_fm_active_settings",
+      "modulation": 2,
+      "active_tone_types": [
+        0,
+        0
+      ],
+      "persisted_tone_shadows": [
+        1,
+        2
+      ],
+      "active_scrambler_and_decode": [
+        0,
+        0
+      ],
+      "execution": {
+        "r0": 255,
+        "r1": 255,
+        "instructions": 1096,
+        "hardware_hooks": 4
+      }
+    },
+    {
+      "case": "name_only_mode_4",
+      "name_hex": "3132333435363738393000767778797a",
+      "nor_operations": [
+        {
+          "op": "read",
+          "address": 4952,
+          "length": 10
+        },
+        {
+          "op": "read",
+          "address": 131120,
+          "length": 24
+        },
+        {
+          "op": "read",
+          "address": 131272,
+          "length": 10
+        }
+      ],
+      "execution": {
+        "r0": 255,
+        "r1": 255,
+        "instructions": 1398,
+        "hardware_hooks": 3
+      }
+    }
+  ],
+  "pure_functions": {
+    "tone_sanitizer": [
+      {
+        "input": [
+          0,
+          0
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 20
+      },
+      {
+        "input": [
+          0,
+          99
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 20
+      },
+      {
+        "input": [
+          1,
+          599
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 17
+      },
+      {
+        "input": [
+          1,
+          600
+        ],
+        "output": [
+          1,
+          600
+        ],
+        "instructions": 16
+      },
+      {
+        "input": [
+          1,
+          885
+        ],
+        "output": [
+          1,
+          885
+        ],
+        "instructions": 16
+      },
+      {
+        "input": [
+          1,
+          2600
+        ],
+        "output": [
+          1,
+          2600
+        ],
+        "instructions": 16
+      },
+      {
+        "input": [
+          1,
+          2601
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 17
+      },
+      {
+        "input": [
+          2,
+          0
+        ],
+        "output": [
+          2,
+          0
+        ],
+        "instructions": 15
+      },
+      {
+        "input": [
+          2,
+          511
+        ],
+        "output": [
+          2,
+          511
+        ],
+        "instructions": 15
+      },
+      {
+        "input": [
+          2,
+          512
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 17
+      },
+      {
+        "input": [
+          3,
+          19
+        ],
+        "output": [
+          3,
+          19
+        ],
+        "instructions": 17
+      },
+      {
+        "input": [
+          3,
+          512
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 19
+      },
+      {
+        "input": [
+          4,
+          8388607
+        ],
+        "output": [
+          4,
+          8388607
+        ],
+        "instructions": 19
+      },
+      {
+        "input": [
+          4,
+          8388608
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 21
+      },
+      {
+        "input": [
+          5,
+          16777215
+        ],
+        "output": [
+          5,
+          16777215
+        ],
+        "instructions": 20
+      },
+      {
+        "input": [
+          5,
+          16777216
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 22
+      },
+      {
+        "input": [
+          6,
+          1
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 20
+      },
+      {
+        "input": [
+          255,
+          4294967295
+        ],
+        "output": [
+          0,
+          0
+        ],
+        "instructions": 20
+      }
+    ],
+    "tx_arithmetic": [
+      {
+        "rx_units": 14552500,
+        "offset_units": 60000,
+        "direction": 0,
+        "tx_units": 14552500,
+        "instructions": 15
+      },
+      {
+        "rx_units": 14552500,
+        "offset_units": 60000,
+        "direction": 1,
+        "tx_units": 14612500,
+        "instructions": 19
+      },
+      {
+        "rx_units": 14552500,
+        "offset_units": 60000,
+        "direction": 2,
+        "tx_units": 14492500,
+        "instructions": 20
+      },
+      {
+        "rx_units": 2500000,
+        "offset_units": 1,
+        "direction": 2,
+        "tx_units": 2500000,
+        "instructions": 19
+      },
+      {
+        "rx_units": 58000000,
+        "offset_units": 1,
+        "direction": 1,
+        "tx_units": 58000000,
+        "instructions": 20
+      },
+      {
+        "rx_units": 2500000,
+        "offset_units": 3000000,
+        "direction": 2,
+        "tx_units": 2500000,
+        "instructions": 19
+      },
+      {
+        "rx_units": 4294967295,
+        "offset_units": 3000001,
+        "direction": 1,
+        "tx_units": 3000000,
+        "instructions": 19
+      },
+      {
+        "rx_units": 14552500,
+        "offset_units": 0,
+        "direction": 255,
+        "tx_units": 2500000,
+        "instructions": 17
+      }
+    ]
+  },
+  "stock_ui": [
+    {
+      "field": "power",
+      "record_offset": 16,
+      "menu_index": 2,
+      "values": [
+        {
+          "value": 0,
+          "display": "LOW"
+        },
+        {
+          "value": 1,
+          "display": "HIGH"
+        },
+        {
+          "value": 2,
+          "display": "TURBO"
+        }
+      ]
+    },
+    {
+      "field": "bandwidth",
+      "record_offset": 13,
+      "menu_index": 8,
+      "values": [
+        {
+          "value": 0,
+          "display": "WIDE"
+        },
+        {
+          "value": 1,
+          "display": "NARROW"
+        }
+      ]
+    },
+    {
+      "field": "modulation",
+      "record_offset": 21,
+      "menu_index": 11,
+      "values": [
+        {
+          "value": 0,
+          "display": "FM"
+        },
+        {
+          "value": 1,
+          "display": "AM"
+        },
+        {
+          "value": 2,
+          "display": "SSB"
+        },
+        {
+          "value": 3,
+          "display": "CW"
+        }
+      ]
+    },
+    {
+      "field": "offset_direction",
+      "record_offset": 12,
+      "menu_index": 6,
+      "values": [
+        {
+          "value": 0,
+          "display": "OFF"
+        },
+        {
+          "value": 1,
+          "display": "+"
+        },
+        {
+          "value": 2,
+          "display": "-"
+        }
+      ]
+    },
+    {
+      "field": "ptt_id",
+      "record_offset": 20,
+      "menu_index": 13,
+      "values": [
+        {
+          "value": 0,
+          "display": "OFF"
+        },
+        {
+          "value": 1,
+          "display": "BOT"
+        },
+        {
+          "value": 2,
+          "display": "EOT"
+        },
+        {
+          "value": 3,
+          "display": "BOTH"
+        }
+      ]
+    },
+    {
+      "field": "aprs_ptt",
+      "record_offset": 8,
+      "menu_index": 17,
+      "values": [
+        {
+          "value": 0,
+          "display": "OFF"
+        },
+        {
+          "value": 1,
+          "display": "BOT"
+        },
+        {
+          "value": 2,
+          "display": "EOT"
+        }
+      ]
+    },
+    {
+      "field": "signaling_system",
+      "record_offset": 60,
+      "menu_index": 12,
+      "values": [
+        {
+          "value": 0,
+          "display": "DTMF"
+        },
+        {
+          "value": 1,
+          "display": "5TONE"
+        }
+      ]
+    },
+    {
+      "menu_index": 7,
+      "value": 60000,
+      "tone_kind": 0,
+      "display": "0.60000MHz"
+    },
+    {
+      "menu_index": 5,
+      "value": 885,
+      "tone_kind": 1,
+      "display": "88.5Hz"
+    },
+    {
+      "menu_index": 5,
+      "value": 19,
+      "tone_kind": 2,
+      "display": "D023N"
+    },
+    {
+      "menu_index": 5,
+      "value": 19,
+      "tone_kind": 3,
+      "display": "D023I"
+    },
+    {
+      "menu_index": 5,
+      "value": 1193046,
+      "tone_kind": 4,
+      "display": "U23:123456"
+    },
+    {
+      "menu_index": 5,
+      "value": 11259375,
+      "tone_kind": 5,
+      "display": "U24:abcdef"
+    },
+    {
+      "menu_index": 15,
+      "value": 32,
+      "tone_kind": 0,
+      "display": "ALL CHAN"
+    },
+    {
+      "menu_index": 15,
+      "value": 33,
+      "tone_kind": 0,
+      "display": "NULL"
+    }
+  ],
+  "scan_lists": {
+    "load": {
+      "index": 5,
+      "input_member_slots": [
+        0,
+        77,
+        998,
+        999,
+        65535,
+        77,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535,
+        65535
+      ],
+      "retained_members": [
+        0,
+        77,
+        998,
+        77
+      ],
+      "member_count": 4,
+      "input_priorities": [
+        23130,
+        998
+      ],
+      "resolved_priorities": [
+        77,
+        998
+      ],
+      "execution": {
+        "r0": 0,
+        "r1": 536871318,
+        "instructions": 1657,
+        "hardware_hooks": 5
+      }
+    },
+    "save": {
+      "rmw_calls": [
+        {
+          "address": 90752,
+          "length": 120,
+          "mode": 0
+        }
+      ],
+      "tail_8_bytes_preserved": true,
+      "execution": {
+        "r0": 536878192,
+        "r1": 93952,
+        "instructions": 1372,
+        "hardware_hooks": 18
+      }
+    }
+  },
+  "checks_passed": true
+}

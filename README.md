@@ -2,7 +2,7 @@
 
 [![Build experimental firmware](https://github.com/guanzi008/uv-k10pro-firmware/actions/workflows/ci.yml/badge.svg)](https://github.com/guanzi008/uv-k10pro-firmware/actions/workflows/ci.yml)
 
-基于泉盛 **UV-K10 Pro 官方英文固件 8.02.16 的静态分析**，独立实现的第三方固件工程。当前版本 `0.1.0-exp` 面向开发者进行硬件初始化与诊断，目标平台为 PY32F071 兼容的 Cortex-M0+，采用 128 KiB Flash / 16 KiB SRAM 地址布局。
+基于泉盛 **UV-K10 Pro 官方英文固件 8.02.16 的静态分析、原指令仿真和官方应用配置交叉核对**，独立实现的第三方固件与研究工程。当前固件版本 `0.1.0-exp` 面向开发者进行硬件初始化与诊断，目标平台为 PY32F071 兼容的 Cortex-M0+，采用 128 KiB Flash / 16 KiB SRAM 地址布局。
 
 **当前没有实机启动、屏幕显示或收发验证记录，不能当作日常对讲固件使用。** 本仓库已经实现可构建的启动程序、硬件驱动、诊断应用及固件文件工具；完整屏幕/键盘界面、对讲接收与发射、GPS/APRS、USB 通信和恢复刷写流程仍待开发。软件通过编译和主机测试，不等于设备已验证。
 
@@ -16,15 +16,30 @@
 | Si4732 | PB8/PB9 软件 I²C、POWER_UP、GET_REV、超时/NACK 处理、可选 FM 调谐与读回核对 | 需要芯片已供电并释放 RESET；音频线路待核对 |
 | 诊断应用 | 启动探测、RAM 状态结构、GDB 命令邮箱、64 字节 Flash 读取 | 无显示屏或 USB/串口控制台 |
 | 固件工具 | XOR128 + CRC16/XMODEM 封装、解包、检查、SHA-256 | 官方样本重封装逐字节一致；未验证官方刷写器接收新包 |
+| 信道工具 | 999 个普通信道、14 个 VFO、属性表、亚音、名称、扫描列表的离线解析与编辑 | 实际原厂加载/保存/删除函数重放；保留未知字节；不连接设备 |
+| 写频协议 | 帧编解码、CRC16/X25、XOR16、原始 Flash 读写请求草稿与状态模型 | 原厂 parser→dispatcher→sender，另有合成 NOR 写入再读回；没有在线写频程序 |
+| 仿真与设置地图 | 固定样本的 CPU 重放、4 KiB NOR 更新、RF GPIO 位流、APK schema 摘要/版本比较 | 明确的人工输入与外设模型；APK 声明和固件行为分别标记 |
 | 自动化 | Python 单元测试、驱动模拟、ARM 构建、向量/大小检查、开发构建产物 | GitHub Actions 不接触硬件 |
 
 引脚、寄存器及固件内函数位置见 [引脚证据](docs/pinmap.md)，芯片判定和样本来源见 [逆向记录](docs/reverse-engineering.md)。这里的硬件型号是固件指纹与厂商资料匹配的结论，完整封装后缀仍需拆机确认。
 
 首版本地验证结果、工具链、镜像大小、摘要和测试覆盖见 [验证记录](docs/validation.md)。
 
+## 信道与协议研究进展
+
+普通信道记录为 **64 B × 999**，地址 `index * 64`；属性字节位于 `0x11000 + index`。接收频率和频差均使用 10 Hz 单位，删除操作只将属性置 `FF`。这些行为由原厂函数执行验证，详细字段和版本差异见 [信道与扫描列表](docs/channel-storage.md)。
+
+电脑写频使用通用存储命令 `0x02C3` 读、`0x02C5` 写；USB 为固件中声明的 CDC ACM，VID/PID `36B7:0001`。**写入 ACK 可能对应被状态门控跳过的操作**，USB/USART1 回应中的 `FFFF` 也不是计算出的 CRC。完整帧格式、状态条件和证据见 [写频协议](docs/programming-protocol.md)。
+
+原厂 NOR 更新函数有两种擦除后行为，不能仅凭请求的地址/长度推断副作用。原厂 RF 三线函数已经执行到 GPIO 逻辑边沿，得到 PF5 SCK、PF6 双向 SDATA、PF9 低有效 CS；芯片具体型号仍待丝印确认。模型、可复现命令和每项边界见 [仿真记录](docs/emulation.md)。
+
+官网 APK 的协议机型为 K8。静态配置覆盖全局设置、DTMF、五音、APRS、广播存台和开机图等区域，但部分枚举与当前固件不同，且 APRS 声明存在重叠字段。参见 [设置地址图与应用版本差异](docs/settings-map.md)、[硬件资料与拆机线索](docs/hardware-research.md)。
+
+官方 PC CPS 0.56 的实际程序也已从安装包静态提取并分析 .NET 元数据/IL。它进一步确认了 64 B 信道结构，并纠正了写请求的内层长度含义：CPS 使用固定 12 B 头长度及 128 B 数据槽，count 可以小于数据槽长度。独立分析工具为 [analyze_cps.py](tools/analyze_cps.py)，报告见 [CPS 交叉证据](docs/evidence/cps-protocol-crosscheck.json)。
+
 ## 构建
 
-需要 GNU Make、Python 3.10+、Arm GNU `arm-none-eabi` 工具链，以及用于驱动模拟测试的主机 C 编译器。Python 工具仅使用标准库。本地验证采用 Arm GNU Toolchain **14.3.Rel1 / GCC 14.3.1**；CI 使用 Ubuntu 提供的 GCC ARM Embedded。
+需要 GNU Make、Python 3.10+、Arm GNU `arm-none-eabi` 工具链，以及用于驱动模拟测试的主机 C 编译器。普通文件与协议工具仅使用 Python 标准库；原指令仿真另需 [requirements-re.txt](requirements-re.txt) 中的可选依赖。本地验证采用 Arm GNU Toolchain **14.3.Rel1 / GCC 14.3.1**；CI 使用 Ubuntu 提供的 GCC ARM Embedded。
 
 ```sh
 git clone https://github.com/guanzi008/uv-k10pro-firmware.git
@@ -48,7 +63,7 @@ make CROSS_COMPILE=/absolute/path/to/bin/arm-none-eabi- package
 
 程序启动后读取 MCU UID、外部 Flash JEDEC ID；只有识别到明确支持的型号才读取 Flash 前 64 字节。随后尝试初始化 Si4732 并读出版本。缺少芯片、总线未响应或型号未知会记录错误码，应用仍进入诊断循环。
 
-状态保存在 ELF 符号 `k10_diag` 对应的 RAM 中。它包含启动阶段、时钟可信标志、运行时间、原始 JEDEC ID、已识别容量、接收芯片版本、错误码及命令序号。这里没有虚构的串口波特率、USB VID/PID 或显示屏协议。
+状态保存在 ELF 符号 `k10_diag` 对应的 RAM 中。它包含启动阶段、时钟可信标志、运行时间、原始 JEDEC ID、已识别容量、接收芯片版本、错误码及命令序号。原厂 USB 和串口参数目前用于研究，尚未实现到这份诊断应用。
 
 在**已建立的、经过核实的调试连接**上加载与当前程序匹配的 ELF 符号后，可暂停目标读取：
 
@@ -74,6 +89,33 @@ K10_REFERENCE_FIRMWARE=reference/K10PRO_ENG_v8.02.16_publish.bin make test
 
 普通测试不依赖官方文件，参考样本测试在未提供路径时跳过。参考包的 SHA-256、解码后的 SHA-256、版本及 CRC 均有固定断言。容器格式见 [格式说明](docs/container-format.md)。官方文件、反汇编、外部 Flash 数据和 Si47xx 补丁均未随仓库发布。
 
+安装可选依赖后可执行原厂函数，并启用实际样本测试：
+
+```sh
+python3 -m pip install -r requirements-re.txt
+python3 tools/emulate_channels.py reference/stock.raw.bin
+python3 tools/emulate_programming.py reference/stock.raw.bin --output protocol-results.json
+python3 tools/emulate_storage.py reference/stock.raw.bin --output storage-results.json
+python3 tools/emulate_rf_bus.py reference/stock.raw.bin --output rf-results.json
+K10_REFERENCE_FIRMWARE=reference/K10PRO_ENG_v8.02.16_publish.bin \
+  K10_REFERENCE_RAW=reference/stock.raw.bin make test
+```
+
+### 离线读取与编辑信道
+
+这里需要**外部 NOR 配置转储**，不能把 MCU 更新包当成信道文件。工具中的索引从 0 开始，索引 77 对应界面信道 78。示例只生成本地文件和帧草稿：
+
+```sh
+python3 tools/channel_codec.py inspect radio-nor.bin --index 77
+python3 tools/channel_codec.py patch radio-nor.bin edited-nor.bin --index 77 \
+  --name TEST --rx-hz 145525000 --offset-hz 600000 --set offset_direction=1
+python3 tools/programming_protocol.py draft-read 0x1340 64 \
+  --session 0x12345678 --transport 1 --xor
+python3 tools/inspect_vendor_schema.py /path/to/official.apk
+```
+
+例中的 session 是人工示例值。工具没有自动会话、在线下载、刷入或发射功能。修改频段时还需核对独立属性与设备的动态频段配置，不能只替换频率数字。
+
 ## 接下来需要补齐的设备能力
 
 1. 由具体硬件版本确认 MCU 丝印、外部 Flash 型号、SWD、供电/复位、晶振与 bootloader 交接状态；首先取得可恢复的实机启动记录。
@@ -89,4 +131,4 @@ K10_REFERENCE_FIRMWARE=reference/K10PRO_ENG_v8.02.16_publish.bin make test
 
 ## English summary
 
-An independently written, experimental UV-K10 Pro firmware project targeting the PY32F071-compatible Cortex-M0+ application layout at `0x08002000`. It includes a freestanding runtime, read-only SPI NOR diagnostics, a Si4732 command driver, a debugger mailbox, a validated update-file codec, host tests, and CI. No vendor firmware or receiver patch is redistributed. Hardware boot, LCD/keypad, transceiver operation, and updater acceptance have **not** been validated; this is a developer bring-up project, not a complete replacement radio firmware.
+An independently written, experimental UV-K10 Pro firmware and research project targeting the PY32F071-compatible Cortex-M0+ application layout at `0x08002000`. It includes a freestanding runtime, read-only SPI NOR diagnostics, a Si4732 driver, a debugger mailbox, update-file and channel codecs, an offline programming-protocol model, pinned stock-instruction replay, an APK schema inspector, host tests, and CI. The replay executes real channel/storage/protocol functions above explicit synthetic hardware boundaries, including protocol write/readback and RF GPIO bit sequences. No vendor firmware, APK, complete vendor schema or receiver patch is redistributed. Hardware boot, LCD/keypad, transceiver operation, and updater acceptance remain unvalidated.

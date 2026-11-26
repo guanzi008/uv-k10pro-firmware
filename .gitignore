@@ -2,6 +2,7 @@
 /build-*/
 /.cache/
 /.toolchains/
+/.venv*/
 /reference/
 __pycache__/
 *.py[cod]
@@ -13,5 +14,8 @@ __pycache__/
 *.bin
 *.hex
 *.zip
+*.apk
+*.exe
+*.rar
 *.tar.*
 .DS_Store

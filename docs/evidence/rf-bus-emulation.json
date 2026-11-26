@@ -1,0 +1,118 @@
+{
+  "sample_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+  "write_function": "0x08018944",
+  "read_function": "0x08018248",
+  "gpio_base": "0x50001400",
+  "pins": {
+    "chip_select_active_low": 9,
+    "clock": 5,
+    "bidirectional_data": 6
+  },
+  "executed": "Original register read/write, bit loops, direction helper and delay instructions; no function replacements.",
+  "modeled": "GPIO MODER/IDR/BSRR/BRR semantics and explicit 16-bit synthetic input; all other MMIO rejected.",
+  "initial_conditions": "Pins 5, 6 and 9 start as outputs with high output latches; the read routine controls pin 6 direction.",
+  "conclusion": "MSB-first 8-bit register command plus 16-bit data; read command sets bit 7. Compatible with a BK48xx-style 3-wire register interface, not a unique chip identification.",
+  "limitations": "Logical GPIO edges only: no real bus capture, pin voltage, signal timing, RF tuning, transmit or receiver emulation.",
+  "cases": [
+    {
+      "operation": "write",
+      "register": "0x38",
+      "value": "0x1234",
+      "passed": true,
+      "controller_output_hex": "381234",
+      "synthetic_input_hex": "",
+      "output_bits": 24,
+      "input_bits": 0,
+      "data_direction_modes": [],
+      "gpio_writes": 81,
+      "instructions": 2780
+    },
+    {
+      "operation": "write",
+      "register": "0x00",
+      "value": "0x0000",
+      "passed": true,
+      "controller_output_hex": "000000",
+      "synthetic_input_hex": "",
+      "output_bits": 24,
+      "input_bits": 0,
+      "data_direction_modes": [],
+      "gpio_writes": 81,
+      "instructions": 2772
+    },
+    {
+      "operation": "write",
+      "register": "0x7f",
+      "value": "0xffff",
+      "passed": true,
+      "controller_output_hex": "7fffff",
+      "synthetic_input_hex": "",
+      "output_bits": 24,
+      "input_bits": 0,
+      "data_direction_modes": [],
+      "gpio_writes": 81,
+      "instructions": 2795
+    },
+    {
+      "operation": "read",
+      "register": "0x67",
+      "value": "0xa55a",
+      "passed": true,
+      "controller_output_hex": "e7",
+      "synthetic_input_hex": "a55a",
+      "output_bits": 8,
+      "input_bits": 16,
+      "data_direction_modes": [
+        0,
+        1
+      ],
+      "gpio_writes": 65,
+      "instructions": 2072
+    },
+    {
+      "operation": "read",
+      "register": "0x00",
+      "value": "0x0000",
+      "passed": true,
+      "controller_output_hex": "80",
+      "synthetic_input_hex": "0000",
+      "output_bits": 8,
+      "input_bits": 16,
+      "data_direction_modes": [
+        0,
+        1
+      ],
+      "gpio_writes": 65,
+      "instructions": 2059
+    },
+    {
+      "operation": "read",
+      "register": "0x7f",
+      "value": "0xffff",
+      "passed": true,
+      "controller_output_hex": "ff",
+      "synthetic_input_hex": "ffff",
+      "output_bits": 8,
+      "input_bits": 16,
+      "data_direction_modes": [
+        0,
+        1
+      ],
+      "gpio_writes": 65,
+      "instructions": 2082
+    },
+    {
+      "operation": "write_register_pair",
+      "function": "0x08018480",
+      "synthetic_word": "0x12345678",
+      "passed": true,
+      "controller_output_hex": [
+        "385678",
+        "391234"
+      ],
+      "gpio_writes": 162,
+      "instructions": 5572
+    }
+  ],
+  "passed": 7
+}

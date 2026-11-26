@@ -1,0 +1,733 @@
+{
+  "schema_version": 1,
+  "kind": "static-CPS-metadata-and-selected-IL-crosscheck",
+  "assembly_sha256": "79c9b3429187f7fca13cc8971d0e5fd46184f078127f149f333a267b99815132",
+  "assembly_bytes": 910336,
+  "official_package_label": "UV-K10 Pro CPS 0.56",
+  "installer_sha256": "ad891682d9e30893d1ae4d579cc7a2d92fd84a2ff9b7c5333a6138e2c21c29ba",
+  "extraction_provenance": {
+    "format": "Setup Factory 7 archive, PKWARE DCL",
+    "recorded_external_result": "11 application entries checked for decompressed length and CRC32; no executable run",
+    "performed_by_this_tool": false,
+    "note": "This tool only checks the separately supplied extracted assembly; archive CRC checks belong to the preceding extraction workflow."
+  },
+  "structures": {
+    "K7.protocol_struct+STRU_CAL_HEADER": {
+      "metadata_token": "0x0200004d",
+      "pack": 1,
+      "size": 4,
+      "fields": [
+        {
+          "name": "u8HeaderFlag1",
+          "offset": 0,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8HeaderFlag2",
+          "offset": 1,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u16Length",
+          "offset": 2,
+          "size": 2,
+          "type": "UInt16"
+        }
+      ]
+    },
+    "K7.protocol_struct+STRU_CAL_ENDER": {
+      "metadata_token": "0x0200004e",
+      "pack": 1,
+      "size": 4,
+      "fields": [
+        {
+          "name": "u16CRC",
+          "offset": 0,
+          "size": 2,
+          "type": "UInt16"
+        },
+        {
+          "name": "u8EnderFlag1",
+          "offset": 2,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8EnderFlag2",
+          "offset": 3,
+          "size": 1,
+          "type": "UInt8"
+        }
+      ]
+    },
+    "K7.protocol_struct+OSP_MSG_HEADER": {
+      "metadata_token": "0x0200004f",
+      "pack": 1,
+      "size": 4,
+      "fields": [
+        {
+          "name": "u16MsgType",
+          "offset": 0,
+          "size": 2,
+          "type": "UInt16"
+        },
+        {
+          "name": "u16MsgLen",
+          "offset": 2,
+          "size": 2,
+          "type": "UInt16"
+        }
+      ]
+    },
+    "K7.protocol_struct+MSG_CALMS_ConnReq": {
+      "metadata_token": "0x02000050",
+      "pack": 1,
+      "size": 28,
+      "fields": [
+        {
+          "name": "struMsgHeader",
+          "offset": 0,
+          "size": 4,
+          "type": "K7.protocol_struct+OSP_MSG_HEADER"
+        },
+        {
+          "name": "u32MagicCode",
+          "offset": 4,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "utc",
+          "offset": 8,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "u8LocationValidFlag",
+          "offset": 12,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8AprsFixedPosLatitude",
+          "offset": 13,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8AprsFixedPosLongitude",
+          "offset": 14,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8Rsv",
+          "offset": 15,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u32AprsFixedPosLatitude",
+          "offset": 16,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "u32AprsFixedPosLongitude",
+          "offset": 20,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "s32AprsFixedPosHeight",
+          "offset": 24,
+          "size": 4,
+          "type": "UInt32"
+        }
+      ]
+    },
+    "K7.protocol_struct+MSG_MSCAL_ConnRsp": {
+      "metadata_token": "0x02000051",
+      "pack": 1,
+      "size": 56,
+      "fields": [
+        {
+          "name": "struMsgHeader",
+          "offset": 0,
+          "size": 4,
+          "type": "K7.protocol_struct+OSP_MSG_HEADER"
+        },
+        {
+          "name": "versionString",
+          "offset": 4,
+          "size": 16,
+          "type": "UInt8[16]"
+        },
+        {
+          "name": "u8PasswordValid",
+          "offset": 20,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8StartLockFlag",
+          "offset": 21,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8ParamsVersion",
+          "offset": 22,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8Rsv",
+          "offset": 23,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u32RandCode",
+          "offset": 24,
+          "size": 16,
+          "type": "UInt32[4]"
+        },
+        {
+          "name": "u32UUID",
+          "offset": 40,
+          "size": 16,
+          "type": "UInt32[4]"
+        }
+      ]
+    },
+    "K7.protocol_struct+MSG_CALMS_ParaReadReq": {
+      "metadata_token": "0x02000053",
+      "pack": 1,
+      "size": 16,
+      "fields": [
+        {
+          "name": "struMsgHeader",
+          "offset": 0,
+          "size": 4,
+          "type": "K7.protocol_struct+OSP_MSG_HEADER"
+        },
+        {
+          "name": "u32Address",
+          "offset": 4,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "u8DataLen",
+          "offset": 8,
+          "size": 2,
+          "type": "UInt16"
+        },
+        {
+          "name": "u8Rsv",
+          "offset": 10,
+          "size": 2,
+          "type": "UInt8[2]"
+        },
+        {
+          "name": "u32MagicCode",
+          "offset": 12,
+          "size": 4,
+          "type": "UInt32"
+        }
+      ]
+    },
+    "K7.protocol_struct+MSG_MSCAL_ParaReadRsp": {
+      "metadata_token": "0x02000054",
+      "pack": 1,
+      "size": 140,
+      "fields": [
+        {
+          "name": "struMsgHeader",
+          "offset": 0,
+          "size": 4,
+          "type": "K7.protocol_struct+OSP_MSG_HEADER"
+        },
+        {
+          "name": "u32Address",
+          "offset": 4,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "u8DataLen",
+          "offset": 8,
+          "size": 2,
+          "type": "UInt16"
+        },
+        {
+          "name": "u8Rsv",
+          "offset": 10,
+          "size": 2,
+          "type": "UInt8[2]"
+        },
+        {
+          "name": "u8Data",
+          "offset": 12,
+          "size": 128,
+          "type": "UInt8[128]"
+        }
+      ]
+    },
+    "K7.protocol_struct+MSG_CALMS_ParaWriteReq": {
+      "metadata_token": "0x02000055",
+      "pack": 1,
+      "size": 144,
+      "fields": [
+        {
+          "name": "struMsgHeader",
+          "offset": 0,
+          "size": 4,
+          "type": "K7.protocol_struct+OSP_MSG_HEADER"
+        },
+        {
+          "name": "u32Address",
+          "offset": 4,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "u8DataLen",
+          "offset": 8,
+          "size": 2,
+          "type": "UInt16"
+        },
+        {
+          "name": "u8AdvanceFlag",
+          "offset": 10,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u8Rsv",
+          "offset": 11,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "u32MagicCode",
+          "offset": 12,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "u8Data",
+          "offset": 16,
+          "size": 128,
+          "type": "UInt8[128]"
+        }
+      ]
+    },
+    "K7.CPS_CHANNEL_INFO": {
+      "metadata_token": "0x02000073",
+      "pack": 1,
+      "size": 64,
+      "fields": [
+        {
+          "name": "rx_freq",
+          "offset": 0,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "freq_diff",
+          "offset": 4,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "AprsPtt",
+          "offset": 8,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "AprsTxChannel",
+          "offset": 9,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "rx_qt_type",
+          "offset": 10,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "tx_qt_type",
+          "offset": 11,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "freq_dir",
+          "offset": 12,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "band",
+          "offset": 13,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "step",
+          "offset": 14,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "encypt",
+          "offset": 15,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "power",
+          "offset": 16,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "busy",
+          "offset": 17,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "reverse",
+          "offset": 18,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "dtmf_decdoe_flag",
+          "offset": 19,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "pttid",
+          "offset": 20,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "demode",
+          "offset": 21,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "scanlist",
+          "offset": 22,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "sq",
+          "offset": 23,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "name",
+          "offset": 24,
+          "size": 16,
+          "type": "UInt8[16]"
+        },
+        {
+          "name": "rx_qt",
+          "offset": 40,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "tx_qt",
+          "offset": 44,
+          "size": 4,
+          "type": "UInt32"
+        },
+        {
+          "name": "resv2",
+          "offset": 48,
+          "size": 12,
+          "type": "UInt8[12]"
+        },
+        {
+          "name": "signal",
+          "offset": 60,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "AprsRxSwitch",
+          "offset": 61,
+          "size": 1,
+          "type": "UInt8"
+        },
+        {
+          "name": "resv3",
+          "offset": 62,
+          "size": 2,
+          "type": "UInt8[2]"
+        }
+      ]
+    }
+  },
+  "methods": {
+    "K7.ComPort::.ctor": {
+      "token": "0x060002ab",
+      "rva": "0x00049278",
+      "instruction_count": 32,
+      "integer_constants": [
+        0,
+        1,
+        8,
+        1000,
+        10000,
+        38400
+      ],
+      "direct_constant_assignments": []
+    },
+    "K7.protocol_struct::makefram": {
+      "token": "0x060002b6",
+      "rva": "0x00049934",
+      "instruction_count": 76,
+      "integer_constants": [
+        0,
+        2,
+        4,
+        171,
+        186,
+        205,
+        220
+      ],
+      "direct_constant_assignments": [
+        {
+          "field": "K7.protocol_struct+STRU_CAL_HEADER::u8HeaderFlag1",
+          "value": 171
+        },
+        {
+          "field": "K7.protocol_struct+STRU_CAL_HEADER::u8HeaderFlag2",
+          "value": 205
+        },
+        {
+          "field": "K7.protocol_struct+STRU_CAL_ENDER::u8EnderFlag1",
+          "value": 220
+        },
+        {
+          "field": "K7.protocol_struct+STRU_CAL_ENDER::u8EnderFlag2",
+          "value": 186
+        }
+      ]
+    },
+    "K7.protocol_struct::ContentNorOr": {
+      "token": "0x060002b8",
+      "rva": "0x00049a88",
+      "instruction_count": 46,
+      "integer_constants": [
+        0,
+        1,
+        16
+      ],
+      "direct_constant_assignments": []
+    },
+    "K7.protocol_struct::PareData": {
+      "token": "0x060002bb",
+      "rva": "0x00049c48",
+      "instruction_count": 104,
+      "integer_constants": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        8,
+        171,
+        186,
+        205,
+        220
+      ],
+      "direct_constant_assignments": []
+    },
+    "K7.protocol_struct::Link": {
+      "token": "0x060002bc",
+      "rva": "0x00049cec",
+      "instruction_count": 141,
+      "integer_constants": [
+        0,
+        1,
+        4,
+        700,
+        701,
+        1000
+      ],
+      "direct_constant_assignments": [
+        {
+          "field": "K7.protocol_struct+OSP_MSG_HEADER::u16MsgType",
+          "value": 700
+        },
+        {
+          "field": "K7.protocol_struct+OSP_MSG_HEADER::u16MsgLen",
+          "value": 4
+        }
+      ]
+    },
+    "K7.protocol_struct::Read": {
+      "token": "0x060002bd",
+      "rva": "0x00049e88",
+      "instruction_count": 118,
+      "integer_constants": [
+        0,
+        1,
+        2,
+        8,
+        12,
+        707,
+        708,
+        2000
+      ],
+      "direct_constant_assignments": [
+        {
+          "field": "K7.protocol_struct+OSP_MSG_HEADER::u16MsgType",
+          "value": 707
+        },
+        {
+          "field": "K7.protocol_struct+OSP_MSG_HEADER::u16MsgLen",
+          "value": 12
+        }
+      ]
+    },
+    "K7.protocol_struct::Write": {
+      "token": "0x060002c2",
+      "rva": "0x0004a298",
+      "instruction_count": 98,
+      "integer_constants": [
+        0,
+        1,
+        12,
+        128,
+        709,
+        710,
+        1000
+      ],
+      "direct_constant_assignments": [
+        {
+          "field": "K7.protocol_struct+OSP_MSG_HEADER::u16MsgType",
+          "value": 709
+        },
+        {
+          "field": "K7.protocol_struct+OSP_MSG_HEADER::u16MsgLen",
+          "value": 12
+        }
+      ]
+    },
+    "K7.protocol_struct::.cctor": {
+      "token": "0x060002c4",
+      "rva": "0x0004a398",
+      "instruction_count": 20,
+      "integer_constants": [
+        0,
+        16,
+        4660
+      ],
+      "direct_constant_assignments": [
+        {
+          "field": "K7.protocol_struct::u8PasswordValid",
+          "value": 0
+        },
+        {
+          "field": "K7.protocol_struct::Model",
+          "value": 0
+        },
+        {
+          "field": "K7.protocol_struct::u8StartLockFlag",
+          "value": 0
+        },
+        {
+          "field": "K7.protocol_struct::seed",
+          "value": 0
+        },
+        {
+          "field": "K7.protocol_struct::magiccode",
+          "value": 4660
+        }
+      ]
+    },
+    "K7.Iparse::CRC16CCITT": {
+      "token": "0x06000396",
+      "rva": "0x00063750",
+      "instruction_count": 78,
+      "integer_constants": [
+        0,
+        1,
+        8,
+        33800,
+        65535
+      ],
+      "direct_constant_assignments": []
+    },
+    "K7.wfm_progress::ReadBlock": {
+      "token": "0x060004f3",
+      "rva": "0x0007faf8",
+      "instruction_count": 71,
+      "integer_constants": [
+        0,
+        1,
+        128
+      ],
+      "direct_constant_assignments": []
+    },
+    "K7.wfm_progress::WriteBlock": {
+      "token": "0x060004f4",
+      "rva": "0x0007fb80",
+      "instruction_count": 70,
+      "integer_constants": [
+        0,
+        1,
+        128
+      ],
+      "direct_constant_assignments": []
+    },
+    "K7.wfm_progress::WriteChannel": {
+      "token": "0x060004f5",
+      "rva": "0x0007fc08",
+      "instruction_count": 62,
+      "integer_constants": [
+        0,
+        1,
+        7,
+        999,
+        1024,
+        69632
+      ],
+      "direct_constant_assignments": []
+    }
+  },
+  "xor_key": {
+    "field_token": "0x0400090c",
+    "rva": "0x00049a78",
+    "hex": "166c14e62e910d402135d5401303e980"
+  },
+  "findings": {
+    "read": "command 707, declared inner length 12, actual 16-byte body; count is UInt16 despite field name u8DataLen",
+    "write": "command 709, declared inner length 12, actual 144-byte body, fixed 128-byte data array; count chooses the meaningful prefix",
+    "hello": "command 700, declared inner length 4, actual 28-byte body, utc timestamp plus optional APRS-position fields",
+    "read_write_chunk_size": 128,
+    "write_channel": "999 records; record struct is 64 bytes; only records with raw attribute <7 selected; then writes 1024 bytes at 0x11000",
+    "request_crc": "CRC16CCITT is the method name; code parameters are reflected 0x8408, initial 0xffff, final complement (CRC16/X25)",
+    "serial_configuration": "ComPort constructor uses 38400, 8 data bits, StopBits.One and RTS disabled; no physical serial timing measured",
+    "response_parser": "PareData checks framing and deobfuscates body; does not calculate a response CRC in this method"
+  },
+  "limitations": "Selected static paths only; no CLR execution, no CPS runtime or device capture, no verification that every UI mode uses the same path."
+}

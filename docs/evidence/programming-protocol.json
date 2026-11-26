@@ -1,0 +1,3020 @@
+{
+  "schema_version": 1,
+  "sample_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+  "sample_base": "0x08002000",
+  "sample_version": "8.02.16",
+  "kind": "actual-stock-instruction-replay-with-explicit-function-hooks",
+  "limits": {
+    "hardware_validated": false,
+    "physical_IO": false,
+    "MMIO": "unmapped; unintended peripheral access stops the experiment",
+    "clock_interrupt_DMA_USB_UART_RF": "not modeled",
+    "session_and_gate_state": "synthetically assigned in SRAM",
+    "ring": "synthetic frame bytes and read/producer indices at observed stock ring addresses",
+    "dispatch_link": "host reproduces caller accepted-flag branch between actual parser and actual dispatcher",
+    "read_backing": "core cases: synthetic byte value (address + offset) & 255; separate NOR roundtrip uses its byte array",
+    "write_backing": "core cases: RMW call capture only; separate NOR roundtrip mutates only its synthetic byte array",
+    "request_buffer_tail": "160-byte observed gap initialized to 0x5a; not an allocation-size claim",
+    "malformed_cases": "function-level observations, not a physical exploitability assessment"
+  },
+  "crc_check": {
+    "input_ascii": "123456789",
+    "result": 36974,
+    "function": "0x08018b58",
+    "execution": {
+      "r0": 36974,
+      "r1": 65535,
+      "instructions": 664,
+      "hardware_hooks": 0
+    }
+  },
+  "static_usb_descriptors": {
+    "kind": "static-descriptor-parse-not-physical-enumeration",
+    "address": "0x0801df94",
+    "registration_caller": "0x0801cf24",
+    "usb_bcd": "0x0200",
+    "device_class": 239,
+    "device_subclass": 2,
+    "device_protocol": 1,
+    "endpoint_zero_max_packet": 64,
+    "vid": "0x36b7",
+    "pid": "0x0001",
+    "device_bcd": "0x0100",
+    "configuration_length": 75,
+    "interfaces": [
+      {
+        "number": 0,
+        "alternate": 0,
+        "endpoint_count": 1,
+        "class": 2,
+        "subclass": 2,
+        "protocol": 1
+      },
+      {
+        "number": 1,
+        "alternate": 0,
+        "endpoint_count": 2,
+        "class": 10,
+        "subclass": 0,
+        "protocol": 0
+      }
+    ],
+    "endpoints": [
+      {
+        "interface": 0,
+        "address": "0x83",
+        "transfer_type": "interrupt",
+        "max_packet": 8,
+        "interval": 10
+      },
+      {
+        "interface": 1,
+        "address": "0x02",
+        "transfer_type": "bulk",
+        "max_packet": 64,
+        "interval": 0
+      },
+      {
+        "interface": 1,
+        "address": "0x81",
+        "transfer_type": "bulk",
+        "max_packet": 64,
+        "interval": 0
+      }
+    ],
+    "strings": [
+      {
+        "index": 0,
+        "language_ids": [
+          1033
+        ]
+      },
+      {
+        "index": 1,
+        "text": "QUANSHENG"
+      },
+      {
+        "index": 2,
+        "text": "K8 CPS"
+      },
+      {
+        "index": 3,
+        "text": "2025080801"
+      }
+    ],
+    "interpretation": "CDC ACM communication interface plus CDC data interface"
+  },
+  "synthetic_nor_roundtrip": {
+    "kind": "actual-parser-dispatch-RMW-sender-with-synthetic-NOR-roundtrip",
+    "request_write_layout": "CPS 0.56 fixed inner length 12, 128-byte padded data, 144-byte body",
+    "channel_index_zero_based": 77,
+    "record_address": 4928,
+    "attribute_address": 69709,
+    "synthetic_attribute": "02",
+    "synthetic_record": {
+      "raw_hex": "f003de0060ea0000000001000201040000000000000000044d4f44454c3737000000000000000000750300000000000000000000000000000000000000000000",
+      "name": "MODEL77",
+      "name_bytes_hex": "4d4f44454c3737000000",
+      "rx_frequency_hz": 145500000,
+      "offset_hz": 600000,
+      "derived_tx_frequency_hz_before_reverse": 144900000,
+      "derived_frequency_note": "Applies 0x080059EC directly to raw values; loader field/band validation and reverse are not applied.",
+      "rx_tone": {
+        "kind": 1,
+        "value": 885,
+        "name": "CTCSS",
+        "accepted_by_reference_sanitizer": true,
+        "frequency_hz": "88.5"
+      },
+      "tx_tone": {
+        "kind": 0,
+        "value": 0,
+        "name": "none",
+        "accepted_by_reference_sanitizer": true
+      },
+      "fields": {
+        "aprs_ptt": 0,
+        "aprs_tx_channel": 0,
+        "offset_direction": 2,
+        "bandwidth": 1,
+        "step_index": 4,
+        "scrambler": 0,
+        "power": 0,
+        "busy_lockout": 0,
+        "reverse": 0,
+        "signaling_decode": 0,
+        "ptt_id": 0,
+        "modulation": 0,
+        "scan_list": 0,
+        "squelch": 4,
+        "signaling_system": 0,
+        "aprs_receive": 0
+      },
+      "power_name": "LOW",
+      "bandwidth_name": "NARROW",
+      "modulation_name_8_02_16": "FM",
+      "step_hz": 5000,
+      "vfo_scan_start_hz": 0,
+      "vfo_scan_end_hz": 0,
+      "uninterpreted_hex": {
+        "0x22..0x27": "000000000000",
+        "0x38..0x3b": "00000000",
+        "0x3e..0x3f": "0000"
+      }
+    },
+    "synthetic_capacity_bytes": 2097152,
+    "initial_nor_sha256": "5da524ab157f7ebc33297d31d66c1eac47c1d474dbe8ace5c37adbecc338e491",
+    "final_nor_sha256": "69e6f40ba659441d33045437dc52307c35d4bb0188ffbcfe4f8e0e2b4856c514",
+    "all_other_bytes_preserved": true,
+    "write_and_readback_match": true,
+    "gated_ack_without_storage_change_verified": true,
+    "gated_read_returned_zero_without_NOR_read": true,
+    "executed": [
+      "0x0800e758 parser",
+      "0x08003468 dispatcher",
+      "stock read/write handlers",
+      "0x08019694 RMW",
+      "0x080197b2 page splitting",
+      "stock USB sender"
+    ],
+    "NOR_function_replacements": [
+      "0x080195e4 read",
+      "0x08019588 erase",
+      "0x080197ec page program"
+    ],
+    "limitations": "Synthetic byte-array persistence only; no physical NOR, power-loss durability, USB enumeration, RF or device programming.",
+    "transactions": [
+      {
+        "name": "write_channel_record",
+        "request_body_hex": "c5020c00401300004000000078563412f003de0060ea0000000001000201040000000000000000044d4f44454c373700000000000000000075030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "request_frame_hex": "abcd9000c5020c00401300004000000078563412f003de0060ea0000000001000201040000000000000000044d4f44454c3737000000000000000000750300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007d5edcba",
+        "response_body_hex": "c602040040130000",
+        "response_frame_hex": "abcd0800c602040040130000ffffdcba",
+        "response_checksum_status": "placeholder-unverified",
+        "parser_execution": {
+          "r0": 152,
+          "r1": 65535,
+          "instructions": 13678,
+          "hardware_hooks": 0
+        },
+        "dispatcher_execution": {
+          "r0": 4,
+          "r1": 536871078,
+          "instructions": 1072,
+          "hardware_hooks": 20
+        },
+        "nor_operations": [
+          {
+            "op": "read",
+            "address": 4096,
+            "length": 4096
+          },
+          {
+            "op": "erase",
+            "address": 4096,
+            "length": 4096
+          },
+          {
+            "op": "program",
+            "address": 4096,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 4352,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 4608,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 4864,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 5120,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 5376,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 5632,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 5888,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 6144,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 6400,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 6656,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 6912,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 7168,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 7424,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 7680,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 7936,
+            "length": 256
+          }
+        ],
+        "explicit_hooks_called": [
+          {
+            "function": "programming_UI_noop",
+            "pc": "0x08006d20",
+            "args": [
+              1,
+              536871108,
+              305419896,
+              120
+            ]
+          },
+          {
+            "function": "nor_read",
+            "pc": "0x080195e4",
+            "args": [
+              4096,
+              536874352,
+              4096,
+              0
+            ]
+          },
+          {
+            "function": "nor_erase_4k",
+            "pc": "0x08019588",
+            "args": [
+              4096,
+              0,
+              64,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536874352,
+              4096,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536874608,
+              4352,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536874864,
+              4608,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875120,
+              4864,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875376,
+              5120,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875632,
+              5376,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875888,
+              5632,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876144,
+              5888,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876400,
+              6144,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876656,
+              6400,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876912,
+              6656,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877168,
+              6912,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877424,
+              7168,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877680,
+              7424,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877936,
+              7680,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536878192,
+              7936,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "USB_endpoint_81_capture",
+            "pc": "0x0801d7f8",
+            "args": [
+              129,
+              536879200,
+              16,
+              4928
+            ]
+          }
+        ],
+        "nor_sha256_after": "0656dd52c4c6fe363d918ef85f398af29fb60d699a6326d7d61854b8cbfdd5b9"
+      },
+      {
+        "name": "write_channel_attribute",
+        "request_body_hex": "c5020c004d10010001000000785634120200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "request_frame_hex": "abcd9000c5020c004d100100010000007856341202000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008c86dcba",
+        "response_body_hex": "c60204004d100100",
+        "response_frame_hex": "abcd0800c60204004d100100ffffdcba",
+        "response_checksum_status": "placeholder-unverified",
+        "parser_execution": {
+          "r0": 152,
+          "r1": 65535,
+          "instructions": 13672,
+          "hardware_hooks": 0
+        },
+        "dispatcher_execution": {
+          "r0": 4,
+          "r1": 536871078,
+          "instructions": 568,
+          "hardware_hooks": 20
+        },
+        "nor_operations": [
+          {
+            "op": "read",
+            "address": 69632,
+            "length": 4096
+          },
+          {
+            "op": "erase",
+            "address": 69632,
+            "length": 4096
+          },
+          {
+            "op": "program",
+            "address": 69632,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 69888,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 70144,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 70400,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 70656,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 70912,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 71168,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 71424,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 71680,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 71936,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 72192,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 72448,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 72704,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 72960,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 73216,
+            "length": 256
+          },
+          {
+            "op": "program",
+            "address": 73472,
+            "length": 256
+          }
+        ],
+        "explicit_hooks_called": [
+          {
+            "function": "programming_UI_noop",
+            "pc": "0x08006d20",
+            "args": [
+              1,
+              536871108,
+              305419896,
+              120
+            ]
+          },
+          {
+            "function": "nor_read",
+            "pc": "0x080195e4",
+            "args": [
+              69632,
+              536874352,
+              4096,
+              0
+            ]
+          },
+          {
+            "function": "nor_erase_4k",
+            "pc": "0x08019588",
+            "args": [
+              69632,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536874352,
+              69632,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536874608,
+              69888,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536874864,
+              70144,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875120,
+              70400,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875376,
+              70656,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875632,
+              70912,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536875888,
+              71168,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876144,
+              71424,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876400,
+              71680,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876656,
+              71936,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536876912,
+              72192,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877168,
+              72448,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877424,
+              72704,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877680,
+              72960,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536877936,
+              73216,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "nor_page_program",
+            "pc": "0x080197ec",
+            "args": [
+              536878192,
+              73472,
+              256,
+              0
+            ]
+          },
+          {
+            "function": "USB_endpoint_81_capture",
+            "pc": "0x0801d7f8",
+            "args": [
+              129,
+              536879200,
+              16,
+              69709
+            ]
+          }
+        ],
+        "nor_sha256_after": "69e6f40ba659441d33045437dc52307c35d4bb0188ffbcfe4f8e0e2b4856c514"
+      },
+      {
+        "name": "read_channel_record",
+        "request_body_hex": "c3020c00401300004000000078563412",
+        "request_frame_hex": "abcd1000c3020c0040130000400000007856341280bedcba",
+        "response_body_hex": "c40248004013000040000000f003de0060ea0000000001000201040000000000000000044d4f44454c3737000000000000000000750300000000000000000000000000000000000000000000",
+        "response_frame_hex": "abcd4c00c40248004013000040000000f003de0060ea0000000001000201040000000000000000044d4f44454c3737000000000000000000750300000000000000000000000000000000000000000000ffffdcba",
+        "response_checksum_status": "placeholder-unverified",
+        "parser_execution": {
+          "r0": 24,
+          "r1": 65535,
+          "instructions": 3550,
+          "hardware_hooks": 0
+        },
+        "dispatcher_execution": {
+          "r0": 4,
+          "r1": 536871078,
+          "instructions": 867,
+          "hardware_hooks": 3
+        },
+        "nor_operations": [
+          {
+            "op": "read",
+            "address": 4928,
+            "length": 64
+          }
+        ],
+        "explicit_hooks_called": [
+          {
+            "function": "programming_UI_noop",
+            "pc": "0x08006d20",
+            "args": [
+              1,
+              536871108,
+              305419896,
+              120
+            ]
+          },
+          {
+            "function": "nor_read",
+            "pc": "0x080195e4",
+            "args": [
+              4928,
+              536886620,
+              64,
+              120
+            ]
+          },
+          {
+            "function": "USB_endpoint_81_capture",
+            "pc": "0x0801d7f8",
+            "args": [
+              129,
+              536879200,
+              84,
+              0
+            ]
+          }
+        ],
+        "nor_sha256_after": "69e6f40ba659441d33045437dc52307c35d4bb0188ffbcfe4f8e0e2b4856c514"
+      },
+      {
+        "name": "read_channel_attribute",
+        "request_body_hex": "c3020c004d1001000100000078563412",
+        "request_frame_hex": "abcd1000c3020c004d10010001000000785634129502dcba",
+        "response_body_hex": "c40209004d1001000100000002",
+        "response_frame_hex": "abcd0d00c40209004d1001000100000002ffffdcba",
+        "response_checksum_status": "placeholder-unverified",
+        "parser_execution": {
+          "r0": 24,
+          "r1": 65535,
+          "instructions": 3560,
+          "hardware_hooks": 0
+        },
+        "dispatcher_execution": {
+          "r0": 4,
+          "r1": 536871078,
+          "instructions": 793,
+          "hardware_hooks": 3
+        },
+        "nor_operations": [
+          {
+            "op": "read",
+            "address": 69709,
+            "length": 1
+          }
+        ],
+        "explicit_hooks_called": [
+          {
+            "function": "programming_UI_noop",
+            "pc": "0x08006d20",
+            "args": [
+              1,
+              536871108,
+              305419896,
+              120
+            ]
+          },
+          {
+            "function": "nor_read",
+            "pc": "0x080195e4",
+            "args": [
+              69709,
+              536886620,
+              1,
+              120
+            ]
+          },
+          {
+            "function": "USB_endpoint_81_capture",
+            "pc": "0x0801d7f8",
+            "args": [
+              129,
+              536879200,
+              21,
+              2
+            ]
+          }
+        ],
+        "nor_sha256_after": "69e6f40ba659441d33045437dc52307c35d4bb0188ffbcfe4f8e0e2b4856c514"
+      },
+      {
+        "name": "gated_write_still_acknowledged",
+        "request_body_hex": "c5020c00401300004000000078563412f003de0060ea000000000100020104000000000000000004534b495050454400000000000000000075030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "request_frame_hex": "abcd9000c5020c00401300004000000078563412f003de0060ea000000000100020104000000000000000004534b4950504544000000000000000000750300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000328dcba",
+        "response_body_hex": "c602040040130000",
+        "response_frame_hex": "abcd0800c602040040130000ffffdcba",
+        "response_checksum_status": "placeholder-unverified",
+        "parser_execution": {
+          "r0": 152,
+          "r1": 65535,
+          "instructions": 13724,
+          "hardware_hooks": 0
+        },
+        "dispatcher_execution": {
+          "r0": 4,
+          "r1": 536871078,
+          "instructions": 209,
+          "hardware_hooks": 2
+        },
+        "nor_operations": [],
+        "explicit_hooks_called": [
+          {
+            "function": "programming_UI_noop",
+            "pc": "0x08006d20",
+            "args": [
+              1,
+              536871108,
+              305419896,
+              120
+            ]
+          },
+          {
+            "function": "USB_endpoint_81_capture",
+            "pc": "0x0801d7f8",
+            "args": [
+              129,
+              536879200,
+              16,
+              4928
+            ]
+          }
+        ],
+        "nor_sha256_after": "69e6f40ba659441d33045437dc52307c35d4bb0188ffbcfe4f8e0e2b4856c514"
+      },
+      {
+        "name": "gated_read_zero_reply",
+        "request_body_hex": "c3020c00401300004000000078563412",
+        "request_frame_hex": "abcd1000c3020c0040130000400000007856341280bedcba",
+        "response_body_hex": "c4024800401300004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_frame_hex": "abcd4c00c4024800401300004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffdcba",
+        "response_checksum_status": "placeholder-unverified",
+        "parser_execution": {
+          "r0": 24,
+          "r1": 65535,
+          "instructions": 3550,
+          "hardware_hooks": 0
+        },
+        "dispatcher_execution": {
+          "r0": 4,
+          "r1": 536871078,
+          "instructions": 864,
+          "hardware_hooks": 2
+        },
+        "nor_operations": [],
+        "explicit_hooks_called": [
+          {
+            "function": "programming_UI_noop",
+            "pc": "0x08006d20",
+            "args": [
+              1,
+              536871108,
+              305419896,
+              120
+            ]
+          },
+          {
+            "function": "USB_endpoint_81_capture",
+            "pc": "0x0801d7f8",
+            "args": [
+              129,
+              536879200,
+              84,
+              0
+            ]
+          }
+        ],
+        "nor_sha256_after": "69e6f40ba659441d33045437dc52307c35d4bb0188ffbcfe4f8e0e2b4856c514"
+      }
+    ],
+    "passed_transactions": 6
+  },
+  "parser_cases": {
+    "hello_usb_plain_autodetect": {
+      "transport": 1,
+      "input_hex": "abcd1c00bc020400785634120000000000000000000000000000000000000000c321dcba",
+      "start_index": 0,
+      "visible_bytes": 36,
+      "accepted": true,
+      "next_index": 36,
+      "xor_state_after": 0,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 36,
+        "r1": 65535,
+        "instructions": 4505,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_usb_xor_autodetect": {
+      "transport": 1,
+      "input_hex": "abcd1c00aa6e10e656c739522135d5401303e980166c14e62e910d402135d540d022dcba",
+      "start_index": 0,
+      "visible_bytes": 36,
+      "accepted": true,
+      "next_index": 36,
+      "xor_state_after": 1,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 36,
+        "r1": 65535,
+        "instructions": 4814,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_usb_wrap": {
+      "transport": 1,
+      "input_hex": "abcd1c00bc020400785634120000000000000000000000000000000000000000c321dcba",
+      "start_index": 380,
+      "visible_bytes": 36,
+      "accepted": true,
+      "next_index": 32,
+      "xor_state_after": 0,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 32,
+        "r1": 65535,
+        "instructions": 4512,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_usart1_plain_autodetect": {
+      "transport": 0,
+      "input_hex": "abcd1c00bc020400785634120000000000000000000000000000000000000000c321dcba",
+      "start_index": 0,
+      "visible_bytes": 36,
+      "accepted": true,
+      "next_index": 36,
+      "xor_state_after": 0,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 36,
+        "r1": 65535,
+        "instructions": 4374,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_usart1_xor_autodetect": {
+      "transport": 0,
+      "input_hex": "abcd1c00aa6e10e656c739522135d5401303e980166c14e62e910d402135d540d022dcba",
+      "start_index": 0,
+      "visible_bytes": 36,
+      "accepted": true,
+      "next_index": 36,
+      "xor_state_after": 1,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 36,
+        "r1": 65535,
+        "instructions": 4683,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_auxiliary_plain": {
+      "transport": 2,
+      "input_hex": "abcd1c00bc020400785634120000000000000000000000000000000000000000c321dcba",
+      "start_index": 0,
+      "visible_bytes": 36,
+      "accepted": true,
+      "next_index": 36,
+      "xor_state_after": 1,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 36,
+        "r1": 65535,
+        "instructions": 4365,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_bad_crc": {
+      "transport": 1,
+      "input_hex": "abcd1c00bc020400785634120000000000000000000000000000000000000000c221dcba",
+      "start_index": 0,
+      "visible_bytes": 36,
+      "accepted": false,
+      "next_index": 36,
+      "xor_state_after": 0,
+      "output_matches_body": true,
+      "execution": {
+        "r0": 36,
+        "r1": 65535,
+        "instructions": 4503,
+        "hardware_hooks": 0
+      }
+    },
+    "hello_incomplete": {
+      "transport": 1,
+      "input_hex": "abcd1c00bc020400785634120000000000000000000000000000000000000000c321dcba",
+      "start_index": 0,
+      "visible_bytes": 35,
+      "accepted": false,
+      "next_index": 0,
+      "xor_state_after": 1,
+      "output_matches_body": false,
+      "execution": {
+        "r0": 0,
+        "r1": 35,
+        "instructions": 862,
+        "hardware_hooks": 0
+      }
+    }
+  },
+  "parser_dispatch_cases": {
+    "read_usb_plain": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000001000000078563412da29dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3568,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 807,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 4096,
+          "count": 16,
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd1c00c40218000010000010000000000102030405060708090a0b0c0d0e0fffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            4096,
+            536886620,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            36,
+            252579084
+          ]
+        }
+      ]
+    },
+    "read_usb_xor": {
+      "transport": 1,
+      "xor": true,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000d56e18e62e810d403135d5406b55dd92cc45dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3755,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 1102,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 4096,
+          "count": 16,
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd1c00d26e0ce62e810d403135d5401302eb83126912e12698074b2d38db4fecfcdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            4096,
+            536886620,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            36,
+            1339766829
+          ]
+        }
+      ]
+    },
+    "read_usb_ring_wrap": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000001000000078563412da29dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 380,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 20,
+        "r1": 65535,
+        "instructions": 3575,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 807,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 4096,
+          "count": 16,
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd1c00c40218000010000010000000000102030405060708090a0b0c0d0e0fffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            4096,
+            536886620,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            36,
+            252579084
+          ]
+        }
+      ]
+    },
+    "read_usart1": {
+      "transport": 0,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000001000000078563412da29dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3494,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 767,
+        "hardware_hooks": 5
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 4096,
+          "count": 16,
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd1c00c40218000010000010000000000102030405060708090a0b0c0d0e0fffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            4096,
+            536886620,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886576,
+            4,
+            28,
+            536886608
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886608,
+            28,
+            28,
+            536886608
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886576,
+            4,
+            28,
+            536886608
+          ]
+        }
+      ]
+    },
+    "read_auxiliary_uart": {
+      "transport": 2,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000001000000078563412da29dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3482,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 2829,
+        "hardware_hooks": 6
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 4096,
+          "count": 16,
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd1c00c40218000010000010000000000102030405060708090a0b0c0d0e0f68addcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            4096,
+            536886620,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "delay_noop_not_wall_time",
+          "pc": "0x0801d000",
+          "args": [
+            30,
+            10,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886576,
+            4,
+            21143,
+            0
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886608,
+            28,
+            21143,
+            0
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886576,
+            4,
+            21143,
+            0
+          ]
+        }
+      ]
+    },
+    "read_128": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000008000000078563412",
+      "request_frame_hex": "abcd1000c3020c0000100000800000007856341240b9dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3562,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 947,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 4096,
+          "count": 128,
+          "data_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f"
+        }
+      ],
+      "response_frame_hex": "abcd8c00c40288000010000080000000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7fffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            4096,
+            536886620,
+            128,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            148,
+            2138996092
+          ]
+        }
+      ]
+    },
+    "read_129_rejected": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000008100000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000008100000078563412ff38dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3564,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 305419896,
+        "r1": 305419896,
+        "instructions": 103,
+        "hardware_hooks": 0
+      },
+      "storage_calls": [],
+      "response_frame_hex": "",
+      "independent_model": "matched",
+      "explicit_hooks_called": []
+    },
+    "read_bad_session": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000009000000",
+      "request_frame_hex": "abcd1000c3020c000010000010000000090000004fd8dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3566,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 9,
+        "r1": 305419896,
+        "instructions": 101,
+        "hardware_hooks": 0
+      },
+      "storage_calls": [],
+      "response_frame_hex": "",
+      "independent_model": "matched",
+      "explicit_hooks_called": []
+    },
+    "read_start_at_limit_rejected": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c0000f01f001000000078563412",
+      "request_frame_hex": "abcd1000c3020c0000f01f001000000078563412c0ebdcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3568,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 2093056,
+        "r1": 305419896,
+        "instructions": 106,
+        "hardware_hooks": 0
+      },
+      "storage_calls": [],
+      "response_frame_hex": "",
+      "independent_model": "matched",
+      "explicit_hooks_called": []
+    },
+    "read_crosses_start_guard": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00ffef1f001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00ffef1f00100000007856341275c9dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3544,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 807,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "read",
+          "address": 2093055,
+          "count": 16,
+          "data_hex": "ff000102030405060708090a0b0c0d0e"
+        }
+      ],
+      "response_frame_hex": "abcd1c00c4021800ffef1f0010000000ff000102030405060708090a0b0c0d0effffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "synthetic_NOR_read_pattern",
+          "pc": "0x080195e4",
+          "args": [
+            2093055,
+            536886620,
+            16,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            36,
+            235736075
+          ]
+        }
+      ]
+    },
+    "read_gate_zero_reply": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000001000000078563412da29dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 1,
+        "secondary_state": 1,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3568,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 804,
+        "hardware_hooks": 2
+      },
+      "storage_calls": [],
+      "response_frame_hex": "abcd1c00c4021800001000001000000000000000000000000000000000000000ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            36,
+            0
+          ]
+        }
+      ]
+    },
+    "read_bad_crc_not_dispatched": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c3020c00001000001000000078563412",
+      "request_frame_hex": "abcd1000c3020c00001000001000000078563412db29dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": false,
+      "parser_execution": {
+        "r0": 24,
+        "r1": 65535,
+        "instructions": 3566,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": null,
+      "storage_calls": [],
+      "response_frame_hex": "",
+      "independent_model": "matched",
+      "explicit_hooks_called": []
+    },
+    "write_normal": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00001000001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00001000001000000078563412000102030405060708090a0b0c0d0e0f4d34dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4804,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 232,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 4096,
+          "count": 16,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            4096,
+            536872148,
+            16,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    "write_cps_056_fixed_64": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5020c00001000004000000078563412000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "request_frame_hex": "abcd9000c5020c00001000004000000078563412000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008037dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 152,
+        "r1": 65535,
+        "instructions": 13634,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 232,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 4096,
+          "count": 64,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            4096,
+            536872148,
+            64,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    "write_cps_056_fixed_128": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5020c00001000008000000078563412000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f",
+      "request_frame_hex": "abcd9000c5020c00001000008000000078563412000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f2a0ddcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 152,
+        "r1": 65535,
+        "instructions": 13706,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 232,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 4096,
+          "count": 128,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            4096,
+            536872148,
+            128,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    "write_129": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5028d00001000008100000078563412000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f80",
+      "request_frame_hex": "abcd9100c5028d00001000008100000078563412000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f803ba7dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 153,
+        "r1": 65535,
+        "instructions": 13721,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 232,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 4096,
+          "count": 129,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f80"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            4096,
+            536872148,
+            129,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    "write_mode_1": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00000005001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00000005001000000078563412000102030405060708090a0b0c0d0e0fbbd8dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4848,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 233,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 327680,
+          "count": 16,
+          "update_mode": 1,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000000500ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            327680,
+            536872148,
+            16,
+            1
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            327680
+          ]
+        }
+      ]
+    },
+    "write_bad_session": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00001000001000000009000000000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00001000001000000009000000000102030405060708090a0b0c0d0e0f7214dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4804,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 9,
+        "r1": 305419896,
+        "instructions": 105,
+        "hardware_hooks": 0
+      },
+      "storage_calls": [],
+      "response_frame_hex": "",
+      "independent_model": "matched",
+      "explicit_hooks_called": []
+    },
+    "write_start_at_limit_rejected": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c0000f01f001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c0000f01f001000000078563412000102030405060708090a0b0c0d0e0fa3e5dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4862,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 2093056,
+        "r1": 536886736,
+        "instructions": 122,
+        "hardware_hooks": 1
+      },
+      "storage_calls": [],
+      "response_frame_hex": "",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        }
+      ]
+    },
+    "write_crosses_start_guard": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00ffef1f001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00ffef1f001000000078563412000102030405060708090a0b0c0d0e0fc050dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4838,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 233,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 2093055,
+          "count": 16,
+          "update_mode": 1,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c6020400ffef1f00ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            2093055,
+            536872148,
+            16,
+            1
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            2093055
+          ]
+        }
+      ]
+    },
+    "write_gate_ack_without_write": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00001000001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00001000001000000078563412000102030405060708090a0b0c0d0e0f4d34dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 1,
+        "secondary_state": 1,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4804,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 209,
+        "hardware_hooks": 2
+      },
+      "storage_calls": [],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    "write_17000_guarded": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00007001001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00007001001000000078563412000102030405060708090a0b0c0d0e0fe3d3dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 1
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4828,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 226,
+        "hardware_hooks": 2
+      },
+      "storage_calls": [],
+      "response_frame_hex": "abcd0800c602040000700100ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            94208
+          ]
+        }
+      ]
+    },
+    "write_17000_flag_1": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00007001001000010078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00007001001000010078563412000102030405060708090a0b0c0d0e0fbe7adcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 1
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4816,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 239,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 94208,
+          "count": 16,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000700100ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            94208,
+            536872148,
+            16,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            94208
+          ]
+        }
+      ]
+    },
+    "write_18000_reload": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00008001001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00008001001000000078563412000102030405060708090a0b0c0d0e0f6093dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4816,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 238,
+        "hardware_hooks": 4
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 98304,
+          "count": 16,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000800100ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            98304,
+            536872148,
+            16,
+            0
+          ]
+        },
+        {
+          "function": "special_area_reload_noop",
+          "pc": "0x0800f288",
+          "args": [
+            98304,
+            536872148,
+            16,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            98304
+          ]
+        }
+      ]
+    },
+    "write_18000_secondary_gate": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5021c00008001001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5021c00008001001000000078563412000102030405060708090a0b0c0d0e0f6093dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 1,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4816,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 226,
+        "hardware_hooks": 2
+      },
+      "storage_calls": [],
+      "response_frame_hex": "abcd0800c602040000800100ffffdcba",
+      "independent_model": "matched",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            98304
+          ]
+        }
+      ]
+    },
+    "synthetic_inner_length_zero": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c5020000001000001000000078563412000102030405060708090a0b0c0d0e0f",
+      "request_frame_hex": "abcd2000c5020000001000001000000078563412000102030405060708090a0b0c0d0e0f1aa7dcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 40,
+        "r1": 65535,
+        "instructions": 4824,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 232,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 4096,
+          "count": 16,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "000102030405060708090a0b0c0d0e0f"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "not-compared-malformed-input",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            4096,
+            536872148,
+            16,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    "synthetic_count_data_mismatch": {
+      "transport": 1,
+      "xor": false,
+      "request_body_hex": "c502100000100000100000007856341200010203",
+      "request_frame_hex": "abcd1400c502100000100000100000007856341200010203633ddcba",
+      "state": {
+        "session": 305419896,
+        "access_state": 0,
+        "secondary_state": 0,
+        "protect_17000": 0
+      },
+      "start_index": 0,
+      "accepted_by_parser": true,
+      "parser_execution": {
+        "r0": 28,
+        "r1": 65535,
+        "instructions": 3870,
+        "hardware_hooks": 0
+      },
+      "dispatcher_execution": {
+        "r0": 4,
+        "r1": 536871078,
+        "instructions": 232,
+        "hardware_hooks": 3
+      },
+      "storage_calls": [
+        {
+          "operation": "write-plan",
+          "address": 4096,
+          "count": 16,
+          "update_mode": 0,
+          "source_pointer": "0x200004d4",
+          "data_hex": "00010203633d5a5a5a5a5a5a5a5a5a5a"
+        }
+      ],
+      "response_frame_hex": "abcd0800c602040000100000ffffdcba",
+      "independent_model": "not-compared-malformed-input",
+      "explicit_hooks_called": [
+        {
+          "function": "programming_UI_noop",
+          "pc": "0x08006d20",
+          "args": [
+            1,
+            536871108,
+            305419896,
+            120
+          ]
+        },
+        {
+          "function": "RMW_call_capture_no_write",
+          "pc": "0x08019694",
+          "args": [
+            4096,
+            536872148,
+            16,
+            0
+          ]
+        },
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ],
+      "synthetic_stale_buffer_explanation": "4 supplied data bytes + 2 copied checksum bytes + 10 initialized 0x5a bytes; RMW is a capture hook and no storage is changed"
+    }
+  },
+  "sender_cases": [
+    {
+      "transport": 0,
+      "xor_state": 0,
+      "wire_hex": "abcd0800c602040000100000ffffdcba",
+      "checksum_status": "placeholder-unverified",
+      "execution": {
+        "r0": 536886752,
+        "r1": 4,
+        "instructions": 51,
+        "hardware_hooks": 3
+      },
+      "explicit_hooks_called": [
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886752,
+            4,
+            8,
+            536872132
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536872132,
+            8,
+            8,
+            536872132
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886752,
+            4,
+            8,
+            536872132
+          ]
+        }
+      ]
+    },
+    {
+      "transport": 0,
+      "xor_state": 1,
+      "wire_hex": "abcd0800d06e10e62e810d40decadcba",
+      "checksum_status": "placeholder-unverified",
+      "execution": {
+        "r0": 536886752,
+        "r1": 4,
+        "instructions": 146,
+        "hardware_hooks": 3
+      },
+      "explicit_hooks_called": [
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886752,
+            4,
+            64,
+            536872132
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536872132,
+            8,
+            64,
+            536872132
+          ]
+        },
+        {
+          "function": "USART1_raw_tx_capture",
+          "pc": "0x0801a890",
+          "args": [
+            536886752,
+            4,
+            536886752,
+            536872132
+          ]
+        }
+      ]
+    },
+    {
+      "transport": 1,
+      "xor_state": 0,
+      "wire_hex": "abcd0800c602040000100000ffffdcba",
+      "checksum_status": "placeholder-unverified",
+      "execution": {
+        "r0": 129,
+        "r1": 536879200,
+        "instructions": 66,
+        "hardware_hooks": 1
+      },
+      "explicit_hooks_called": [
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "transport": 1,
+      "xor_state": 1,
+      "wire_hex": "abcd0800d06e10e62e810d40decadcba",
+      "checksum_status": "placeholder-unverified",
+      "execution": {
+        "r0": 129,
+        "r1": 536879200,
+        "instructions": 161,
+        "hardware_hooks": 1
+      },
+      "explicit_hooks_called": [
+        {
+          "function": "USB_endpoint_81_capture",
+          "pc": "0x0801d7f8",
+          "args": [
+            129,
+            536879200,
+            16,
+            1074626862
+          ]
+        }
+      ]
+    },
+    {
+      "transport": 2,
+      "xor_state": 0,
+      "wire_hex": "abcd0800c6020400001000005392dcba",
+      "checksum_status": "crc16-x25-verified",
+      "execution": {
+        "r0": 536886752,
+        "r1": 4,
+        "instructions": 637,
+        "hardware_hooks": 3
+      },
+      "explicit_hooks_called": [
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886752,
+            4,
+            28076,
+            0
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536872132,
+            8,
+            28076,
+            0
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886752,
+            4,
+            28076,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "transport": 2,
+      "xor_state": 1,
+      "wire_hex": "abcd0800c6020400001000005392dcba",
+      "checksum_status": "crc16-x25-verified",
+      "execution": {
+        "r0": 536886752,
+        "r1": 4,
+        "instructions": 637,
+        "hardware_hooks": 3
+      },
+      "explicit_hooks_called": [
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886752,
+            4,
+            28076,
+            0
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536872132,
+            8,
+            28076,
+            0
+          ]
+        },
+        {
+          "function": "auxiliary_UART_raw_tx_capture",
+          "pc": "0x0801aad0",
+          "args": [
+            536886752,
+            4,
+            28076,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "case_counts": {
+    "crc": 1,
+    "parser": 8,
+    "parser_dispatch": 27,
+    "sender": 6
+  },
+  "all_assertions_passed": true
+}

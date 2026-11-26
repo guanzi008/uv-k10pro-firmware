@@ -5,7 +5,9 @@ of successful operation on a physical radio. It targets the interface used by
 `K10PRO_ENG_v8.02.16`. Board revisions and optional components still need to be
 identified on hardware.
 
-The independently implemented drivers use only the pins below. Unknown reset,
+The independently implemented drivers use the SPI NOR and Si4732 pins below.
+The RF and programming-interface sections record additional research evidence;
+those interfaces are not configured by the diagnostic firmware. Unknown reset,
 power, speaker, antenna-switch and transmit signals have no guessed definitions.
 
 ## Evidence identity
@@ -108,6 +110,40 @@ The stock image contains an additional path at `0x08019AF4` that transfers
 `0x3DD8` bytes from external NOR offset `0xA0000` in eight-byte chunks. That
 external patch is not present in the MCU download and is not used or distributed
 here. AM/SSB and this patch path remain outside the initial driver.
+
+## Main RF register bus: recovered, not a hardware-validated driver
+
+The stock functions `0x08018944(reg, value16)` and `0x08018248(reg)` use the
+port at `0x50001400`. The [Puya CMSIS definitions][puya-header] identify this as
+GPIOF. Actual instruction replay with an explicit GPIO register model confirms:
+
+| Signal | Firmware-derived MCU pin | Evidence |
+| --- | --- | --- |
+| Serial clock | PF5 | BSRR/BRR bit5 transitions in `0x08018588` and `0x08018530` |
+| Bidirectional data | PF6 | Output bit6, IDR bit6, MODER input/output switching |
+| Chip select, active low | PF9 | Bit9 wraps each register transaction |
+| Write format | Register byte, then 16-bit value, MSB first | `reg=0x38,value=0x1234` produces `38 12 34` |
+| Read format | `reg | 0x80`, then 16 input bits | Artificial `A5 5A` returns `0xA55A` |
+| 32-bit register pair | Low word to `0x38`, high word to `0x39` | Actual helper `0x08018480` |
+
+This is compatible with a BK48xx-style three-wire interface. It does not uniquely
+identify BK4819 or BK4829, establish a complete register map, or measure electrical
+timing. See [the replay and its limitations](emulation.md) and
+[manufacturer/teardown sources](hardware-research.md). No main-RF driver has been
+enabled in the experimental firmware on the strength of this model alone.
+
+## Programming interfaces: recovered stock configuration
+
+| Interface | Observed stock mapping | Limit |
+| --- | --- | --- |
+| USART1 | `0x40013800`, PA9/PA10 AF1; 38400/115200 configuration paths | No measured baud rate or connector pinout |
+| Native USB | CDC ACM descriptors, VID `36B7`, PID `0001`, data OUT `02`, data IN `81` | Descriptor parse, not physical enumeration |
+| Auxiliary USART3 | `0x40004800`, PB11 AF4; PB10 AF4 configured by a separate function | Bluetooth/GPS module connection not established |
+
+The common framing and each transport's checksum/XOR behavior are documented in
+[programming-protocol.md](programming-protocol.md). A USB VID by itself does not
+identify the MCU. The descriptor text `K8 CPS` is a product/software clue; no
+assumption about an interchangeable K8 radio follows from that string.
 
 ## Configuration and validation boundary
 

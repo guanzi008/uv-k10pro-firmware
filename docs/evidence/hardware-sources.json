@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "updated": "2026-11-26",
+  "target": "QUANSHENG UV-K10 Pro",
+  "firmware_identity": {
+    "version": "8.02.16 English",
+    "decoded_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+    "reference": "../reverse-engineering.md"
+  },
+  "evidence_policy": {
+    "physical_k10_pcb_silkscreens_verified": false,
+    "vendor_binaries_in_repo": false,
+    "vendor_full_schema_in_repo": false,
+    "do_not_conflate_models": [
+      "UV-K1",
+      "UV-K5",
+      "UV-K5 V3",
+      "TK11",
+      "TK11-8"
+    ],
+    "negative_search_result_scope": "Only the retrieved sources as of 2026-11-26; not proof of global absence."
+  },
+  "sources": [
+    {
+      "id": "quansheng-product",
+      "url": "https://qsfj.com/products/11145",
+      "source_type": "manufacturer",
+      "title": "UV-K10 Pro product page",
+      "accessed": "2026-11-26",
+      "verification": "official CMS JSON read",
+      "api_url": "https://cms.qsfj.com/api/entries/products/11145?fl-language=en",
+      "body_sha256": "26c0813c9313fd1e0b6c09885ea648a9fabe9d00ec7ba9aac6a1f690c746c9ef",
+      "facts": {
+        "spec11113": "999 user-facing channels",
+        "spec11120": "1.44 inch screen",
+        "feature11179": "GPS optional",
+        "feature11180": "Si4732 optional",
+        "feature11178": "body and battery Type-C charging"
+      },
+      "not_proven": [
+        "MCU suffix",
+        "NOR capacity",
+        "LCD controller",
+        "USB data wiring",
+        "Bluetooth or GNSS chipset"
+      ]
+    },
+    {
+      "id": "quansheng-variants",
+      "url": "https://jp.linkedin.com/company/quanshengradios",
+      "source_type": "manufacturer_account",
+      "title": "UV-K10 Pro version announcement",
+      "accessed": "2026-11-26",
+      "verification": "text read",
+      "author": "Quansheng Electronics Co., Ltd.",
+      "published": "relative date 2 weeks before access; exact day not established",
+      "variants": {
+        "Basic": "standard features",
+        "GPS": "Basic plus GPS/APRS",
+        "Full": "Basic plus GPS/APRS plus Si4732"
+      },
+      "not_proven": [
+        "PCB revision equivalence",
+        "optional-module part numbers"
+      ]
+    },
+    {
+      "id": "quansheng-app-policy",
+      "url": "https://qsfj.com/privacy-policy.html",
+      "source_type": "manufacturer",
+      "title": "QUANSHENG application privacy policy",
+      "accessed": "2026-11-26",
+      "verification": "HTML downloaded and relevant sections read",
+      "published": "2026-10-12",
+      "body_sha256": "5f0a00be2c48ab89c16575703e3b8f8dd783f8f0f4b2f3ba57fc262bda06c3cc",
+      "facts": {
+        "protocol_model_for_uv_k10_pro": "K8",
+        "ios_bundle_id": "com.walkieTalkieMain",
+        "ios_version_described": "1.1.0",
+        "capabilities": [
+          "Bluetooth channel programming",
+          "local templates",
+          "phone location sync",
+          "APRS messages"
+        ]
+      },
+      "not_proven": [
+        "GATT UUIDs",
+        "Bluetooth chipset",
+        "GNSS chipset",
+        "exact template serialization"
+      ]
+    },
+    {
+      "id": "quansheng-files-list",
+      "url": "https://cms.qsfj.com/api/entries/files?fields=title%2CfileUrl%2CfileSize%2Ccategory%2Clanguages&fl-language=en&filter%5Bproducts%5D=11145&filter%5Bpublished%5D=Yes",
+      "source_type": "manufacturer",
+      "title": "Published files for product 11145",
+      "accessed": "2026-11-26",
+      "verification": "JSON downloaded; six entries read",
+      "discovered_from": "https://qsfj.com/assets/product-0bFSRl5R.js",
+      "body_sha256": "417cd064e1addd667cedb6482f9e882cc519deb950631d2bd4f0a5ac5ed2e5ef",
+      "not_found_in_this_list": [
+        "standalone blank template",
+        "whole-radio user manual PDF"
+      ]
+    },
+    {
+      "id": "bk4819-official",
+      "url": "https://www.bekencorp.com/en/goods/detail/cid/50.html",
+      "source_type": "chip_manufacturer",
+      "title": "BK4819 product information",
+      "accessed": "2026-11-26",
+      "verification": "official text read",
+      "author": "Beken Corporation",
+      "use": "candidate three-wire RF interface comparison only",
+      "not_proven": [
+        "BK4819 fitted to UV-K10 Pro"
+      ]
+    },
+    {
+      "id": "bk4829-datasheet-mirror",
+      "url": "https://manuals.plus/m/b03fb6dba016158ab9f4b5b3d1aeb1d9ea178efc44cc11c2c08398621553cdc9.pdf",
+      "source_type": "manufacturer_authored_document_third_party_mirror",
+      "title": "BK4829 Datasheet DS-BK4829-E01 V1.0",
+      "accessed": "2026-11-26",
+      "verification": "PDF text read; not manufacturer-hosted",
+      "author_claimed_in_document": "Beken Corporation",
+      "published": "2023-05-26",
+      "pages": {
+        "11": "three-wire bus and timing",
+        "16-17": "pin descriptions"
+      },
+      "use": "candidate bus-shape comparison",
+      "not_proven": [
+        "mirror authenticity by vendor signature",
+        "complete register map",
+        "BK4829 fitted to UV-K10 Pro"
+      ]
+    },
+    {
+      "id": "bk4829-register-caution",
+      "url": "https://github.com/armel/uv-k1-k5v3-firmware-custom/discussions/36",
+      "source_type": "first_party_community_discussion",
+      "title": "BK4829 register list? #36",
+      "accessed": "2026-11-26",
+      "verification": "discussion read",
+      "published": "2025-12-10",
+      "relevant_comment_date": "2026-03-03",
+      "finding": "A participant questions whether the uploaded document is a relabeled BK4819 register list; attachment not used as authoritative BK4829 register reference."
+    },
+    {
+      "id": "teardown-lead",
+      "url": "https://post.smzdm.com/p/awwdov6p/",
+      "source_type": "secondary_aggregator",
+      "title": "K10 Pro teardown lead in aggregated source list",
+      "accessed": "2026-11-26",
+      "verification": "aggregate text read; original teardown NOT acquired",
+      "published": "2026-11-14",
+      "claimed_original": {
+        "platform": "Xiaohongshu",
+        "attribution": "CQ业余无线电，BH4IWK分享",
+        "date": "2026-11-12",
+        "title": "泉盛K10 Pro拆机",
+        "original_url": null,
+        "video_timestamp": null,
+        "image_page": null
+      },
+      "silkscreen_verified": false,
+      "not_proven": [
+        "4 MiB NOR",
+        "MCU suffix",
+        "RF part",
+        "PCB revision"
+      ]
+    },
+    {
+      "id": "manual-scan-lead",
+      "url": "https://www.xiaohongshu.com/explore/6af12a9600000000350141ed",
+      "source_type": "unread_primary_lead",
+      "title": "UV-K10 Pro manual scan",
+      "accessed": "2026-11-26",
+      "verification": "URL followed; original content unavailable",
+      "claimed_author": "大大猫",
+      "claimed_date": "2026-11-09",
+      "attribution_source": "teardown-lead",
+      "image_page": null,
+      "video_timestamp": null,
+      "technical_claims_used": false
+    },
+    {
+      "id": "bi4oae-non-hands-on",
+      "url": "https://www.bi4oae.top/blog/quansheng-uv-k10-pro-review",
+      "source_type": "secondary_review",
+      "title": "UV-K10 Pro overview",
+      "accessed": "2026-11-26",
+      "verification": "text read; author says no personal radio yet",
+      "author": "BI4OAE",
+      "published": "2026-11-18",
+      "use": "exclude as independent teardown or chip-capacity confirmation"
+    },
+    {
+      "id": "f4hwn-fair-preview",
+      "url": "https://www.youtube.com/watch?v=CDfujLy33So",
+      "source_type": "original_author_video_description",
+      "title": "First look at HKTDC fair",
+      "accessed": "2026-11-26",
+      "verification": "description read; video not used for internal hardware",
+      "author": "F4HWN Armel",
+      "published": "2026-10-11",
+      "finding": "Author describes a preview based on a manufacturer-booth photo.",
+      "video_timestamp": null,
+      "silkscreen_verified": false
+    },
+    {
+      "id": "regulatory-index",
+      "url": "https://fccid.io/company/Quansheng-Electronics-Co-Ltd",
+      "source_type": "third_party_regulatory_index",
+      "title": "Quansheng certification index",
+      "accessed": "2026-11-26",
+      "verification": "index text read; no K10 internal exhibit acquired",
+      "finding": "Visible records include UV-K1, TK11, TK11-8 and UV-K5. K10 was not in the retrieved list.",
+      "not_proven": [
+        "absence of K10 certification",
+        "same-board status of those models"
+      ]
+    },
+    {
+      "id": "uv-k1-community-exclusion",
+      "url": "https://uv-k1.com/",
+      "source_type": "community_reference",
+      "title": "UV-K1 and UV-K10 community homepage",
+      "accessed": "2026-11-26",
+      "verification": "text read",
+      "finding": "Most specification, model-variant and teardown content is explicitly UV-K1; not transferred to K10.",
+      "technical_claims_used_for_k10": false
+    },
+    {
+      "id": "uv-k5-pcb-exclusion",
+      "url": "https://github.com/mentalDetector/Quansheng_UV-K5_PCB_R51-V1.4",
+      "source_type": "original_hardware_research",
+      "title": "UV-K5 R51 V1.4 PCB images",
+      "accessed": "2026-11-26",
+      "verification": "repository description read; images not used for K10",
+      "author": "mentalDetector and contributors",
+      "finding": "Explicitly a UV-K5 V1.4 board; not a K10 schematic.",
+      "technical_claims_used_for_k10": false
+    },
+    {
+      "id": "shj-resource-pack",
+      "url": "https://tiengu.com/software/",
+      "source_type": "reseller_distribution",
+      "title": "K10-PRO Resource Pack",
+      "accessed": "2026-11-26",
+      "verification": "page and archive directory read; APK extracted statically and K8 schema compared; no vendor executable run",
+      "download_url": "https://www.tiengu.com/wp-content/uploads/2026/11/QUANSHENG-1.1.0-68.apk_.1.1.11.zip",
+      "bytes": 18509848,
+      "sha256": "c745aac17acece6374ed44b7e645e701516b46a99a2238da07ad7ec8877a5fba",
+      "members": [
+        {
+          "name": "QUANSHENG-1.1.0-68.apk.1.1.1(1).1",
+          "bytes": 30908734
+        },
+        {
+          "name": "UV-K10 Pro(0.57 客户版)(1).exe",
+          "bytes": 1341538
+        },
+        {
+          "name": "UV-K10_Pro蓝牙APP使用说明(1).docx",
+          "bytes": 279035
+        },
+        {
+          "name": "功率操作(1).docx",
+          "bytes": 702040
+        }
+      ],
+      "not_proven": [
+        "officially authenticated package",
+        "whole-radio user manual",
+        "runtime behavior"
+      ]
+    },
+    {
+      "id": "puya-gpiof-cmsis",
+      "url": "https://raw.githubusercontent.com/OpenPuya/PY32F071_Firmware/master/Drivers/CMSIS/Device/PY32F071/Include/py32f071xB.h",
+      "source_type": "chip_manufacturer_sdk",
+      "title": "PY32F071xB CMSIS header",
+      "accessed": "2026-11-26",
+      "verification": "Header downloaded and exact base definitions read",
+      "body_sha256": "08de8dbc4087557934ef85d538a33dd5b5a254ad94ee529fea02489d1cac6dd0",
+      "facts": {
+        "IOPORT_BASE": "0x50000000",
+        "GPIOF_BASE": "IOPORT_BASE + 0x00001400"
+      },
+      "use": "Name MMIO base from firmware simulation as GPIOF; no physical pin measurement claimed"
+    }
+  ],
+  "official_downloads": [
+    {
+      "cms_id": "11434",
+      "record_url": "https://cms.qsfj.com/api/entries/files/11434?fl-language=en",
+      "title": "UV-K10 Pro English Firmware",
+      "download_url": "https://www.dropbox.com/scl/fi/t3hjej7ao9rpv661o8v7h/K10PRO_ENG_v8.02.16_publish.bin?rlkey=3r9820ejabye5svswno24f2o0&st=bwzucjio&dl=1",
+      "status": "previously downloaded and analyzed by project; see docs/reverse-engineering.md"
+    },
+    {
+      "cms_id": "11411",
+      "record_url": "https://cms.qsfj.com/api/entries/files/11411?fl-language=en",
+      "title": "UV-K10 Pro 中文固件",
+      "download_url": "https://pan.baidu.com/s/1WIgStXHA-SUQ9tuyC-dFEQ?pwd=5n88",
+      "status": "not downloaded in this hardware-research task"
+    },
+    {
+      "cms_id": "11398",
+      "record_url": "https://cms.qsfj.com/api/entries/files/11398?fl-language=en",
+      "title": "QUANSHENG Android Bluetooth APP APK",
+      "download_url": "https://www.dropbox.com/scl/fi/4ystlxyaj0dbczqpkd9vh/QUANSHENG-1.1.0-64.apk.1.1.1.1.1.apk.1.1.1.1.1_tmp.apk.1.1.1.1.1_tmp?rlkey=ulbxmu0sk819lpwrg36qfosob&st=l83hmfqz&dl=1",
+      "status": "downloaded; not executed",
+      "analysis_filename": "QUANSHENG-1.1.0-64.apk",
+      "bytes": 30842842,
+      "sha256": "b12adceddfe49c7df04eab3b8b6dbc336d7a6eb32a0df62bc75b7e978559d048"
+    },
+    {
+      "cms_id": "11390",
+      "record_url": "https://cms.qsfj.com/api/entries/files/11390?fl-language=en",
+      "title": "UV-K10 Pro CPS/Programming Software",
+      "download_url": "https://www.dropbox.com/scl/fi/1frpm6vbrw0qgf78fr8f2/UV-K10-Pro-0.56.rar?rlkey=qp4ofvnod4goj48wr0lndyzvf&st=gok65ca9&dl=1",
+      "status": "downloaded; not executed",
+      "analysis_filename": "UV-K10-Pro-0.56.rar",
+      "bytes": 1178625,
+      "sha256": "4a61d69d342b261175dd5d005fa4d014db5d292f4b5d14161e6ba0a4d77bfaa7"
+    },
+    {
+      "cms_id": "11237",
+      "record_url": "https://cms.qsfj.com/api/entries/files/11237?fl-language=en",
+      "title": "UV-K10 Pro写频软件1.2.0-12",
+      "download_url": "https://pan.baidu.com/s/1fsxrTevmtdMWCZP3JVFW8g?pwd=aew8",
+      "status": "not downloaded in this hardware-research task"
+    },
+    {
+      "cms_id": "11234",
+      "record_url": "https://cms.qsfj.com/api/entries/files/11234?fl-language=en",
+      "title": "UV-K10 Pro安卓蓝牙APP软件1.1.0-68",
+      "download_url": "https://pan.baidu.com/s/1ZY4BcJ3Oh1NO5HUNdSWYvQ?pwd=5qfd",
+      "status": "not downloaded in this hardware-research task"
+    }
+  ],
+  "official_apk_assets_observed": [
+    {
+      "path": "assets/flutter_assets/assets/products/data.json",
+      "bytes": 189,
+      "observation": "Single product directory entry named UV-K10 Pro; does not prove all APK code is model-specific."
+    },
+    {
+      "path": "assets/flutter_assets/assets/K8.json",
+      "bytes": 175298,
+      "observation": "Parameter schema; only independent field findings are intended for repository publication."
+    },
+    {
+      "path": "assets/flutter_assets/assets/devices/k8.png",
+      "bytes": 73663,
+      "observation": "File existence and size verified; not used to inspect internal hardware."
+    }
+  ],
+  "search_scope": {
+    "languages": [
+      "Chinese",
+      "English"
+    ],
+    "topics": [
+      "UV-K10 Pro teardown / 拆机",
+      "PCB photos and silkscreens",
+      "original BH4IWK teardown attribution",
+      "FCC / certification internal photos",
+      "official firmware, CPS and APK downloads",
+      "whole-radio manual",
+      "BK4819 / BK4829 manufacturer references"
+    ],
+    "limitations": [
+      "No readable original K10 PCB photo acquired",
+      "Bilibili public search endpoint returned HTTP 412; no access-control bypass attempted",
+      "Xiaohongshu manual source was not readable",
+      "Regulatory retrieval used an index; no K10 primary internal exhibit located"
+    ]
+  },
+  "vendor_app_schema_summary": "vendor-schema.json",
+  "firmware_rf_simulation": "rf-bus-emulation.json"
+}

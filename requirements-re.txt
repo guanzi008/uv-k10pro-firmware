@@ -1,0 +1,5 @@
+# Optional host-only reverse-engineering dependencies, never linked into firmware.
+unicorn==2.1.4
+capstone==5.0.9
+dnfile==0.18.0
+dncil==1.0.2

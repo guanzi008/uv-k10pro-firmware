@@ -1,0 +1,531 @@
+{
+  "sample_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+  "function": "0x08019694",
+  "argument_order": [
+    "address",
+    "source_pointer",
+    "length",
+    "mode"
+  ],
+  "executed": [
+    "stock RMW",
+    "stock memory helpers",
+    "stock page-splitting wrapper 0x080197b2"
+  ],
+  "replaced": [
+    "0x080195e4 read",
+    "0x08019588 sector erase",
+    "0x080197ec page program"
+  ],
+  "synthetic_capacity_bytes": 2097152,
+  "limitations": "Function-level CPU replay with a byte-array NOR model; no real device, SPI timing, power loss, endurance or fitted capacity validation.",
+  "cases": [
+    {
+      "name": "erased_target_page_split",
+      "passed": true,
+      "observation": "Programs 8 + 24 bytes across a 256-byte page; no sector erase.",
+      "instructions": 413,
+      "operations": [
+        {
+          "op": "read",
+          "address": 4096,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 4856,
+          "length": 8
+        },
+        {
+          "op": "program",
+          "address": 4864,
+          "length": 24
+        }
+      ],
+      "result_sha256": "76f74cbc53e38b750b77eb2fda5fc13d6960a50b5a9f8d3957b3e4ecaa829204"
+    },
+    {
+      "name": "identical_cached_write",
+      "passed": true,
+      "observation": "Identical cached bytes cause no read, erase, or program.",
+      "instructions": 269,
+      "operations": [],
+      "result_sha256": "76f74cbc53e38b750b77eb2fda5fc13d6960a50b5a9f8d3957b3e4ecaa829204"
+    },
+    {
+      "name": "mode0_preserves_sector_neighbors",
+      "passed": true,
+      "observation": "A changed non-erased target causes one erase and a complete 4 KiB rewrite; both neighbors survive.",
+      "instructions": 586,
+      "operations": [
+        {
+          "op": "read",
+          "address": 4096,
+          "length": 4096
+        },
+        {
+          "op": "erase",
+          "address": 4096,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 4096,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 4352,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 4608,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 4864,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 5120,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 5376,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 5632,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 5888,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 6144,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 6400,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 6656,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 6912,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 7168,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 7424,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 7680,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 7936,
+          "length": 256
+        }
+      ],
+      "result_sha256": "1c68c2ac757409455afd4cf7a40e8d1c2d811ceacac2f185c91d930dc79a189c"
+    },
+    {
+      "name": "mode1_erased_tail",
+      "passed": true,
+      "observation": "After erase, only the prefix through the requested end is rewritten; the rest of this sector becomes FF.",
+      "instructions": 15494,
+      "operations": [
+        {
+          "op": "read",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "erase",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 327680,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 327936,
+          "length": 64
+        }
+      ],
+      "result_sha256": "f2dbbf812c885ac6ec1439478420ee522bb2e247bf550ab9a710e37b67654171"
+    },
+    {
+      "name": "mode1_erased_target_preserves_tail",
+      "passed": true,
+      "observation": "An already-erased target takes the direct-program path; the populated tail survives.",
+      "instructions": 397,
+      "operations": [
+        {
+          "op": "read",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 327968,
+          "length": 32
+        }
+      ],
+      "result_sha256": "bbc69d00b57bb5f1665df55895a03dc588bb545dce5b4bee78204a6c9c805de4"
+    },
+    {
+      "name": "cross_sector_mode0",
+      "passed": true,
+      "observation": "Splits a 32-byte request at the 4 KiB boundary; both sectors retain all neighbors.",
+      "instructions": 914,
+      "operations": [
+        {
+          "op": "read",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "erase",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 327680,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 327936,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328192,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328448,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328704,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328960,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329216,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329472,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329728,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329984,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 330240,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 330496,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 330752,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 331008,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 331264,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 331520,
+          "length": 256
+        },
+        {
+          "op": "read",
+          "address": 331776,
+          "length": 4096
+        },
+        {
+          "op": "erase",
+          "address": 331776,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 331776,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 332032,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 332288,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 332544,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 332800,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 333056,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 333312,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 333568,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 333824,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 334080,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 334336,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 334592,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 334848,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 335104,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 335360,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 335616,
+          "length": 256
+        }
+      ],
+      "result_sha256": "2f0e4e64e379f8506ebb4cd44f19b959761b50a7786648c6d7892a016a9b9d41"
+    },
+    {
+      "name": "cross_sector_mode1",
+      "passed": true,
+      "observation": "Splits a 32-byte request at the 4 KiB boundary; the second sector's trailing bytes become FF.",
+      "instructions": 17036,
+      "operations": [
+        {
+          "op": "read",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "erase",
+          "address": 327680,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 327680,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 327936,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328192,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328448,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328704,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 328960,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329216,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329472,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329728,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 329984,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 330240,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 330496,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 330752,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 331008,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 331264,
+          "length": 256
+        },
+        {
+          "op": "program",
+          "address": 331520,
+          "length": 256
+        },
+        {
+          "op": "read",
+          "address": 331776,
+          "length": 4096
+        },
+        {
+          "op": "erase",
+          "address": 331776,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 331776,
+          "length": 16
+        }
+      ],
+      "result_sha256": "3f9a524f598f67b8c583300d7c635f5d2c50ac2a17a8e3c03564b8d9973e5d36"
+    },
+    {
+      "name": "same_sector_cache_reuse",
+      "passed": true,
+      "observation": "Two different writes reuse one sector read and both changes persist in the model.",
+      "instructions": 120,
+      "operations": [
+        {
+          "op": "read",
+          "address": 4096,
+          "length": 4096
+        },
+        {
+          "op": "program",
+          "address": 4352,
+          "length": 2
+        },
+        {
+          "op": "program",
+          "address": 4608,
+          "length": 2
+        }
+      ],
+      "result_sha256": "6b0dae2e5209eff3f887e5a516396f79df6643ea956ea30ee7594084f91b73ba"
+    }
+  ],
+  "passed": 8
+}

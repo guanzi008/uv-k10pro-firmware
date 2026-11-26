@@ -3,12 +3,14 @@ UV-K10 Pro. It is not an official Quansheng or Puya release and is not
 endorsed by those companies.
 
 The code was written from public hardware documentation and observations of
-the official K10PRO_ENG_v8.02.16_publish.bin application. This is not a claim
+the official K10PRO_ENG_v8.02.16_publish.bin application and the statically
+inspected official programming applications. This is not a claim
 of a separated clean-room process. See docs/reverse-engineering.md for the
 reference sample hashes, observed addresses, sources, and uncertainty.
 
 No Quansheng firmware image, vendor disassembly, bootloader, external Flash
-dump, calibration data, font image, or Si47xx patch is included. The MIT
+dump, calibration data, font image, APK, CPS executable, complete vendor JSON
+schema, bundled vendor CSV, or Si47xx patch is included. The MIT
 license applies to the new project code and documentation, not to third-party
 reference materials or trademarks.
 
@@ -16,6 +18,13 @@ The 128-byte firmware-container XOR constant is a protocol interoperability
 parameter, also documented by the F4HWN project's tools/serialtool/_fwcodec.py:
 https://github.com/armel/uv-k1-k5v3-firmware-custom
 The codec implementation in this repository is independently written.
+
+The 16-byte programming-frame XOR constant, command identifiers, field offsets,
+observed enum meanings and artifact hashes are interoperability/research facts.
+The offline codecs, synthetic data, function-level emulator harness and schema
+summarizer were independently authored. A schema field is not a claim that its
+vendor formatter or the corresponding radio operation has been implemented.
+See docs/emulation.md for explicit hardware replacements and model limitations.
 
 Register definitions are documented by Puya's PY32F071 datasheet and OpenPuya
 CMSIS/LL headers. Si47xx command definitions are documented in Skyworks AN332.

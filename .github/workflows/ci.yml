@@ -23,7 +23,9 @@ jobs:
           sudo apt-get install --no-install-recommends -y gcc-arm-none-eabi binutils-arm-none-eabi
           arm-none-eabi-gcc --version
       - name: Test host tools and driver mocks
-        run: make test
+        run: |
+          python3 -m pip install --disable-pip-version-check -r requirements-re.txt
+          make test
       - name: Build and verify experimental image
         run: make -j2 package
       - name: Record build checksums
