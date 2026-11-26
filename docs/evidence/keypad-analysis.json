@@ -1,0 +1,1369 @@
+{
+  "sample_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+  "functions": {
+    "gpio_init": "0x08018b94",
+    "raw_scan": "0x08018c54",
+    "poll_filter": "0x08008a14",
+    "event_capture": "0x080082fc"
+  },
+  "model": "Logical contacts; stock initialization, GPIO helper, scanner and filter execute. Clock enable, SysTick delay and application dispatch are explicit hooks.",
+  "limitations": "No whole-system time, real PCB continuity, voltage, diode, ghosting, output contention or RF behavior is simulated. Rows/columns are MCU port bits, not package pins or connector pads.",
+  "initial_conditions": "Scatter data executed; BSS and modeled GPIO registers initially zero; application state and input flags explicitly reset for each filter case.",
+  "gpio_clock_masks": [
+    1,
+    2,
+    4,
+    32
+  ],
+  "initial_pins": {
+    "PF8": {
+      "mode": 1,
+      "output_type": 0,
+      "speed": 3,
+      "pull": 1,
+      "output_latch": 1
+    },
+    "PB4": {
+      "mode": 1,
+      "output_type": 0,
+      "speed": 3,
+      "pull": 1,
+      "output_latch": 1
+    },
+    "PB3": {
+      "mode": 1,
+      "output_type": 0,
+      "speed": 3,
+      "pull": 1,
+      "output_latch": 1
+    },
+    "PA14": {
+      "mode": 1,
+      "output_type": 0,
+      "speed": 3,
+      "pull": 1,
+      "output_latch": 1
+    },
+    "PB15": {
+      "mode": 0,
+      "output_type": 0,
+      "speed": 0,
+      "pull": 1,
+      "output_latch": 0
+    },
+    "PB14": {
+      "mode": 0,
+      "output_type": 0,
+      "speed": 0,
+      "pull": 1,
+      "output_latch": 0
+    },
+    "PB13": {
+      "mode": 0,
+      "output_type": 0,
+      "speed": 0,
+      "pull": 1,
+      "output_latch": 0
+    },
+    "PB12": {
+      "mode": 0,
+      "output_type": 0,
+      "speed": 0,
+      "pull": 1,
+      "output_latch": 0
+    },
+    "PA8": {
+      "mode": 0,
+      "output_type": 0,
+      "speed": 0,
+      "pull": 1,
+      "output_latch": 0
+    },
+    "PC13": {
+      "mode": 0,
+      "output_type": 0,
+      "speed": 0,
+      "pull": 1,
+      "output_latch": 0
+    }
+  },
+  "rows": [
+    "PF8",
+    "PB4",
+    "PB3",
+    "PA14"
+  ],
+  "columns": [
+    "PB15",
+    "PB14",
+    "PB13",
+    "PB12",
+    "PA8"
+  ],
+  "matrix_codes": [
+    [
+      17,
+      1,
+      4,
+      7,
+      10
+    ],
+    [
+      12,
+      2,
+      5,
+      8,
+      11
+    ],
+    [
+      13,
+      3,
+      6,
+      9,
+      null
+    ],
+    [
+      18,
+      14,
+      0,
+      15,
+      16
+    ]
+  ],
+  "direct_codes": {
+    "24": "PB15",
+    "23": "PB14",
+    "25": "PB13"
+  },
+  "ptt": {
+    "pin": "PC13",
+    "active_low": true,
+    "event_code": 21,
+    "press_polls": 5,
+    "release_polls": 2
+  },
+  "scan_cases": [
+    {
+      "name": "idle",
+      "pressed_keys": [],
+      "result": 255,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 22,
+      "instructions": 296,
+      "passed": true
+    },
+    {
+      "name": "single_0",
+      "pressed_keys": [
+        0
+      ],
+      "result": 0,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 20,
+      "instructions": 275,
+      "passed": true
+    },
+    {
+      "name": "single_1",
+      "pressed_keys": [
+        1
+      ],
+      "result": 1,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 5,
+      "instructions": 91,
+      "passed": true
+    },
+    {
+      "name": "single_2",
+      "pressed_keys": [
+        2
+      ],
+      "result": 2,
+      "row_low_order": [
+        "PF8",
+        "PB4"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 10,
+      "instructions": 152,
+      "passed": true
+    },
+    {
+      "name": "single_3",
+      "pressed_keys": [
+        3
+      ],
+      "result": 3,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 15,
+      "instructions": 213,
+      "passed": true
+    },
+    {
+      "name": "single_4",
+      "pressed_keys": [
+        4
+      ],
+      "result": 4,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 6,
+      "instructions": 101,
+      "passed": true
+    },
+    {
+      "name": "single_5",
+      "pressed_keys": [
+        5
+      ],
+      "result": 5,
+      "row_low_order": [
+        "PF8",
+        "PB4"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 11,
+      "instructions": 161,
+      "passed": true
+    },
+    {
+      "name": "single_6",
+      "pressed_keys": [
+        6
+      ],
+      "result": 6,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 16,
+      "instructions": 223,
+      "passed": true
+    },
+    {
+      "name": "single_7",
+      "pressed_keys": [
+        7
+      ],
+      "result": 7,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 7,
+      "instructions": 111,
+      "passed": true
+    },
+    {
+      "name": "single_8",
+      "pressed_keys": [
+        8
+      ],
+      "result": 8,
+      "row_low_order": [
+        "PF8",
+        "PB4"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 12,
+      "instructions": 171,
+      "passed": true
+    },
+    {
+      "name": "single_9",
+      "pressed_keys": [
+        9
+      ],
+      "result": 9,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 17,
+      "instructions": 233,
+      "passed": true
+    },
+    {
+      "name": "single_10",
+      "pressed_keys": [
+        10
+      ],
+      "result": 10,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 8,
+      "instructions": 122,
+      "passed": true
+    },
+    {
+      "name": "single_11",
+      "pressed_keys": [
+        11
+      ],
+      "result": 11,
+      "row_low_order": [
+        "PF8",
+        "PB4"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 13,
+      "instructions": 182,
+      "passed": true
+    },
+    {
+      "name": "single_12",
+      "pressed_keys": [
+        12
+      ],
+      "result": 12,
+      "row_low_order": [
+        "PF8",
+        "PB4"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 9,
+      "instructions": 142,
+      "passed": true
+    },
+    {
+      "name": "single_13",
+      "pressed_keys": [
+        13
+      ],
+      "result": 13,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 14,
+      "instructions": 203,
+      "passed": true
+    },
+    {
+      "name": "single_14",
+      "pressed_keys": [
+        14
+      ],
+      "result": 14,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 19,
+      "instructions": 265,
+      "passed": true
+    },
+    {
+      "name": "single_15",
+      "pressed_keys": [
+        15
+      ],
+      "result": 15,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 21,
+      "instructions": 286,
+      "passed": true
+    },
+    {
+      "name": "single_16",
+      "pressed_keys": [
+        16
+      ],
+      "result": 16,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 22,
+      "instructions": 296,
+      "passed": true
+    },
+    {
+      "name": "single_17",
+      "pressed_keys": [
+        17
+      ],
+      "result": 17,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 4,
+      "instructions": 81,
+      "passed": true
+    },
+    {
+      "name": "single_18",
+      "pressed_keys": [
+        18
+      ],
+      "result": 18,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 18,
+      "instructions": 255,
+      "passed": true
+    },
+    {
+      "name": "single_24",
+      "pressed_keys": [
+        24
+      ],
+      "result": 24,
+      "row_low_order": [],
+      "delay_arguments": [
+        1
+      ],
+      "gpio_reads": 1,
+      "instructions": 46,
+      "passed": true
+    },
+    {
+      "name": "single_23",
+      "pressed_keys": [
+        23
+      ],
+      "result": 23,
+      "row_low_order": [],
+      "delay_arguments": [
+        1
+      ],
+      "gpio_reads": 2,
+      "instructions": 56,
+      "passed": true
+    },
+    {
+      "name": "single_25",
+      "pressed_keys": [
+        25
+      ],
+      "result": 25,
+      "row_low_order": [],
+      "delay_arguments": [
+        1
+      ],
+      "gpio_reads": 3,
+      "instructions": 66,
+      "passed": true
+    },
+    {
+      "name": "same_row_priority",
+      "pressed_keys": [
+        1,
+        4
+      ],
+      "result": 1,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 5,
+      "instructions": 91,
+      "passed": true
+    },
+    {
+      "name": "different_rows_distinct_columns",
+      "pressed_keys": [
+        4,
+        2
+      ],
+      "result": 4,
+      "row_low_order": [
+        "PF8"
+      ],
+      "delay_arguments": [
+        1,
+        1
+      ],
+      "gpio_reads": 6,
+      "instructions": 101,
+      "passed": true
+    },
+    {
+      "name": "direct_over_matrix",
+      "pressed_keys": [
+        24,
+        1
+      ],
+      "result": 24,
+      "row_low_order": [],
+      "delay_arguments": [
+        1
+      ],
+      "gpio_reads": 1,
+      "instructions": 46,
+      "passed": true
+    },
+    {
+      "name": "direct_priority",
+      "pressed_keys": [
+        23,
+        24,
+        25
+      ],
+      "result": 24,
+      "row_low_order": [],
+      "delay_arguments": [
+        1
+      ],
+      "gpio_reads": 1,
+      "instructions": 46,
+      "passed": true
+    },
+    {
+      "name": "unscanned_pb3_pa8",
+      "pressed_keys": [],
+      "result": 255,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 22,
+      "instructions": 296,
+      "passed": true
+    },
+    {
+      "name": "ptt_absent_from_raw_scan",
+      "pressed_keys": [],
+      "result": 255,
+      "row_low_order": [
+        "PF8",
+        "PB4",
+        "PB3",
+        "PA14"
+      ],
+      "delay_arguments": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "gpio_reads": 22,
+      "instructions": 296,
+      "passed": true
+    },
+    {
+      "name": "software_override",
+      "result": 7,
+      "gpio_reads": 0,
+      "instructions": 9,
+      "passed": true
+    }
+  ],
+  "filter_cases": [
+    {
+      "name": "short_press_release",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 5,
+          "keys": [
+            1
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 1,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 10,
+          "key": 1,
+          "pressed": 0,
+          "held": 0
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "four_sample_glitch",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 4,
+          "keys": [
+            1
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "stable_key_transition",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 5,
+          "keys": [
+            1
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [
+            2
+          ],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 1,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 10,
+          "key": 1,
+          "pressed": 0,
+          "held": 0
+        },
+        {
+          "poll": 10,
+          "key": 2,
+          "pressed": 1,
+          "held": 0
+        }
+      ],
+      "final_state": {
+        "last_raw": 2,
+        "active": 2,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "long_digit_release",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 129,
+          "keys": [
+            1
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 1,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 129,
+          "key": 1,
+          "pressed": 1,
+          "held": 1
+        },
+        {
+          "poll": 134,
+          "key": 1,
+          "pressed": 0,
+          "held": 1
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "repeat_direction_key",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 161,
+          "keys": [
+            12
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 12,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 129,
+          "key": 12,
+          "pressed": 1,
+          "held": 1
+        },
+        {
+          "poll": 145,
+          "key": 12,
+          "pressed": 1,
+          "held": 1
+        },
+        {
+          "poll": 161,
+          "key": 12,
+          "pressed": 1,
+          "held": 1
+        },
+        {
+          "poll": 166,
+          "key": 12,
+          "pressed": 0,
+          "held": 1
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "no_long_for_code18",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 161,
+          "keys": [
+            18
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 18,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 166,
+          "key": 18,
+          "pressed": 0,
+          "held": 0
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "state1_repeat_digit5",
+      "app_state": 1,
+      "phases": [
+        {
+          "polls": 161,
+          "keys": [
+            5
+          ],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 5,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 129,
+          "key": 5,
+          "pressed": 1,
+          "held": 1
+        },
+        {
+          "poll": 145,
+          "key": 5,
+          "pressed": 1,
+          "held": 1
+        },
+        {
+          "poll": 161,
+          "key": 5,
+          "pressed": 1,
+          "held": 1
+        }
+      ],
+      "final_state": {
+        "last_raw": 5,
+        "active": 5,
+        "counter": 160,
+        "held": 1,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "ptt_press5_release2",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": true
+        },
+        {
+          "polls": 2,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 21,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 7,
+          "key": 21,
+          "pressed": 0,
+          "held": 0
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 7,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "ptt_glitches",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 4,
+          "keys": [],
+          "ptt": true
+        },
+        {
+          "polls": 2,
+          "keys": [],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": true
+        },
+        {
+          "polls": 1,
+          "keys": [],
+          "ptt": false
+        },
+        {
+          "polls": 2,
+          "keys": [],
+          "ptt": true
+        },
+        {
+          "polls": 2,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 11,
+          "key": 21,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 16,
+          "key": 21,
+          "pressed": 0,
+          "held": 0
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 16,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "ptt_and_matrix",
+      "app_state": 0,
+      "phases": [
+        {
+          "polls": 5,
+          "keys": [
+            2
+          ],
+          "ptt": true
+        },
+        {
+          "polls": 2,
+          "keys": [
+            2
+          ],
+          "ptt": false
+        },
+        {
+          "polls": 5,
+          "keys": [],
+          "ptt": false
+        }
+      ],
+      "events": [
+        {
+          "poll": 5,
+          "key": 21,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 5,
+          "key": 2,
+          "pressed": 1,
+          "held": 0
+        },
+        {
+          "poll": 7,
+          "key": 21,
+          "pressed": 0,
+          "held": 0
+        },
+        {
+          "poll": 12,
+          "key": 2,
+          "pressed": 0,
+          "held": 0
+        }
+      ],
+      "final_state": {
+        "last_raw": 255,
+        "active": 255,
+        "counter": 4,
+        "held": 0,
+        "ptt": 0,
+        "ptt_counter": 0
+      },
+      "passed": true
+    }
+  ],
+  "ui_cases": [
+    {
+      "name": "signaling_profile0_character_mapping",
+      "function": "0x08006ef4",
+      "keys": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "characters": "0123456789ABCD*#",
+      "passed": true
+    },
+    {
+      "name": "menu_from_main",
+      "key": 17,
+      "handler": "0x08009cb4",
+      "menu_depth": 0,
+      "requested_ui_state": 2,
+      "passed": true
+    },
+    {
+      "name": "menu_enter_sublevel",
+      "key": 17,
+      "handler": "0x0800a884",
+      "initial_menu_depth": 0,
+      "menu_depth": 1,
+      "requested_ui_state": 2,
+      "passed": true
+    },
+    {
+      "name": "exit_to_parent",
+      "key": 18,
+      "handler": "0x0800a884",
+      "initial_menu_depth": 1,
+      "menu_depth": 0,
+      "requested_ui_state": 2,
+      "passed": true
+    },
+    {
+      "name": "exit_to_main",
+      "key": 18,
+      "handler": "0x0800a884",
+      "initial_menu_depth": 0,
+      "menu_depth": 0,
+      "requested_ui_state": 0,
+      "passed": true
+    },
+    {
+      "name": "menu_previous",
+      "key": 12,
+      "handler": "0x0800a884",
+      "initial_index": 2,
+      "index": 1,
+      "passed": true
+    },
+    {
+      "name": "menu_next",
+      "key": 13,
+      "handler": "0x0800a884",
+      "initial_index": 2,
+      "index": 3,
+      "passed": true
+    },
+    {
+      "name": "long_function_lock_toggle",
+      "key": 15,
+      "handler": "0x08009cb4",
+      "initial_lock": 0,
+      "lock": 1,
+      "ram_field": "0x200023e4",
+      "passed": true
+    },
+    {
+      "name": "long_function_lock_toggle",
+      "key": 15,
+      "handler": "0x08009cb4",
+      "initial_lock": 1,
+      "lock": 0,
+      "ram_field": "0x200023e4",
+      "passed": true
+    },
+    {
+      "name": "ab_selection_toggle",
+      "key": 10,
+      "handler": "0x08009cb4",
+      "initial_selection": 0,
+      "selection": 1,
+      "ram_field": "0x200023e0",
+      "boundary": "0x08006b9c",
+      "passed": true
+    },
+    {
+      "name": "ab_selection_toggle",
+      "key": 10,
+      "handler": "0x08009cb4",
+      "initial_selection": 1,
+      "selection": 0,
+      "ram_field": "0x200023e0",
+      "boundary": "0x08006b9c",
+      "passed": true
+    }
+  ],
+  "timing": {
+    "initializer": "0x0801a520",
+    "synthetic_core_hz": 72000000,
+    "reload": 719999,
+    "control": 7,
+    "ticks_per_us": 72,
+    "nominal_systick_hz": 100,
+    "systick_vector": "0x0801ba71",
+    "poll_route": [
+      "0x0801ba70",
+      "flag 0x20000014",
+      "0x0801d2e6",
+      "0x0800c628",
+      "0x0800c9ba",
+      "0x08008a14"
+    ],
+    "limitation": "Synthetic timer reads verify units only. Main-loop flag coalescing and blocking work can lengthen polling intervals.",
+    "cases": [
+      {
+        "name": "delay_1us_argument",
+        "function": "0x0801d010",
+        "argument": 1,
+        "synthetic_timer_delta": 72,
+        "value_reads": 2,
+        "instructions": 21,
+        "passed": true
+      },
+      {
+        "name": "delay_1ms_wrapper",
+        "function": "0x0801d000",
+        "argument": 1,
+        "synthetic_timer_delta": 72000,
+        "value_reads": 1001,
+        "instructions": 11016,
+        "passed": true
+      }
+    ]
+  },
+  "passed": 53
+}

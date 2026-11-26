@@ -1,0 +1,1159 @@
+{
+  "schema_version": 1,
+  "kind": "model-identity-static-audit-and-optional-reply-replay",
+  "android": [
+    {
+      "sample": "official-direct-download-1.1.0-64",
+      "apk_sha256": "b12adceddfe49c7df04eab3b8b6dbc336d7a6eb32a0df62bc75b7e978559d048",
+      "apk_bytes": 30842842,
+      "product_catalog_names": [
+        "UV-K10 Pro"
+      ],
+      "product_catalog_sha256": "efdaa8efdc8bfcef1d4d6a98a35ea7acffafcf4ab752d92106ad940c598354be",
+      "schemas": {
+        "K8": {
+          "asset": "assets/flutter_assets/assets/K8.json",
+          "bytes": 175298,
+          "sha256": "5df044c86a2a2eee8fd4b709bf47c1a6cfeb030b30d23c3010b09f19593dfc5f",
+          "device_model": "K8",
+          "tables": {
+            "channel_list": {
+              "address": 0,
+              "stride_bytes": 64,
+              "count": 999,
+              "flag_address": 69632,
+              "flag_length_bytes": 999
+            },
+            "vfo": {
+              "address": 65536,
+              "stride_bytes": 64,
+              "count": 14
+            },
+            "scanning_list": {
+              "address": 90112,
+              "stride_bytes": 128,
+              "count": 32
+            },
+            "dtmfLinkman": {
+              "address": 106496,
+              "stride_bytes": 24,
+              "count": 16
+            }
+          },
+          "channel_demode_labels": [
+            "FM",
+            "AM",
+            "CW"
+          ],
+          "k10_layout_gate": {
+            "matches_reference_geometry": true,
+            "checks": {
+              "exact_K8_id": true,
+              "channel_geometry": true,
+              "vfo_geometry": true
+            },
+            "live_device_identity_verified": false
+          }
+        },
+        "K82": {
+          "asset": "assets/flutter_assets/assets/K82.json",
+          "bytes": 79511,
+          "sha256": "b1c681e7bdf8a2ebc50240e57e55be9d35dbd52785804509fee1ce78540092ba",
+          "device_model": "K82",
+          "tables": {
+            "channel_list": {
+              "address": 0,
+              "stride_bytes": 16,
+              "count": 200,
+              "flag_address": 3424,
+              "flag_length_bytes": 200
+            },
+            "vfo": {
+              "address": 3200,
+              "stride_bytes": 16,
+              "count": 14
+            },
+            "flag_list": {
+              "address": 3424,
+              "stride_bytes": 1,
+              "count": 200
+            },
+            "channel_name_list": {
+              "address": 3920,
+              "stride_bytes": 16,
+              "count": 200
+            },
+            "scan_list": {
+              "address": 169,
+              "stride_bytes": 3,
+              "count": 2
+            },
+            "dtmfLinkman": {
+              "address": 7168,
+              "stride_bytes": 16,
+              "count": 16
+            }
+          },
+          "channel_demode_labels": [],
+          "k10_layout_gate": {
+            "matches_reference_geometry": false,
+            "checks": {
+              "exact_K8_id": false,
+              "channel_geometry": false,
+              "vfo_geometry": false
+            },
+            "live_device_identity_verified": false
+          }
+        },
+        "UV5": {
+          "asset": "assets/flutter_assets/assets/UV5.json",
+          "bytes": 189504,
+          "sha256": "65e2117fbdf410ab6b99dc941fa4b42923ad8eed97de74651e339318843e279b",
+          "device_model": "UV5",
+          "tables": {
+            "channel_list": {
+              "address": 7405568,
+              "stride_bytes": 72,
+              "count": 10000,
+              "flag_address": 8478720,
+              "flag_length_bytes": 10000
+            },
+            "scan_list": {
+              "address": 5292032,
+              "stride_bytes": 64,
+              "count": 250,
+              "flag_address": 8495104,
+              "flag_length_bytes": 250
+            }
+          },
+          "channel_demode_labels": [],
+          "k10_layout_gate": {
+            "matches_reference_geometry": false,
+            "checks": {
+              "exact_K8_id": false,
+              "channel_geometry": false,
+              "vfo_geometry": false
+            },
+            "live_device_identity_verified": false
+          }
+        }
+      },
+      "aot": {
+        "architecture": "arm64-v8a",
+        "bytes": 12518288,
+        "sha256": "8851fea2ebc54442d12062cba11673d3d8a0aad05dbcfd15009b657b21da7a4f",
+        "string_byte_offsets": {
+          "protocolIdForModelName": 760858,
+          "modelNameForProtocolId": 528932,
+          "normalizeModelId": 943295,
+          "selectProtocolForDeviceModel": 601447,
+          "preferredDeviceModel": 276006,
+          "K8RadioProtocol": 652581,
+          "K82RadioProtocol": 446390,
+          "K8Session": 295831,
+          "K82Session": 237584,
+          "assets/K8.json": 722864,
+          "assets/K82.json": 925381,
+          "assets/UV5.json": 244575,
+          "UV-K10 Pro": 551987
+        },
+        "limitation": "String presence/offsets do not recover the Dart routing call graph."
+      },
+      "conclusion": "K8 agrees with the K10 reference geometry; K82 and UV5 are separate schemas."
+    },
+    {
+      "sample": "dealer-resource-pack-1.1.0-68",
+      "apk_sha256": "0395fa0332d025da73a39aad49b01eaedfe59e8296f17df56fa937ff9b83b326",
+      "apk_bytes": 30908734,
+      "product_catalog_names": [
+        "UV-K10 Pro"
+      ],
+      "product_catalog_sha256": "efdaa8efdc8bfcef1d4d6a98a35ea7acffafcf4ab752d92106ad940c598354be",
+      "schemas": {
+        "K8": {
+          "asset": "assets/flutter_assets/assets/K8.json",
+          "bytes": 175876,
+          "sha256": "7b8cb1c712251fd892101f3650571ecf8992d285f82b9518c730402e9909a2a5",
+          "device_model": "K8",
+          "tables": {
+            "channel_list": {
+              "address": 0,
+              "stride_bytes": 64,
+              "count": 999,
+              "flag_address": 69632,
+              "flag_length_bytes": 999
+            },
+            "vfo": {
+              "address": 65536,
+              "stride_bytes": 64,
+              "count": 14
+            },
+            "scanning_list": {
+              "address": 90112,
+              "stride_bytes": 128,
+              "count": 32
+            },
+            "dtmfLinkman": {
+              "address": 106496,
+              "stride_bytes": 24,
+              "count": 16
+            }
+          },
+          "channel_demode_labels": [
+            "FM",
+            "AM",
+            "CW"
+          ],
+          "k10_layout_gate": {
+            "matches_reference_geometry": true,
+            "checks": {
+              "exact_K8_id": true,
+              "channel_geometry": true,
+              "vfo_geometry": true
+            },
+            "live_device_identity_verified": false
+          }
+        },
+        "K82": {
+          "asset": "assets/flutter_assets/assets/K82.json",
+          "bytes": 80991,
+          "sha256": "fe4074226e77438cbf1f6e96ff970b904af068bc790a0e65992afd21dfbee2a6",
+          "device_model": "K82",
+          "tables": {
+            "channel_list": {
+              "address": 0,
+              "stride_bytes": 16,
+              "count": 200,
+              "flag_address": 3424,
+              "flag_length_bytes": 200
+            },
+            "vfo": {
+              "address": 3200,
+              "stride_bytes": 16,
+              "count": 14
+            },
+            "flag_list": {
+              "address": 3424,
+              "stride_bytes": 1,
+              "count": 200
+            },
+            "channel_name_list": {
+              "address": 3920,
+              "stride_bytes": 16,
+              "count": 200
+            },
+            "scan_list": {
+              "address": 169,
+              "stride_bytes": 3,
+              "count": 2
+            },
+            "dtmfLinkman": {
+              "address": 7168,
+              "stride_bytes": 16,
+              "count": 16
+            }
+          },
+          "channel_demode_labels": [],
+          "k10_layout_gate": {
+            "matches_reference_geometry": false,
+            "checks": {
+              "exact_K8_id": false,
+              "channel_geometry": false,
+              "vfo_geometry": false
+            },
+            "live_device_identity_verified": false
+          }
+        },
+        "UV5": {
+          "asset": "assets/flutter_assets/assets/UV5.json",
+          "bytes": 189504,
+          "sha256": "65e2117fbdf410ab6b99dc941fa4b42923ad8eed97de74651e339318843e279b",
+          "device_model": "UV5",
+          "tables": {
+            "channel_list": {
+              "address": 7405568,
+              "stride_bytes": 72,
+              "count": 10000,
+              "flag_address": 8478720,
+              "flag_length_bytes": 10000
+            },
+            "scan_list": {
+              "address": 5292032,
+              "stride_bytes": 64,
+              "count": 250,
+              "flag_address": 8495104,
+              "flag_length_bytes": 250
+            }
+          },
+          "channel_demode_labels": [],
+          "k10_layout_gate": {
+            "matches_reference_geometry": false,
+            "checks": {
+              "exact_K8_id": false,
+              "channel_geometry": false,
+              "vfo_geometry": false
+            },
+            "live_device_identity_verified": false
+          }
+        }
+      },
+      "aot": {
+        "architecture": "arm64-v8a",
+        "bytes": 12583824,
+        "sha256": "c2cbc6245093682907109259fa1c888fa1f41c6505a48d113e0b5ca09fd5dabb",
+        "string_byte_offsets": {
+          "protocolIdForModelName": 761172,
+          "modelNameForProtocolId": 529122,
+          "normalizeModelId": 943739,
+          "selectProtocolForDeviceModel": 601668,
+          "preferredDeviceModel": 276164,
+          "K8RadioProtocol": 652856,
+          "K82RadioProtocol": 446580,
+          "K8Session": 295989,
+          "K82Session": 237742,
+          "assets/K8.json": 723178,
+          "assets/K82.json": 925825,
+          "assets/UV5.json": 244733,
+          "UV-K10 Pro": 552186
+        },
+        "limitation": "String presence/offsets do not recover the Dart routing call graph."
+      },
+      "conclusion": "K8 agrees with the K10 reference geometry; K82 and UV5 are separate schemas."
+    }
+  ],
+  "pc": {
+    "assembly_sha256": "79c9b3429187f7fca13cc8971d0e5fd46184f078127f149f333a267b99815132",
+    "assembly_bytes": 910336,
+    "namespace": "K7",
+    "product_resource": "UV-K10 Pro/UV-K10 Pro",
+    "methods": {
+      "0x6000023": {
+        "name": "K7.cps_convert::GetSafeItem",
+        "rva": "0x6c6c",
+        "selected_strings": [],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": []
+      },
+      "0x6000025": {
+        "name": "K7.cps_convert::convert_data",
+        "rva": "0x6d60",
+        "selected_strings": [],
+        "selected_field_refs": [
+          {
+            "il_offset": "0x177",
+            "operation": "ldfld",
+            "field": "K7.CPS_CHANNEL_INFO::demode"
+          },
+          {
+            "il_offset": "0x181",
+            "operation": "stfld",
+            "field": "K7.CHANNEL_INFO::am"
+          }
+        ],
+        "model_version_assignments": [],
+        "selected_internal_calls": [
+          {
+            "il_offset": "0xaa",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0xc2",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0xda",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0xf2",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x10a",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x124",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x138",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x14c",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x164",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x170",
+            "target": "K7.param_string::chn_demode_Items",
+            "token": "0x60002e1"
+          },
+          {
+            "il_offset": "0x17c",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x1a6",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x1be",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x2b9",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x2d1",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x2e9",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          },
+          {
+            "il_offset": "0x301",
+            "target": "K7.cps_convert::GetSafeItem",
+            "token": "0x6000023"
+          }
+        ]
+      },
+      "0x6000026": {
+        "name": "K7.cps_convert::GetIndex",
+        "rva": "0x7074",
+        "selected_strings": [],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": []
+      },
+      "0x6000028": {
+        "name": "K7.cps_convert::convert_data",
+        "rva": "0x70e0",
+        "selected_strings": [],
+        "selected_field_refs": [
+          {
+            "il_offset": "0x193",
+            "operation": "ldfld",
+            "field": "K7.CHANNEL_INFO::am"
+          },
+          {
+            "il_offset": "0x19d",
+            "operation": "stfld",
+            "field": "K7.CPS_CHANNEL_INFO::demode"
+          }
+        ],
+        "model_version_assignments": [],
+        "selected_internal_calls": [
+          {
+            "il_offset": "0xc2",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0xda",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0xf2",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x10a",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x122",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x13e",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x153",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x168",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x180",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x18c",
+            "target": "K7.param_string::chn_demode_Items",
+            "token": "0x60002e1"
+          },
+          {
+            "il_offset": "0x198",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x1b0",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x1e9",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x2a6",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x2be",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x2d6",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          },
+          {
+            "il_offset": "0x2ee",
+            "target": "K7.cps_convert::GetIndex",
+            "token": "0x6000026"
+          }
+        ]
+      },
+      "0x60002bc": {
+        "name": "K7.protocol_struct::Link",
+        "rva": "0x49cec",
+        "selected_strings": [],
+        "selected_field_refs": [
+          {
+            "il_offset": "0x164",
+            "operation": "ldfld",
+            "field": "K7.protocol_struct+MSG_MSCAL_ConnRsp::u8ParamsVersion"
+          },
+          {
+            "il_offset": "0x169",
+            "operation": "stsfld",
+            "field": "K7.protocol_struct::Model"
+          }
+        ],
+        "model_version_assignments": [],
+        "selected_internal_calls": []
+      },
+      "0x60002cd": {
+        "name": "K7.param_string::GetRadioChipTypes",
+        "rva": "0x4a6e4",
+        "selected_strings": [
+          "BK1080",
+          "Si4732"
+        ],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": []
+      },
+      "0x60002e1": {
+        "name": "K7.param_string::chn_demode_Items",
+        "rva": "0x4ad1c",
+        "selected_strings": [
+          "FM",
+          "AM",
+          "CW"
+        ],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": []
+      },
+      "0x6000324": {
+        "name": "K7.channel::channel_Load",
+        "rva": "0x4d140",
+        "selected_strings": [],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": [
+          {
+            "il_offset": "0x20",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x32",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x44",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x56",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x68",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x7a",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x8c",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x9e",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0xab",
+            "target": "K7.param_string::chn_demode_Items",
+            "token": "0x60002e1"
+          },
+          {
+            "il_offset": "0xb0",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0xc2",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0xd4",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0xe6",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0xf8",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x10a",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x11c",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x12e",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x140",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          },
+          {
+            "il_offset": "0x152",
+            "target": "K7.channel::LoadComboBoxString",
+            "token": "0x6000322"
+          }
+        ]
+      },
+      "0x6000399": {
+        "name": "K7.main::.ctor",
+        "rva": "0x63c60",
+        "selected_strings": [
+          "Version 0.56"
+        ],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": []
+      },
+      "0x60003a8": {
+        "name": "K7.main::main_Load",
+        "rva": "0x64a94",
+        "selected_strings": [
+          "model"
+        ],
+        "selected_field_refs": [
+          {
+            "il_offset": "0x2a",
+            "operation": "stsfld",
+            "field": "K7.main::RadioModul"
+          }
+        ],
+        "model_version_assignments": [],
+        "selected_internal_calls": [
+          {
+            "il_offset": "0x1f",
+            "target": "K7.param_string::GetRadioChipTypes",
+            "token": "0x60002cd"
+          },
+          {
+            "il_offset": "0xbb",
+            "target": "K7.main::GetLang",
+            "token": "0x60003b4"
+          },
+          {
+            "il_offset": "0xd1",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0xe7",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0xfd",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x113",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x129",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x13f",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x150",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x163",
+            "target": "K7.main::GridViewChannelInit",
+            "token": "0x60003ab"
+          }
+        ]
+      },
+      "0x60003cf": {
+        "name": "K7.main::Login",
+        "rva": "0x67aac",
+        "selected_strings": [
+          "model_error"
+        ],
+        "selected_field_refs": [
+          {
+            "il_offset": "0x34",
+            "operation": "ldsfld",
+            "field": "K7.protocol_struct::Model"
+          },
+          {
+            "il_offset": "0x39",
+            "operation": "ldsfld",
+            "field": "K7.main::ModelVersion"
+          }
+        ],
+        "model_version_assignments": [],
+        "selected_internal_calls": [
+          {
+            "il_offset": "0xe",
+            "target": "K7.protocol_struct::Link",
+            "token": "0x60002bc"
+          },
+          {
+            "il_offset": "0x1d",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x4a",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          }
+        ]
+      },
+      "0x600042f": {
+        "name": "K7.main::CellContentClick",
+        "rva": "0x6c124",
+        "selected_strings": [],
+        "selected_field_refs": [],
+        "model_version_assignments": [],
+        "selected_internal_calls": [
+          {
+            "il_offset": "0xdb",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x142",
+            "target": "K7.main::GetLang",
+            "token": "0x60003a2"
+          },
+          {
+            "il_offset": "0x18e",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x1a0",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x1b2",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x1c4",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x1d1",
+            "target": "K7.param_string::chn_demode_Items",
+            "token": "0x60002e1"
+          },
+          {
+            "il_offset": "0x1d6",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x1e8",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x1f7",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x206",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x215",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x224",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x233",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x242",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x251",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          },
+          {
+            "il_offset": "0x260",
+            "target": "K7.main::LoadComboBoxString",
+            "token": "0x600042c"
+          }
+        ]
+      },
+      "0x6000453": {
+        "name": "K7.main::.cctor",
+        "rva": "0x6e4e0",
+        "selected_strings": [],
+        "selected_field_refs": [
+          {
+            "il_offset": "0x1d8",
+            "operation": "stsfld",
+            "field": "K7.main::ModelVersion"
+          },
+          {
+            "il_offset": "0x236",
+            "operation": "stsfld",
+            "field": "K7.main::RadioModul"
+          }
+        ],
+        "model_version_assignments": [
+          {
+            "field": "K7.main::ModelVersion",
+            "value": 0,
+            "il_offset": "0x1d8"
+          }
+        ],
+        "selected_internal_calls": []
+      }
+    },
+    "demode_callers": [
+      {
+        "method": "K7.cps_convert::convert_data",
+        "token": "0x6000025",
+        "rva": "0x6d60",
+        "il_offset": "0x170"
+      },
+      {
+        "method": "K7.cps_convert::convert_data",
+        "token": "0x6000028",
+        "rva": "0x70e0",
+        "il_offset": "0x18c"
+      },
+      {
+        "method": "K7.cps_convert::convert_data",
+        "token": "0x600002e",
+        "rva": "0x7ec8",
+        "il_offset": "0x1fc"
+      },
+      {
+        "method": "K7.cps_convert::convert_data",
+        "token": "0x600002f",
+        "rva": "0x81c0",
+        "il_offset": "0x179"
+      },
+      {
+        "method": "K7.vfo::channel_Load",
+        "token": "0x600028d",
+        "rva": "0x44ef0",
+        "il_offset": "0x122"
+      },
+      {
+        "method": "K7.channel::channel_Load",
+        "token": "0x6000324",
+        "rva": "0x4d140",
+        "il_offset": "0xab"
+      },
+      {
+        "method": "K7.main::ImportCsvToDataGridView",
+        "token": "0x600041b",
+        "rva": "0x6ab9c",
+        "il_offset": "0xaf"
+      },
+      {
+        "method": "K7.main::CellContentClick",
+        "token": "0x600042f",
+        "rva": "0x6c124",
+        "il_offset": "0x1d1"
+      }
+    ],
+    "interpretation": {
+      "product": "UV-K10 Pro",
+      "parameter_revision_expected": 0,
+      "revision_source": "ConnRsp.u8ParamsVersion at body offset 22 -> protocol_struct.Model -> main.Login comparison",
+      "revision_is_unique_product_id": false,
+      "demode_labels": [
+        "FM",
+        "AM",
+        "CW"
+      ],
+      "demode_active_channel_read_write_path": true,
+      "label_conflict_is_explained_by_wrong_CPS_model": false,
+      "radio_chip_default": "Si4732",
+      "radio_chip_default_proves_fitted_hardware": false
+    },
+    "execution": "static PE/.NET metadata and IL parsing only; no vendor process or CLR"
+  },
+  "firmware_hello": {
+    "raw_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+    "function": "0x080035b8",
+    "initialize_instructions": 7274,
+    "function_instructions": 300,
+    "hardware_hooks": 1,
+    "transport_hook": "0x0800361c",
+    "capture": {
+      "transport": 1,
+      "body_bytes": 56,
+      "command": 701,
+      "declared_inner_length": 52,
+      "version": "8.02.16",
+      "parameter_revision_offset": 22,
+      "parameter_revision": 0
+    },
+    "mmio_modeled": false,
+    "physical_io": false,
+    "boundary": "Real reply-builder instructions; transport replaced; zero-initialized BSS plus original .data initialization."
+  },
+  "manual_annotations": {
+    "review_date": "2026-11-26",
+    "separation_note": "Everything below is a sourced analyst annotation, not a claim of automated hardware measurement.",
+    "primary_sources": [
+      {
+        "url": "https://qsfj.com/products/11145",
+        "role": "target product"
+      },
+      {
+        "url": "https://cms.qsfj.com/api/entries/files/11398?fl-language=en",
+        "role": "official directly downloaded APK 64"
+      },
+      {
+        "url": "https://cms.qsfj.com/api/entries/files/11234?fl-language=zh",
+        "role": "official APK 68 version label; linked Baidu artifact not independently fetched/hash-matched in this audit"
+      },
+      {
+        "url": "https://cms.qsfj.com/api/entries/files/11390?fl-language=en",
+        "role": "official CPS 0.56 package"
+      },
+      {
+        "url": "https://qsfj.com/privacy-policy.html",
+        "section": "4",
+        "role": "manufacturer explicitly associates UV-K10 Pro with protocol model K8",
+        "scope": "policy is titled for iOS 1.1.0 and includes same-function Android processing; Android geometry is independently cross-checked"
+      }
+    ],
+    "model_assignment": {
+      "target_marketing_name": "UV-K10 Pro",
+      "intended_android_protocol_id": "K8",
+      "basis": [
+        "manufacturer model/protocol statement",
+        "single K10 product catalog entry",
+        "K8 geometry agrees with original firmware function replay and actual CPS channel structures"
+      ],
+      "dart_runtime_route_fully_recovered": false,
+      "android_runtime_executed": false,
+      "K82_marketing_product": "unresolved",
+      "K82_usable_as_K10_schema": false,
+      "UV5_marketing_product": "unresolved",
+      "UV5_usable_as_K10_schema": false,
+      "shared_helper_name_is_sufficient": false
+    },
+    "cps_control_flow_review": {
+      "model_resource_used_for_window_title": {
+        "method_token": "0x060003a8",
+        "rva": "0x00064a94",
+        "resource_key_il_offset": "0x014b",
+        "resource_key": "model",
+        "value": "UV-K10 Pro/UV-K10 Pro"
+      },
+      "namespace_K7_means_product_K7": false,
+      "hello_link_model_assignment": {
+        "method_token": "0x060002bc",
+        "rva": "0x00049cec",
+        "load_params_version_il_offset": "0x0164",
+        "store_model_il_offset": "0x0169"
+      },
+      "parameter_revision_field_body_offset": 22,
+      "body_offset_includes_4_byte_inner_message_header": true,
+      "hello_parameter_revision_uniquely_identifies_product": false,
+      "radio_default": {
+        "method_token": "0x060003a8",
+        "rva": "0x00064a94",
+        "GetRadioChipTypes_call_il_offset": "0x001f",
+        "selected_index": 1,
+        "label": "Si4732",
+        "physical_chip_measurement": false
+      }
+    },
+    "demode_conflict_review": {
+      "source_firmware_evidence": "docs/evidence/channel-layout.json / menu display result for modulation, menu index 11",
+      "record_offset": 21,
+      "firmware_8_02_16_labels": [
+        "FM",
+        "AM",
+        "SSB",
+        "CW"
+      ],
+      "official_apk64_K8_labels": [
+        "FM",
+        "AM",
+        "CW"
+      ],
+      "dealer_apk68_K8_labels": [
+        "FM",
+        "AM",
+        "CW"
+      ],
+      "CPS_0_56_labels": [
+        "FM",
+        "AM",
+        "CW"
+      ],
+      "CPS_raw_to_UI_method_token": "0x06000025",
+      "CPS_UI_to_raw_method_token": "0x06000028",
+      "GetSafeItem_method_token": "0x06000023",
+      "GetIndex_method_token": "0x06000026",
+      "GetSafeItem_out_of_range_fallback": "first list item; FM for this list",
+      "GetIndex_unknown_label_fallback": 0,
+      "raw_2_UI_label": "CW",
+      "raw_3_UI_label": "FM",
+      "raw_3_UI_raw_composed_result": 0,
+      "composed_result_evidence_class": "inference from statically reviewed converter control flow; no CPS runtime end-to-end execution",
+      "wrong_model_explains_this_conflict": false,
+      "RF_mode_physically_verified": false
+    },
+    "user_reports": [
+      {
+        "subject": "external NOR density",
+        "value": "25Q32 / 32 Mbit",
+        "bytes": 4194304,
+        "binary_mebibytes": 4,
+        "address_end_exclusive": "0x400000",
+        "source": "user-report in this conversation",
+        "new_jedec_read": false,
+        "new_marking_photo": false,
+        "manufacturer_and_suffix": "not established by this report"
+      },
+      {
+        "subject": "MCU family",
+        "value": "PY32F071",
+        "source": "user-report agreeing with the previous firmware-derived inference",
+        "new_chip_or_package_measurement": false,
+        "exact_part_suffix_confirmed_by_report": false
+      }
+    ],
+    "capacity_boundary_note": "An earlier 2 MiB NorModel is a synthetic backing size. Host command start-address guard 0x1ff000 is protocol behavior, not physical flash density. Neither proves a 2 MiB fitted part.",
+    "test_summary": {
+      "synthetic_model_isolation_tests_passed": 7,
+      "pinned_APKs_audited": 2,
+      "pinned_CPS_assemblies_statically_audited": 1,
+      "pinned_hello_builder_instruction_replays": 1,
+      "physical_device_IO": false
+    }
+  }
+}

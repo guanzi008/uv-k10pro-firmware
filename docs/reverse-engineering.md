@@ -13,6 +13,9 @@
 | CPU 模型、NOR 擦除语义、RF 三线 GPIO | [emulation.md](emulation.md) |
 | 官方 APK 的 27 表 / 242 字段声明与版本比较 | [settings-map.md](settings-map.md) |
 | 原厂下载、硬件文档、拆机来源可信度 | [hardware-research.md](hardware-research.md) |
+| LCD SPI1、128×64 页缓冲、RGB 设置到 PWM | [display.md](display.md) |
+| 矩阵、PTT、键码 UI 语义、去抖/长按/延时 | [keypad.md](keypad.md) |
+| APK 多机型隔离、CPS 实际产品与转换调用链 | [model-identity.md](model-identity.md) |
 
 各页明确区分实际执行的原厂逻辑、人工外设边界、应用声明与待实机确认项。上述观察不表示这些完整功能已经移植到实验固件。
 
@@ -51,6 +54,11 @@
 | 应用末尾 | 基址加长度=`0x0801F0AC`，结束地址不包含在内 | 超出 64 KiB Flash 档，符合 128 KiB 规格档 |
 
 综合证据指向 **PY32F071 或寄存器/中断兼容实现、128 KiB Flash / 16 KiB SRAM 规格档**。Puya 的 F071 资料定义 Cortex-M0+、最高 72 MHz。现有固件证据不能读出芯片丝印、封装后缀或直接测量晶体频率，仍需实物确认。
+
+后续用户确认 MCU 与该系列推定一致，另明确外置 NOR 为 25Q32 密度等级，
+32 Mbit / 8 = 4 MiB。本项目因此按 PY32F071 / 25Q32 4 MiB 板级配置推进。
+这是补充的用户来源，不改变上表中各条固件证据本身能证明的范围；完整后缀、
+封装、JEDEC 与板号仍未新增实测。详细来源见[型号身份记录](model-identity.md)。
 
 原厂 RAM 初始化表先将压缩数据展开到 `0x20000000`，长度 `0x4C4`，随后从 `0x200004C4` 清零 `0x395C` 字节。结束位置是 `0x20003E20`。这不是“15,904 字节都是全局变量”的证明；栈和缓冲区也可能计入该布局。
 

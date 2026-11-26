@@ -2,9 +2,9 @@
 
 [![Build experimental firmware](https://github.com/guanzi008/uv-k10pro-firmware/actions/workflows/ci.yml/badge.svg)](https://github.com/guanzi008/uv-k10pro-firmware/actions/workflows/ci.yml)
 
-基于泉盛 **UV-K10 Pro 官方英文固件 8.02.16 的静态分析、原指令仿真和官方应用配置交叉核对**，独立实现的第三方固件与研究工程。当前固件版本 `0.1.0-exp` 面向开发者进行硬件初始化与诊断，目标平台为 PY32F071 兼容的 Cortex-M0+，采用 128 KiB Flash / 16 KiB SRAM 地址布局。
+基于泉盛 **UV-K10 Pro 官方英文固件 8.02.16 的静态分析、原指令仿真和官方应用配置交叉核对**，独立实现的第三方固件与研究工程。当前固件版本 `0.2.0-exp` 面向开发者进行硬件初始化与诊断，目标平台为 PY32F071 Cortex-M0+，采用 128 KiB Flash / 16 KiB SRAM 地址布局。设备所有者已确认 MCU 系列及外置 25Q32 密度等级：**32 Mbit = 4 MiB = 4,194,304 字节**；完整器件后缀和板号仍未记录。
 
-**当前没有实机启动、屏幕显示或收发验证记录，不能当作日常对讲固件使用。** 本仓库已经实现可构建的启动程序、硬件驱动、诊断应用及固件文件工具；完整屏幕/键盘界面、对讲接收与发射、GPS/APRS、USB 通信和恢复刷写流程仍待开发。软件通过编译和主机测试，不等于设备已验证。
+**当前没有实机启动、屏幕显示或收发验证记录，不能当作日常对讲固件使用。** 本仓库已经实现可构建的启动程序、硬件驱动、显示/按键诊断应用及固件文件工具；可导航的完整菜单、对讲接收与发射、GPS/APRS、USB 通信和恢复刷写流程仍待开发。软件通过编译和主机测试，不等于设备已验证。
 
 ## 已实现的内容
 
@@ -14,16 +14,29 @@
 | MCU HAL | 解析继承的 RCC 时钟、SysTick、延时、128 位 UID、空闲等待 | 未测量实机时钟；未知时钟有状态标志 |
 | 外部 SPI NOR | SPI2 模式 3、PA0/1/2 + PA3 CS、JEDEC 识别、带容量边界的读取 | 驱动未连接实机；不含写入/擦除 API |
 | Si4732 | PB8/PB9 软件 I²C、POWER_UP、GET_REV、超时/NACK 处理、可选 FM 调谐与读回核对 | 需要芯片已供电并释放 RESET；音频线路待核对 |
-| 诊断应用 | 启动探测、RAM 状态结构、GDB 命令邮箱、64 字节 Flash 读取 | 无显示屏或 USB/串口控制台 |
+| LCD / RGB 背光 | SPI1、128×64 单色页格式、列偏移 +4、三路 PWM、完整初始化/清屏/刷新 | 真实原厂函数重放与独立 C 驱动测试；具体控制器和排线针序待实物确认 |
+| 按键 / PTT | 4 行 × 5 列中的 19 个键位、3 个专用键、PC13 独立 PTT、20 ms 诊断去抖 | 默认关闭矩阵以不主动接管 PA14/SWCLK；只报告输入，未实现菜单/长按动作 |
+| 诊断应用 | 128×64 状态页、独立帧缓冲、ABI 2 RAM 状态、GDB 命令邮箱、64 字节 Flash 读取 | 显示主机合成输入已检查；无实机显示或 USB/串口控制台 |
 | 固件工具 | XOR128 + CRC16/XMODEM 封装、解包、检查、SHA-256 | 官方样本重封装逐字节一致；未验证官方刷写器接收新包 |
 | 信道工具 | 999 个普通信道、14 个 VFO、属性表、亚音、名称、扫描列表的离线解析与编辑 | 实际原厂加载/保存/删除函数重放；保留未知字节；不连接设备 |
 | 写频协议 | 帧编解码、CRC16/X25、XOR16、原始 Flash 读写请求草稿与状态模型 | 原厂 parser→dispatcher→sender，另有合成 NOR 写入再读回；没有在线写频程序 |
 | 仿真与设置地图 | 固定样本的 CPU 重放、4 KiB NOR 更新、RF GPIO 位流、APK schema 摘要/版本比较 | 明确的人工输入与外设模型；APK 声明和固件行为分别标记 |
+| 型号隔离 | K8 / K82 / UV5 分别审计、CPS 产品资源与实际转换调用链、参数版本回复 | 不把相似名称或参数版本 0 当作唯一设备 ID；完整 Dart 动态路由尚未恢复 |
 | 自动化 | Python 单元测试、驱动模拟、ARM 构建、向量/大小检查、开发构建产物 | GitHub Actions 不接触硬件 |
 
-引脚、寄存器及固件内函数位置见 [引脚证据](docs/pinmap.md)，芯片判定和样本来源见 [逆向记录](docs/reverse-engineering.md)。这里的硬件型号是固件指纹与厂商资料匹配的结论，完整封装后缀仍需拆机确认。
+引脚、寄存器及固件内函数位置见 [引脚证据](docs/pinmap.md)，芯片判定和样本来源见 [逆向记录](docs/reverse-engineering.md)。用户确认、厂商规格、样本执行与未验证项分别记录在[型号审计](docs/model-identity.md)中，不将用户确认改写为新的实机测量。
 
-首版本地验证结果、工具链、镜像大小、摘要和测试覆盖见 [验证记录](docs/validation.md)。
+各版本本地验证结果、工具链、镜像大小、摘要和测试覆盖见 [验证记录](docs/validation.md)。
+
+## 显示、按键与型号审计进展
+
+屏幕使用 **PA5/AF0 SCK、PA7/AF0 MOSI、PB2 CS#、PF2 D/C**；RGB 背光分别为 **PB6/TIM1_CH3、PA15/TIM2_CH1、PB5/TIM3_CH2**。原厂初始化、页寻址、RGB 设置到 PWM 的路径已执行验证，详见 [显示研究与驱动](docs/display.md)。这里的 RGB 指背光；帧缓冲是 1 bit/pixel。ST7565/ST7567 兼容命令不能单独确定唯一控制器型号。
+
+矩阵行是 **PF8、PB4、PB3、PA14**，列是 **PB15、PB14、PB13、PB12、PA8**。完整键码表、数字/菜单/返回/上下/A-B/锁定语义、侧键短长按与 PTT 去抖，见 [按键研究](docs/keypad.md)。原厂的 53 个按键执行案例和 14 个显示/PWM 执行案例保存在可重生成 JSON 中。
+
+Android 包确实包含多个型号分支：本项目仅采用 **K8 的 999×64 B** 路径，排除 K82 的 200×16 B 和 UV5 的独立布局。CPS 的 `K7` 是程序集内部命名，产品资源和实际 UI 是 UV-K10 Pro。原厂四项 `FM/AM/SSB/CW` 与 CPS/K8 三项列表的差异已追到实际转换调用链，不能用另一机型的枚举填平；详见[型号隔离与调用路径审计](docs/model-identity.md)。
+
+本轮还纠正旧版文档的 SPI2 信号名称：**PA1 是 MOSI，PA2 是 MISO**，依据 Puya 同型号手册的引脚表和 AF 表。两脚都为 AF9，原有寄存器配置不变；连接硬件时应采用修正后的名称。
 
 ## 信道与协议研究进展
 
@@ -55,15 +68,28 @@ make package
 make CROSS_COMPILE=/absolute/path/to/bin/arm-none-eabi- package
 ```
 
+默认开启 NOR、Si4732 和显示驱动；键盘默认关闭，以不主动接管 PA14/SWCLK。
+需要构建输入诊断版本时，显式选择：
+
+```sh
+make BUILD=build-keypad EXTRA_CPPFLAGS=-DK10_ENABLE_KEYPAD=1 package
+```
+
+这个选项会把 PA14 设为矩阵输出。它只是构建选项，不会刷机。四项 `K10_ENABLE_*` 均支持设为 0，此时对应驱动无 MMIO。关闭键盘只保留该脚继承状态，不保证任意启动环境下 SWD 已经可用。
+
 `build/k10pro.elf` 保留调试符号；`build/k10pro.bin` 是原始应用镜像；`build/k10pro.experimental.bin` 是实验性更新容器。`build/verification.json` 和 `build/package.json` 记录结构检查与 SHA-256。这些命令只构建本地文件。
 
 应用起点为 `0x08002000`。本工程把应用 Flash 上界保守设为 `0x0801F000`，保留前 8 KiB 地址范围与最后 4 KiB；RAM 为 `0x20000000..0x20003FFF`。**这是链接范围约束，不能保证一个尚未验证的刷写器如何擦除 Flash。** 没有提供一键刷入脚本。
 
 ## 诊断应用怎样使用
 
-程序启动后读取 MCU UID、外部 Flash JEDEC ID；只有识别到明确支持的型号才读取 Flash 前 64 字节。随后尝试初始化 Si4732 并读出版本。缺少芯片、总线未响应或型号未知会记录错误码，应用仍进入诊断循环。
+程序启动后读取 MCU UID，初始化 LCD，并在成功后请求 RGB 背光各 25。随后读取外部 Flash JEDEC ID；只有识别到明确支持的型号才读取 Flash 前 64 字节，再尝试初始化 Si4732 并读出版本。诊断屏每 250 ms 更新。缺少芯片、总线未响应或型号未知会记录错误码，应用仍进入诊断循环。LCD 为只写接口，SPI 本地成功不证明已经接上屏幕。
 
-状态保存在 ELF 符号 `k10_diag` 对应的 RAM 中。它包含启动阶段、时钟可信标志、运行时间、原始 JEDEC ID、已识别容量、接收芯片版本、错误码及命令序号。原厂 USB 和串口参数目前用于研究，尚未实现到这份诊断应用。
+下面是**同一 C 渲染器对合成测试输入的输出**，用于检查布局；不是实机照片，JEDEC、PN、按键和运行时间均为示例：
+
+![独立诊断渲染器的合成输入预览](docs/images/frontpanel-preview.svg)
+
+状态保存在 ELF 符号 `k10_diag` 对应的 RAM 中。ABI 2 增加显示帧数、显示/按键错误、原始和稳定键码、独立 PTT 状态、输入事件和预期容量；ABI 1 原字段的偏移保持不变。4 MiB 预期值不会替代 JEDEC 识别。启用矩阵时每 10 ms 尝试扫描，独立诊断过滤器采用 20 ms 稳定条件，尚未复刻原厂长按/重复/菜单状态机。原厂 USB 和串口参数目前用于研究，尚未实现到这份诊断应用。
 
 在**已建立的、经过核实的调试连接**上加载与当前程序匹配的 ELF 符号后，可暂停目标读取：
 
@@ -97,6 +123,8 @@ python3 tools/emulate_channels.py reference/stock.raw.bin
 python3 tools/emulate_programming.py reference/stock.raw.bin --output protocol-results.json
 python3 tools/emulate_storage.py reference/stock.raw.bin --output storage-results.json
 python3 tools/emulate_rf_bus.py reference/stock.raw.bin --output rf-results.json
+python3 tools/emulate_display.py reference/stock.raw.bin --output display-results.json
+python3 tools/emulate_keypad.py reference/stock.raw.bin --output keypad-results.json
 K10_REFERENCE_FIRMWARE=reference/K10PRO_ENG_v8.02.16_publish.bin \
   K10_REFERENCE_RAW=reference/stock.raw.bin make test
 ```
@@ -118,8 +146,8 @@ python3 tools/inspect_vendor_schema.py /path/to/official.apk
 
 ## 接下来需要补齐的设备能力
 
-1. 由具体硬件版本确认 MCU 丝印、外部 Flash 型号、SWD、供电/复位、晶振与 bootloader 交接状态；首先取得可恢复的实机启动记录。
-2. 还原 LCD 控制器、初始化序列、背光和键盘矩阵，建立可以直接操作的本机界面。
+1. 在已确认 MCU 系列与 25Q32 容量的基础上，补完整丝印后缀、板号、SWD、供电/复位、晶振与 bootloader 交接状态，取得可恢复的实机启动记录。
+2. 核验已恢复的 LCD 总线、初始化、RGB 和矩阵；补排线针序、控制器唯一型号、实际像素方向和键帽位置，再实现可导航菜单。
 3. 确认主对讲射频芯片、音频开关、校准数据结构，完成接收路径。
 4. 在设备测量与校准资料齐全后开发发射控制；随后再处理 GPS/APRS、USB、设置保存和稳定更新流程。
 
@@ -131,4 +159,4 @@ python3 tools/inspect_vendor_schema.py /path/to/official.apk
 
 ## English summary
 
-An independently written, experimental UV-K10 Pro firmware and research project targeting the PY32F071-compatible Cortex-M0+ application layout at `0x08002000`. It includes a freestanding runtime, read-only SPI NOR diagnostics, a Si4732 driver, a debugger mailbox, update-file and channel codecs, an offline programming-protocol model, pinned stock-instruction replay, an APK schema inspector, host tests, and CI. The replay executes real channel/storage/protocol functions above explicit synthetic hardware boundaries, including protocol write/readback and RF GPIO bit sequences. No vendor firmware, APK, complete vendor schema or receiver patch is redistributed. Hardware boot, LCD/keypad, transceiver operation, and updater acceptance remain unvalidated.
+An independently written, experimental UV-K10 Pro firmware and research project targeting the owner-confirmed PY32F071 family and 25Q32-density NOR, with the Cortex-M0+ application at `0x08002000`. Version 0.2.0-exp adds a 128x64 monochrome LCD/RGB driver, optional keypad/PTT diagnostics and a rendered status page to the runtime, read-only NOR and Si4732 drivers, debugger mailbox, channel/protocol tools and CI. Stock-instruction replay now includes LCD, PWM, key filtering and selected UI semantics. APK K8/K82/UV5 paths and the actual K10 CPS are audited separately. No vendor firmware, APK, complete vendor schema or receiver patch is redistributed. Physical boot, display/input behavior, transceiver operation and updater acceptance remain unvalidated.

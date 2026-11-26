@@ -28,6 +28,10 @@ jobs:
           make test
       - name: Build and verify experimental image
         run: make -j2 package
+      - name: Verify opt-in keypad and disabled peripheral configurations
+        run: |
+          make -j2 verify BUILD=build-keypad EXTRA_CPPFLAGS=-DK10_ENABLE_KEYPAD=1
+          make -j2 verify BUILD=build-disabled EXTRA_CPPFLAGS='-DK10_ENABLE_SPI_NOR=0 -DK10_ENABLE_SI4732=0 -DK10_ENABLE_DISPLAY=0 -DK10_ENABLE_KEYPAD=0'
       - name: Record build checksums
         run: |
           cd build

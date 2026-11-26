@@ -173,6 +173,12 @@ APK 提供了字段名的独立交叉证据，但不能覆盖当前固件的实�
 | `cps_convert.convert_data` 的信道写入重载 | `0x06000028 / 0x70E0` | 从 RX/TX 两个频率计算频差及方向；名称编码后最多复制 16 B |
 | `param_string.chn_demode_Items` | `0x060002E1 / 0x4AD1C` | 该 CPS 也列出 `FM, AM, CW`，仍与固定固件的四项菜单存在差异 |
 
+后续[型号与调用路径审计](model-identity.md)确认这份 CPS 的产品资源及实际窗口为
+UV-K10 Pro，`K7` 仅是内部命名；`chn_demode_Items` 确实被两个信道转换器和编辑
+界面调用。原始值 3 经它的 `GetSafeItem` 会回退显示为 FM，再经反向转换可能成为 0；
+这是明确调用链的静态推导，并非本项目已经运行 CPS 或写坏实机的观察。K8/K82/UV5
+资产分别核对，当前 K8 布局没有混用其他两个分支。
+
 CPS 名称转换调用自身的 `Iparse.ConvertStringToByte(..., "default")`，并且分配 16 B；它并不能消除固件装载只取 10 B 的差异。名称字节数、显示字符数和 CSV 文件编码需要分别处理。
 
 ### 随包 CSV 与当前 CPS 表格并不相同

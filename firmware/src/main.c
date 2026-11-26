@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: MIT */
+#include "k10/board.h"
 #include "k10/diagnostics.h"
+#include "k10/display.h"
+#include "k10/frontpanel.h"
 #include "k10/hal.h"
+#include "k10/keypad.h"
 #include "k10/si4732.h"
 #include "k10/spi_nor.h"
 
@@ -16,6 +20,11 @@ volatile struct k10_diagnostics k10_diag;
 const char k10_firmware_version[] __attribute__((used, section(".firmware_info"))) = K10_VERSION;
 
 static bool receiver_ready;
+static bool display_ready;
+static bool keypad_ready;
+/* Dedicated storage: the stock application shares its LCD buffer and NOR
+ * sector cache; this application deliberately has separate ownership. */
+static uint8_t framebuffer[DISPLAY_FRAMEBUFFER_SIZE];
 
 static void publish_barrier(void)
 {
@@ -47,7 +56,8 @@ static uint32_t read_flash(uint32_t address, uint32_t length)
 static uint32_t probe_flash(void)
 {
     uint8_t id[3] = {0u, 0u, 0u};
-    k10_diag.flags &= ~((uint32_t)K10_FLAG_JEDEC_READ | (uint32_t)K10_FLAG_FLASH_READ);
+    k10_diag.flags &= ~((uint32_t)K10_FLAG_JEDEC_READ | (uint32_t)K10_FLAG_FLASH_READ |
+                        (uint32_t)K10_FLAG_FLASH_GEOMETRY_MATCH);
     k10_diag.jedec_id = 0u;
     k10_diag.flash_capacity_bytes = 0u;
     k10_diag.buffer_length = 0u;
@@ -59,6 +69,9 @@ static uint32_t probe_flash(void)
     k10_diag.flash_capacity_bytes = spi_nor_capacity_bytes();
     k10_diag.flash_error = (uint32_t)spi_nor_last_error();
     k10_diag.flags |= K10_FLAG_JEDEC_READ;
+    if (k10_diag.flash_capacity_bytes == K10_NOR_EXPECTED_CAPACITY_BYTES) {
+        k10_diag.flags |= K10_FLAG_FLASH_GEOMETRY_MATCH;
+    }
     if (k10_diag.flash_capacity_bytes != 0u) {
         return read_flash(0u, K10_DIAG_BUFFER_SIZE);
     }
@@ -137,6 +150,58 @@ static uint32_t execute_command(uint32_t command, uint32_t argument0, uint32_t a
     }
 }
 
+static void refresh_frontpanel(void)
+{
+    if (!display_ready) { return; }
+    const struct frontpanel_view view = {
+        .clock_hz = k10_diag.clock_hz,
+        .uptime_ms = k10_diag.uptime_ms,
+        .flags = k10_diag.flags,
+        .stage = k10_diag.stage,
+        .jedec_id = k10_diag.jedec_id,
+        .flash_capacity = k10_diag.flash_capacity_bytes,
+        .flash_error = k10_diag.flash_error,
+        .receiver_error = k10_diag.receiver_error,
+        .receiver_part = k10_diag.receiver_part_number,
+        .display_error = k10_diag.display_error,
+        .keypad_error = k10_diag.keypad_error,
+        .key_events = k10_diag.key_event_count,
+        .raw_key = (uint8_t)k10_diag.key_raw,
+        .key = (uint8_t)k10_diag.key_stable,
+        .ptt = k10_diag.ptt_stable != 0u
+    };
+    if (!frontpanel_render(framebuffer, sizeof(framebuffer), &view)) { return; }
+    if (display_present(framebuffer, sizeof(framebuffer))) {
+        ++k10_diag.display_frames;
+    } else {
+        display_ready = false;
+        k10_diag.flags &= ~(uint32_t)K10_FLAG_DISPLAY_READY;
+    }
+    k10_diag.display_error = (uint32_t)display_last_error();
+}
+
+static void poll_frontpanel(uint32_t now)
+{
+    struct keypad_state state;
+    if (!keypad_ready) { return; }
+    if (keypad_poll(now, &state)) {
+        k10_diag.key_raw = state.raw_key;
+        k10_diag.key_stable = state.key;
+        k10_diag.ptt_raw = state.raw_ptt ? 1u : 0u;
+        k10_diag.ptt_stable = state.ptt ? 1u : 0u;
+        if (state.events != 0u) {
+            k10_diag.key_last_events = state.events;
+            k10_diag.key_last_released = (state.events & KEYPAD_RELEASE) != 0u
+                                           ? state.previous_key : KEYPAD_NONE;
+            ++k10_diag.key_event_count;
+        }
+    } else {
+        keypad_ready = false;
+        k10_diag.flags &= ~(uint32_t)K10_FLAG_KEYPAD_READY;
+    }
+    k10_diag.keypad_error = (uint32_t)keypad_last_error();
+}
+
 int main(void)
 {
     uint32_t uid[4];
@@ -146,6 +211,10 @@ int main(void)
     k10_diag.stage = K10_STAGE_START;
     k10_diag.clock_hz = hal_clock_hz();
     k10_diag.flags = hal_clock_known() ? K10_FLAG_CLOCK_KNOWN : 0u;
+    k10_diag.expected_flash_capacity_bytes = K10_NOR_EXPECTED_CAPACITY_BYTES;
+    k10_diag.key_raw = KEYPAD_NONE;
+    k10_diag.key_stable = KEYPAD_NONE;
+    k10_diag.key_last_released = KEYPAD_NONE;
     hal_read_uid(uid);
     for (uint32_t i = 0u; i < 4u; ++i) {
         k10_diag.uid[i] = uid[i];
@@ -153,12 +222,26 @@ int main(void)
     publish_barrier();
     k10_diag.magic = K10_DIAG_MAGIC;
 
+    k10_diag.stage = K10_STAGE_FRONTPANEL;
+    display_ready = display_init();
+    if (display_ready) { display_ready = display_set_backlight(25u, 25u, 25u); }
+    k10_diag.display_error = (uint32_t)display_last_error();
+    if (display_ready) { k10_diag.flags |= K10_FLAG_DISPLAY_READY; }
+    keypad_ready = keypad_init();
+    k10_diag.keypad_error = (uint32_t)keypad_last_error();
+    if (keypad_ready) { k10_diag.flags |= K10_FLAG_KEYPAD_READY; }
+    refresh_frontpanel();
+
     k10_diag.stage = K10_STAGE_SPI;
     (void)probe_flash();
+    refresh_frontpanel();
     k10_diag.stage = K10_STAGE_RECEIVER;
     (void)probe_receiver();
     k10_diag.stage = K10_STAGE_READY;
+    refresh_frontpanel();
 
+    uint32_t last_poll = hal_millis();
+    uint32_t last_refresh = last_poll;
     for (;;) {
         k10_diag.uptime_ms = hal_millis();
         ++k10_diag.heartbeat;
@@ -171,6 +254,15 @@ int main(void)
             k10_diag.result = execute_command(command, arg0, arg1);
             publish_barrier();
             k10_diag.completion_seq = sequence;
+        }
+        uint32_t now = hal_millis();
+        if ((uint32_t)(now - last_poll) >= 10u) {
+            last_poll = now;
+            poll_frontpanel(now);
+        }
+        if ((uint32_t)(now - last_refresh) >= 250u) {
+            last_refresh = now;
+            refresh_frontpanel();
         }
         hal_idle();
     }

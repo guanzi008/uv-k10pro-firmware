@@ -1,0 +1,789 @@
+{
+  "passed": 14,
+  "scenario_counts": {
+    "lcd_initialization": 1,
+    "pattern_frame": 1,
+    "partial_refresh": 2,
+    "clear_fill": 1,
+    "direct_pwm": 5,
+    "ram_settings_apply": 1,
+    "nor_settings_to_pwm": 3
+  },
+  "sample": {
+    "sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+    "version": "K10 Pro ENG 8.02.16",
+    "application_base": "0x08002000"
+  },
+  "boundary": {
+    "cpu": "actual supplied Thumb instructions",
+    "gpio": "register file plus BSRR/BRR output latch effects",
+    "spi": "SR TXE/RXNE forced ready, DR reads zero; no physical bit timing",
+    "timer": "register file only; counters do not advance",
+    "delay": "intercepted and arguments recorded; no elapsed target time",
+    "not_modeled": [
+      "LCD electronics",
+      "RF",
+      "DMA",
+      "interrupts",
+      "PLL",
+      "bootloader"
+    ]
+  },
+  "functions": {
+    "gpio_init": "0x08018b94",
+    "lcd_partial": "0x08019390",
+    "lcd_pages_1_7": "0x080193e0",
+    "lcd_page_0": "0x08019434",
+    "lcd_clear": "0x08019478",
+    "lcd_init": "0x080194a0",
+    "lcd_address": "0x0801954c",
+    "lcd_command": "0x08019574",
+    "spi_init": "0x0801a1d8",
+    "spi_byte": "0x0801a27c",
+    "backlight_init": "0x0801a5f4",
+    "backlight_set": "0x0801a710",
+    "backlight_apply_settings": "0x0800e36c",
+    "delay": "0x0801d000"
+  },
+  "calls": {
+    "scatter": {
+      "r0": 0,
+      "r1": 536872132,
+      "instructions": 7274,
+      "hardware_hooks": 0
+    },
+    "gpio": {
+      "r0": 0,
+      "r1": 0,
+      "instructions": 1538,
+      "hardware_hooks": 0
+    },
+    "lcd": {
+      "r0": 4,
+      "r1": 1342178304,
+      "instructions": 26045,
+      "hardware_hooks": 4
+    },
+    "page_zero": {
+      "r0": 4,
+      "r1": 1073819648,
+      "instructions": 2519,
+      "hardware_hooks": 0
+    },
+    "other_pages": {
+      "r0": 4,
+      "r1": 1342178304,
+      "instructions": 18399,
+      "hardware_hooks": 0
+    },
+    "clear_fill": {
+      "r0": 4,
+      "r1": 1342178304,
+      "instructions": 25031,
+      "hardware_hooks": 0
+    },
+    "backlight_init": {
+      "r0": 1,
+      "r1": 1073742848,
+      "instructions": 1197,
+      "hardware_hooks": 0
+    }
+  },
+  "lcd": {
+    "pins": [
+      {
+        "pin": "PA5",
+        "mode": 2,
+        "otype": 0,
+        "speed": 2,
+        "pull": 1,
+        "af": 0,
+        "level": 0
+      },
+      {
+        "pin": "PA7",
+        "mode": 2,
+        "otype": 0,
+        "speed": 2,
+        "pull": 0,
+        "af": 0,
+        "level": 0
+      },
+      {
+        "pin": "PB2",
+        "mode": 1,
+        "otype": 0,
+        "speed": 3,
+        "pull": 1,
+        "af": 0,
+        "level": 1
+      },
+      {
+        "pin": "PF2",
+        "mode": 1,
+        "otype": 0,
+        "speed": 3,
+        "pull": 1,
+        "af": 0,
+        "level": 1
+      }
+    ],
+    "spi": {
+      "cr1": "0x0000035f",
+      "cr2": "0x00000000",
+      "i2scfgr": "0x00000000"
+    },
+    "delays": [
+      120,
+      1,
+      1,
+      40
+    ],
+    "initialization_byte_count": 1067,
+    "initialization_segments": [
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 1,
+        "length": 17,
+        "commands_hex": "e2 a2 c0 a1 a6 a4 24 81 1f 2b 2e 2f 2f 2f 2f 40 af"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 2,
+        "length": 4,
+        "commands_hex": "40 b0 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 2,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 4,
+        "commands_hex": "40 b1 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 3,
+        "commands_hex": "b2 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 3,
+        "commands_hex": "b3 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 3,
+        "commands_hex": "b4 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 3,
+        "commands_hex": "b5 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 3,
+        "commands_hex": "b6 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 3,
+        "length": 3,
+        "commands_hex": "b7 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 3,
+        "length": 128,
+        "sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca"
+      }
+    ],
+    "framebuffer": {
+      "base": "0x20000d70",
+      "size": 1024,
+      "width_bytes": 128,
+      "pages": 8,
+      "page_zero_pointer": "0x2000000c",
+      "other_pages_pointer": "0x20000010",
+      "shared_with_nor_cache": true,
+      "cache_tag_invalidated": "0x20000048"
+    },
+    "pattern_refresh": [
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 4,
+        "length": 4,
+        "commands_hex": "40 b0 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 4,
+        "length": 128,
+        "sha256": "0aedd4856f8eba0963627336ad5144a9a7dbe12498e6066f0165fc97d8ddee4c"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 4,
+        "commands_hex": "40 b1 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "d39a634f6a0578c808c93a16931e8ec147ac26665af96961afa8531770ab3614"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 3,
+        "commands_hex": "b2 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "0aedd4856f8eba0963627336ad5144a9a7dbe12498e6066f0165fc97d8ddee4c"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 3,
+        "commands_hex": "b3 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "d39a634f6a0578c808c93a16931e8ec147ac26665af96961afa8531770ab3614"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 3,
+        "commands_hex": "b4 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "0aedd4856f8eba0963627336ad5144a9a7dbe12498e6066f0165fc97d8ddee4c"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 3,
+        "commands_hex": "b5 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "d39a634f6a0578c808c93a16931e8ec147ac26665af96961afa8531770ab3614"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 3,
+        "commands_hex": "b6 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "0aedd4856f8eba0963627336ad5144a9a7dbe12498e6066f0165fc97d8ddee4c"
+      },
+      {
+        "cs": 0,
+        "dc": 0,
+        "transaction": 5,
+        "length": 3,
+        "commands_hex": "b7 10 04"
+      },
+      {
+        "cs": 0,
+        "dc": 1,
+        "transaction": 5,
+        "length": 128,
+        "sha256": "d39a634f6a0578c808c93a16931e8ec147ac26665af96961afa8531770ab3614"
+      }
+    ],
+    "partial_refresh": [
+      {
+        "flag": 0,
+        "x": 7,
+        "page": 3,
+        "length": 5,
+        "call": {
+          "r0": 4,
+          "r1": 1073819648,
+          "instructions": 163,
+          "hardware_hooks": 0
+        },
+        "segments": [
+          {
+            "cs": 0,
+            "dc": 0,
+            "transaction": 6,
+            "data": [
+              179,
+              16,
+              11
+            ]
+          },
+          {
+            "cs": 0,
+            "dc": 1,
+            "transaction": 6,
+            "data": [
+              1,
+              128,
+              85,
+              170,
+              255
+            ]
+          }
+        ]
+      },
+      {
+        "flag": 1,
+        "x": 7,
+        "page": 3,
+        "length": 5,
+        "call": {
+          "r0": 4,
+          "r1": 1073819648,
+          "instructions": 164,
+          "hardware_hooks": 0
+        },
+        "segments": [
+          {
+            "cs": 0,
+            "dc": 0,
+            "transaction": 7,
+            "data": [
+              179,
+              16,
+              11
+            ]
+          },
+          {
+            "cs": 0,
+            "dc": 1,
+            "transaction": 7,
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "backlight": {
+    "pins_in_argument_order": [
+      {
+        "pin": "PB6",
+        "mode": 2,
+        "otype": 0,
+        "speed": 2,
+        "pull": 0,
+        "af": 11,
+        "level": 0
+      },
+      {
+        "pin": "PA15",
+        "mode": 2,
+        "otype": 0,
+        "speed": 2,
+        "pull": 0,
+        "af": 2,
+        "level": 0
+      },
+      {
+        "pin": "PB5",
+        "mode": 2,
+        "otype": 0,
+        "speed": 2,
+        "pull": 0,
+        "af": 1,
+        "level": 0
+      }
+    ],
+    "timer_registers_after_init": {
+      "TIM1": {
+        "0x00": "0x00000001",
+        "0x14": "0x00000001",
+        "0x1c": "0x00000060",
+        "0x20": "0x00000100",
+        "0x28": "0x0000000f",
+        "0x2c": "0x000009c4",
+        "0x44": "0x00008000"
+      },
+      "TIM2": {
+        "0x00": "0x00000001",
+        "0x14": "0x00000001",
+        "0x18": "0x00000060",
+        "0x20": "0x00000001",
+        "0x28": "0x0000000f",
+        "0x2c": "0x000009c4",
+        "0x44": "0x00008000"
+      },
+      "TIM3": {
+        "0x00": "0x00000001",
+        "0x14": "0x00000001",
+        "0x18": "0x00006000",
+        "0x20": "0x00000010",
+        "0x28": "0x0000000f",
+        "0x2c": "0x000009c4",
+        "0x44": "0x00008000"
+      }
+    },
+    "cases": [
+      {
+        "arguments": [
+          0,
+          0,
+          0
+        ],
+        "compare": [
+          0,
+          0,
+          0
+        ],
+        "call": {
+          "r0": 1073742848,
+          "r1": 0,
+          "instructions": 14,
+          "hardware_hooks": 0
+        }
+      },
+      {
+        "arguments": [
+          1,
+          50,
+          100
+        ],
+        "compare": [
+          25,
+          1250,
+          2500
+        ],
+        "call": {
+          "r0": 1073742848,
+          "r1": 1250,
+          "instructions": 14,
+          "hardware_hooks": 0
+        }
+      },
+      {
+        "arguments": [
+          100,
+          0,
+          0
+        ],
+        "compare": [
+          2500,
+          0,
+          0
+        ],
+        "call": {
+          "r0": 1073742848,
+          "r1": 0,
+          "instructions": 14,
+          "hardware_hooks": 0
+        }
+      },
+      {
+        "arguments": [
+          0,
+          100,
+          0
+        ],
+        "compare": [
+          0,
+          2500,
+          0
+        ],
+        "call": {
+          "r0": 1073742848,
+          "r1": 2500,
+          "instructions": 14,
+          "hardware_hooks": 0
+        }
+      },
+      {
+        "arguments": [
+          0,
+          0,
+          100
+        ],
+        "compare": [
+          0,
+          0,
+          2500
+        ],
+        "call": {
+          "r0": 1073742848,
+          "r1": 0,
+          "instructions": 14,
+          "hardware_hooks": 0
+        }
+      }
+    ],
+    "settings_apply": {
+      "addresses": [
+        "0x20002404",
+        "0x20002405",
+        "0x20002406"
+      ],
+      "values": [
+        13,
+        47,
+        89
+      ],
+      "compare": [
+        325,
+        1175,
+        2225
+      ],
+      "call": {
+        "r0": 1073742848,
+        "r1": 1175,
+        "instructions": 48,
+        "hardware_hooks": 0
+      }
+    },
+    "settings_to_pwm": {
+      "window_start": "0x0800f376",
+      "window_stop_before": "0x0800f560",
+      "injected_registers": {
+        "r4": "0x20000d70",
+        "r5": 0,
+        "r6": 1
+      },
+      "scope": "bounded stock instruction window, not the whole settings initializer",
+      "cases": [
+        {
+          "raw_offsets": [
+            "0x13024",
+            "0x13025",
+            "0x13026"
+          ],
+          "input": [
+            13,
+            47,
+            89
+          ],
+          "ram_addresses": [
+            "0x20002404",
+            "0x20002405",
+            "0x20002406"
+          ],
+          "loaded": [
+            13,
+            47,
+            89
+          ],
+          "compare": [
+            325,
+            1175,
+            2225
+          ],
+          "window_call": {
+            "r0": 89,
+            "r1": 536886784,
+            "instructions": 187,
+            "hardware_hooks": 1
+          },
+          "apply_call": {
+            "r0": 1073742848,
+            "r1": 1175,
+            "instructions": 48,
+            "hardware_hooks": 0
+          },
+          "nor_operations": [
+            {
+              "op": "read",
+              "address": 77824,
+              "length": 296
+            }
+          ]
+        },
+        {
+          "raw_offsets": [
+            "0x13024",
+            "0x13025",
+            "0x13026"
+          ],
+          "input": [
+            0,
+            100,
+            1
+          ],
+          "ram_addresses": [
+            "0x20002404",
+            "0x20002405",
+            "0x20002406"
+          ],
+          "loaded": [
+            0,
+            100,
+            1
+          ],
+          "compare": [
+            0,
+            2500,
+            25
+          ],
+          "window_call": {
+            "r0": 1,
+            "r1": 536886784,
+            "instructions": 187,
+            "hardware_hooks": 1
+          },
+          "apply_call": {
+            "r0": 1073742848,
+            "r1": 2500,
+            "instructions": 48,
+            "hardware_hooks": 0
+          },
+          "nor_operations": [
+            {
+              "op": "read",
+              "address": 77824,
+              "length": 296
+            }
+          ]
+        },
+        {
+          "raw_offsets": [
+            "0x13024",
+            "0x13025",
+            "0x13026"
+          ],
+          "input": [
+            101,
+            255,
+            100
+          ],
+          "ram_addresses": [
+            "0x20002404",
+            "0x20002405",
+            "0x20002406"
+          ],
+          "loaded": [
+            50,
+            50,
+            100
+          ],
+          "compare": [
+            1250,
+            1250,
+            2500
+          ],
+          "window_call": {
+            "r0": 100,
+            "r1": 536886784,
+            "instructions": 191,
+            "hardware_hooks": 1
+          },
+          "apply_call": {
+            "r0": 1073742848,
+            "r1": 1250,
+            "instructions": 48,
+            "hardware_hooks": 0
+          },
+          "nor_operations": [
+            {
+              "op": "read",
+              "address": 77824,
+              "length": 296
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "mmio_write_count": 3454
+}

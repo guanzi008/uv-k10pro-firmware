@@ -1,11 +1,14 @@
 # Board interfaces recovered from the application
 
-This is a **firmware-derived board profile**, not a checked schematic or a report
-of successful operation on a physical radio. It targets the interface used by
+This is a **firmware-derived board profile** with an owner-confirmed PY32F071
+family MCU and 25Q32-density NOR (32 Mbit / 8 = 4 MiB). It is not a checked
+schematic or a report of successful operation on a physical radio. See
+[model identity and evidence provenance](model-identity.md). It targets the interface used by
 `K10PRO_ENG_v8.02.16`. Board revisions and optional components still need to be
 identified on hardware.
 
-The independently implemented drivers use the SPI NOR and Si4732 pins below.
+The independently implemented drivers use the SPI NOR, Si4732, LCD/backlight
+and optional keypad pins below.
 The RF and programming-interface sections record additional research evidence;
 those interfaces are not configured by the diagnostic firmware. Unknown reset,
 power, speaker, antenna-switch and transmit signals have no guessed definitions.
@@ -23,15 +26,20 @@ proprietary disassembly is included in this repository.
 | Signal | MCU pin | Configuration | Firmware evidence |
 | --- | --- | --- | --- |
 | SCK | PA0 | Alternate function 8 | GPIO initialization in `0x0801A298` sets pin mask `1`, AF8 |
-| MISO | PA1 | Alternate function 9 | Same routine sets pin mask `6`, AF9 for PA1/PA2 |
-| MOSI | PA2 | Alternate function 9 | Same pair; signal names match Puya table 3-3 |
+| MOSI | PA1 | Alternate function 9 | Same routine sets pin mask `6`, AF9 for PA1/PA2 |
+| MISO | PA2 | Alternate function 9 | Same pair; signal names match Puya table 3-3 |
 | CS# | PA3 | GPIO output, active low | `0x080195E4` writes bit3 to GPIOA BRR; completion writes BSRR |
 | Controller | SPI2 | Base `0x40003800` | Byte transfer at `0x0801A504` uses SR and DR at offsets 8 and 12 |
 
 The GPIO initializer called at `0x0801B040` establishes the parameter layout, so
 the AF numbers are traced through the call rather than inferred from a familiar
 STM32 pinout. [Puya's PY32F071 datasheet, table 3-3][puya-ds] confirms PA0/AF8 as
-SPI2_SCK and PA1/PA2 AF9 as SPI2_MISO/SPI2_MOSI.
+SPI2_SCK and PA1/PA2 AF9 as SPI2_MOSI/SPI2_MISO. The PA1/PA2 signal labels in
+the earlier project revision were reversed. They are corrected against the
+manufacturer's Chinese v1.4 table 3-3 (page 53), pin table 3-2 (pages 34–35),
+and English v0.7 table 3-3. Both pins remain AF9, so this correction does not
+change the driver's GPIO register configuration. Do not use the old labels
+for wiring.
 
 The initializer enables SPI2 using RCC `+0x3C`, bit14, and GPIOA using RCC
 `+0x34`, bit0. Its SPI parameters produce CR1 `0x0307` before enabling SPE:
@@ -67,12 +75,76 @@ The initial exact-ID table is deliberately small:
 | `EF 40 16` | [Winbond W25Q32JV IQ/JQ, section 7.1][wb-nor] | 4 MiB |
 | `EF 70 16` | [Winbond W25Q32JV IM/JM, section 7.1][wb-nor] | 4 MiB |
 
-This table is **not identification of the chip fitted to a UV-K10 Pro**. An
+The owner's 25Q32 confirmation establishes density, not manufacturer or suffix.
+This table is **not identification of the exact chip fitted to a UV-K10 Pro**. An
 unknown but readable ID is returned unchanged, capacity remains zero, and array
 reads return `SPI_NOR_UNSUPPORTED_ID`. Add other IDs only with their supporting
 datasheet, or implement and validate SFDP parsing. The read-only interface has no
 program, erase, write-enable, status-write, unlock or patch-upload operation. It
 does not wake a chip left in an undocumented deep-sleep or QPI state.
+
+## LCD and RGB backlight
+
+Actual execution of the stock GPIO, SPI1, LCD initialization and refresh
+functions establishes a 128×64 monochrome page buffer: eight pages of 128
+bytes, 1024 bytes total, with LCD column offset +4. The serial configuration is
+mode 3, 8-bit MSB-first, PCLK/16 (`SPI1_CR1=0x035F`). The colors are three
+backlight PWM channels. Detailed instruction and settings-loader evidence is
+in [display.md](display.md) and [display-analysis.json](evidence/display-analysis.json).
+
+| Signal | MCU pin | Configuration / destination |
+| --- | --- | --- |
+| LCD SCK | PA5 | SPI1 AF0 |
+| LCD data out | PA7 | SPI1 MOSI AF0 |
+| LCD CS# | PB2 | GPIO output, active low |
+| LCD D/C | PF2 | GPIO output, low command / high data |
+| Red backlight | PB6 | AF11, TIM1_CH3 / CCR3 |
+| Green backlight | PA15 | AF2, TIM2_CH1 / CCR1 |
+| Blue backlight | PB5 | AF1, TIM3_CH2 / CCR2 |
+
+All three timers use PSC=15, ARR=2500, compare=`setting * 25`, with settings
+0..100. The independent driver initializes them at zero; the diagnostic
+application requests (25,25,25) after successful initialization. It owns
+TIM1/2/3 and SPI1, uses bounded polling, releases CS and turns PWM off on bus
+failure. A successful write-only SPI transaction does not detect panel presence.
+
+The command family is compatible with ST7565/ST7567-style monochrome
+controllers; the exact controller is not identified. Stock software sends
+`E2` reset. No independent hardware RESET/power pin appears in the executed
+LCD path. PF2 can also serve NRST depending on option bytes; this project does
+not alter option bytes or assume another reset wiring. These are MCU port
+names, **not LCD connector numbers or MCU package pad numbers**.
+
+## Keypad and PTT
+
+Stock scanning function `0x08018C54` establishes these logical contacts.
+Columns are active-low inputs with pull-ups. Row outputs are push-pull,
+pull-up, speed 3; an idle scan leaves every row high.
+
+| Selected row | PB15 | PB14 | PB13 | PB12 | PA8 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| PF8 | 17 | 1 | 4 | 7 | 10 |
+| PB4 | 12 | 2 | 5 | 8 | 11 |
+| PB3 | 13 | 3 | 6 | 9 | not sampled |
+| PA14 | 18 | 14 | 0 | 15 | 16 |
+
+With all rows high, the scanner first checks PB15→24 (SK1), PB14→23 (SK2),
+PB13→25 (SK3), in that priority order. PC13 is a separate active-low input,
+producing PTT key code 21. See [keypad.md](keypad.md) for key semantics, stock
+debounce/hold behavior, simulation boundaries and the unconfirmed labels.
+
+The new driver configures only these pins, not the unrelated outputs in the
+stock whole-board GPIO initializer. Its diagnostic filter is independently
+specified: 20 ms of unchanged samples, with press/release event flags and
+independent PTT state. It does not implement the stock menu or long-press
+actions, and PTT is not connected to an RF operation.
+
+PA14 is also SWCLK. `K10_ENABLE_KEYPAD=0` is therefore the default: the keypad
+API returns `DISABLED` without MMIO and leaves inherited PA14 state untouched.
+This does not establish that SWD is already usable after every bootloader
+handoff. Opting in with `K10_ENABLE_KEYPAD=1` takes PA14 for the matrix. The
+contact model does not prove the board's diode isolation, safe arbitrary
+multiple-key shorts, ghosting behavior or external switch/connector numbering.
 
 ## Optional Si4732 receiver
 
@@ -147,12 +219,13 @@ assumption about an interchangeable K8 radio follows from that string.
 
 ## Configuration and validation boundary
 
-`K10_ENABLE_SPI_NOR=0` and `K10_ENABLE_SI4732=0` compile the corresponding APIs
-as explicit `DISABLED` results with no register access. They default to 1 for
-this experimental board profile because their bus pins are established from the
-sample. All operations are blocking and intended for one caller outside an ISR.
+`K10_ENABLE_SPI_NOR=0`, `K10_ENABLE_SI4732=0`, `K10_ENABLE_DISPLAY=0` and
+`K10_ENABLE_KEYPAD=0` compile the corresponding APIs
+as explicit `DISABLED` results with no register access. NOR, receiver and display
+default to 1; keypad defaults to 0 for the PA14/SWCLK reason above. All operations
+are blocking and intended for one caller outside an ISR.
 
-Hardware work still needs to verify the fitted MCU and NOR markings, optional
+Hardware work still needs the complete MCU/NOR suffixes and package markings, optional
 receiver population, real core/bus clock, pull-ups, reset/power sequencing, and
 receiver command traces. Delay accuracy follows the HAL's clock estimate;
 `hal_clock_known()` records whether that clock is established. An inherited

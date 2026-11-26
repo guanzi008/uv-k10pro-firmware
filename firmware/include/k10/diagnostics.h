@@ -5,21 +5,25 @@
 #include <stdint.h>
 
 #define K10_DIAG_MAGIC 0x4430314bu /* little-endian "K10D" */
-#define K10_DIAG_ABI 1u
+#define K10_DIAG_ABI 2u
 #define K10_DIAG_BUFFER_SIZE 64u
 
 enum k10_stage {
     K10_STAGE_START = 1,
     K10_STAGE_SPI = 2,
     K10_STAGE_RECEIVER = 3,
-    K10_STAGE_READY = 4
+    K10_STAGE_READY = 4,
+    K10_STAGE_FRONTPANEL = 5
 };
 
 enum k10_diag_flag {
     K10_FLAG_CLOCK_KNOWN = 1u << 0,
     K10_FLAG_JEDEC_READ = 1u << 1,
     K10_FLAG_FLASH_READ = 1u << 2,
-    K10_FLAG_RECEIVER_REVISION = 1u << 3
+    K10_FLAG_RECEIVER_REVISION = 1u << 3,
+    K10_FLAG_DISPLAY_READY = 1u << 4,
+    K10_FLAG_KEYPAD_READY = 1u << 5,
+    K10_FLAG_FLASH_GEOMETRY_MATCH = 1u << 6
 };
 
 enum k10_command {
@@ -76,6 +80,18 @@ struct k10_diagnostics {
     uint32_t argument1;
     uint32_t result;
     uint8_t buffer[K10_DIAG_BUFFER_SIZE];
+    /* ABI 2 fields are appended: ABI 1 offsets above remain unchanged. */
+    uint32_t expected_flash_capacity_bytes;
+    uint32_t display_error;
+    uint32_t display_frames;
+    uint32_t keypad_error;
+    uint32_t key_raw; /* 0xff = no key, not digit 0 */
+    uint32_t key_stable;
+    uint32_t ptt_raw;
+    uint32_t ptt_stable;
+    uint32_t key_last_events; /* enum keypad_event, latched until next event */
+    uint32_t key_last_released;
+    uint32_t key_event_count; /* number of nonempty event batches */
 };
 
 extern volatile struct k10_diagnostics k10_diag;

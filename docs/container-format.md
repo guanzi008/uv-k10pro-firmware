@@ -63,7 +63,7 @@ Python packages, serial ports, or attached radio are needed.
 
 ```sh
 python3 tools/verify_image.py build/k10pro.bin
-python3 tools/fwtool.py pack build/k10pro.bin build/k10pro.packed.bin --version 0.1.0-exp
+python3 tools/fwtool.py pack build/k10pro.bin build/k10pro.packed.bin --version 0.2.0-exp
 python3 tools/fwtool.py inspect build/k10pro.packed.bin
 python3 tools/fwtool.py unpack build/k10pro.packed.bin build/extracted.bin
 python3 tools/fwtool.py inspect build/extracted.bin --raw

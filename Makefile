@@ -2,7 +2,7 @@
 CROSS_COMPILE ?= arm-none-eabi-
 PYTHON ?= python3
 BUILD ?= build
-VERSION ?= 0.1.0-exp
+VERSION ?= 0.2.0-exp
 
 CC := $(CROSS_COMPILE)gcc
 OBJCOPY := $(CROSS_COMPILE)objcopy
