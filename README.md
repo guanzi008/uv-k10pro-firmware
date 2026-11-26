@@ -28,6 +28,12 @@
 
 各版本本地验证结果、工具链、镜像大小、摘要和测试覆盖见 [验证记录](docs/validation.md)。
 
+## 独立 Web 写频项目
+
+浏览器写频工作台另建于 **[uv-k10pro-web](https://github.com/guanzi008/uv-k10pro-web)**，不与 MCU 固件混在一个发布包中。它实现普通信道、VFO、Si4732/BK1080 存台、设置、扫描、联系人、开机图和本地备份，包含 Web Serial / WebUSB / 显式配置 BLE、正常密码认证、写前基线核对、备份及写后回读。实际设备验收与可写边界以该仓库说明为准；本仓库 Python 原型工具不会因此自动变成在线写频器。
+
+该项目继续执行官方广播 loader/saver 与正常密码验证指令，发现并修正当前 CPS 的若干结构和枚举差异。机主新补充的音频功放标识 **4898** 也已收入[硬件表](docs/hardware-research.md)，完整厂商/后缀/引脚待核，不擅自指定为 LM4898。
+
 ## 显示、按键与型号审计进展
 
 屏幕使用 **PA5/AF0 SCK、PA7/AF0 MOSI、PB2 CS#、PF2 D/C**；RGB 背光分别为 **PB6/TIM1_CH3、PA15/TIM2_CH1、PB5/TIM3_CH2**。原厂初始化、页寻址、RGB 设置到 PWM 的路径已执行验证，详见 [显示研究与驱动](docs/display.md)。这里的 RGB 指背光；帧缓冲是 1 bit/pixel。ST7565/ST7567 兼容命令不能单独确定唯一控制器型号。
