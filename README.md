@@ -36,7 +36,9 @@
 
 ## 用户补充的硬件配置
 
-2026-11-27，用户补充 **BK4829、CS6150XC**，明确 **FM 收音机为 BK1080**、**蓝牙为 PHY6235SC（BLE 5.4、RISC-V）**。当前硬件记录据此更新；CS6150XC 的功能仍待核验。奉加官方 PHY6235 系列资料支持 BLE 5.4 和 32 位 RISC-V，完整 SC 后缀对应的封装、容量及板级连线另行核对，见 [蓝牙硬件与写频链路](docs/bluetooth-hardware.md)及[本次用户报告](docs/evidence/owner-hardware-20261127.json)。此前 Si4732 的报告继续保留，BK1080 与 Si4732 的同板共存、选装及音频切换关系尚未确定。
+2026-11-27，用户补充 **BK4829、CS6150XC**，明确 **FM 收音机为 BK1080**、**蓝牙为 PHY6235SC（BLE 5.4、RISC-V）**。当前硬件记录据此更新；CS6150XC 的功能仍待核验。奉加官方 PHY6235 系列资料支持 BLE 5.4 和 32 位 RISC-V；2026-11-28 新取得的厂家手册进一步定位 SC 为 SOP16，容量需按完整订货后缀区分，板级连线仍待核对，见 [蓝牙硬件与写频链路](docs/bluetooth-hardware.md)及[用户报告](docs/evidence/owner-hardware-20261127.json)。此前 Si4732 的报告继续保留，BK1080 与 Si4732 的同板共存、选装及音频切换关系尚未确定。
+
+2026-11-28 的[蓝牙耳机音频分析](docs/bluetooth-audio-feasibility.md)重新核对官方样本，定位 USART3 的 115200 配置，以及 **ADC/DMA → AFSK/AX.25 解调 → APRS 数据上传**链。当前没有标准耳机音频实现；自定义 BLE 压缩语音可继续研究，普通 A2DP/HFP 和标准 LE Audio 的控制器/协议能力不能从 BLE 5.4 推出。
 
 2026-11-26，用户补充本次研究对象的 **Si4732、杭州中科微 ATGM336H-5N31 双模定位模块、10 × 10 mm GPS 天线、32.768 kHz 晶振（SMD3215-2P）和 SMA 天线母座**；此前已确认功放型号 **LM4898**。这些信息按用户报告记录于本仓库[硬件表](docs/hardware-research.md)，不外推到所有 K10 Pro 销售版本。
 

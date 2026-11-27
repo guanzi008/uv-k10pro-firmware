@@ -239,6 +239,27 @@ The common framing and each transport's checksum/XOR behavior are documented in
 identify the MCU. The descriptor text `K8 CPS` is a product/software clue; no
 assumption about an interchangeable K8 radio follows from that string.
 
+## ADC packet sampling input: PB1 / ADC_IN9
+
+The 2026-11-28 static review connects the stock ADC/DMA sampling mode to
+**ADC channel 9**, and the Puya PY32F071 v1.4 datasheet p39 maps that channel
+to **PB1**. The same initialization configures PB0 and PB1 as analog inputs.
+The non-DMA conversion path switches to channel 8, mapped to PB0, and feeds
+the battery/voltage processing path. In DMA mode the ordinary read function
+returns its cached pre-DMA value.
+
+| Item | Fixed-sample anchor | Boundary |
+| --- | --- | --- |
+| PB0/PB1 analog mode | `0x080173BC..0x080173CC`, GPIOB mask 1/2, mode 3 | GPIO configuration, not measured traces |
+| ADC_IN9 for packet sampling | `0x080174AC..0x080174B4`, argument `0x05B00009` | PB1 per [Puya pin table][puya-ds] |
+| ADC_IN8 after DMA mode | `0x0801755C..0x08017564`, argument `0x05800008` | PB0 per the same pin table |
+| Channel argument decoding | `0x0801AD70..0x0801AD78`, low 5 bits into conversion sequence | Confirms these are channel numbers |
+
+No BK4829 audio-output pad, Si4732/BK1080 audio switch, or battery-divider
+resistor has been mapped to these MCU pins. Package pad numbers are not
+assigned without the exact MCU suffix. See [the audio analysis](bluetooth-audio-feasibility.md)
+and [byte anchors](evidence/ble-audio-static-anchors.json).
+
 ## PHY6235SC Bluetooth SoC and unresolved CS6150XC
 
 The owner identified **PHY6235SC**, **BLE 5.4** and **RISC-V** on 2026-11-27.
@@ -250,6 +271,11 @@ family specifications and application-level evidence.
 No PHY6235SC package pad, host UART/SPI/USB interface, reset, wake-up or power
 signal has been mapped to the K10 board. In particular, the USART3/PB10/PB11
 stock configuration above is not sufficient to assign that UART to Bluetooth.
+The 2026-11-28 manufacturer-datasheet review now supplies an SC/SOP16 device
+pin reference in [bluetooth-hardware.md](bluetooth-hardware.md); these device
+pins are not measured board connections. The same investigation confirms the
+stock USART3 initialization argument of 115200 and an ADC/DMA-to-APRS packet
+path; see [bluetooth-audio-feasibility.md](bluetooth-audio-feasibility.md).
 The separate owner-reported marking **CS6150XC** remains functionally unresolved;
 no pin or peripheral definition is assigned to it.
 

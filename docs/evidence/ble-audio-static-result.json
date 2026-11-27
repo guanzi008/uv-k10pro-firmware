@@ -1,0 +1,457 @@
+{
+  "audit_type": "offline_static_byte_validation",
+  "success": true,
+  "sample_matches": true,
+  "sample_sha256": "061759672cc69a1b00420ce6fae67b0756d3db111f8fa4329cadc940dcd17f17",
+  "sample_size": 118956,
+  "anchor_count": 53,
+  "matched_anchor_count": 53,
+  "hardware_or_emulation_run": false,
+  "results": [
+    {
+      "id": "uart3_baud_call",
+      "address": "0x08018B4E",
+      "size": 8,
+      "matched": true,
+      "actual_hex": "e1 20 40 02 01 f0 1f ff",
+      "interpretation": "MOVS r0,225; LSLS r0,9; BL 0x0801A994. Requested USART3 baud = 115200."
+    },
+    {
+      "id": "uart3_base_literal",
+      "address": "0x0801AAC4",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "00 48 00 40",
+      "interpretation": "USART3 register base = 0x40004800."
+    },
+    {
+      "id": "uart3_rx_buffer_literal",
+      "address": "0x0801AAC8",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "f8 22 00 20",
+      "interpretation": "DMA RX buffer literal = 0x200022F8; verify annotated listing for use."
+    },
+    {
+      "id": "uart3_dma_count",
+      "address": "0x0801AA70",
+      "size": 16,
+      "matched": true,
+      "actual_hex": "c8 21 e0 7f 13 1f c2 58 12 0c 12 04 0a 43 c2 50",
+      "interpretation": "USART3 RX DMA transfer count initialized to 200."
+    },
+    {
+      "id": "uart3_tx_write",
+      "address": "0x0801AAD0",
+      "size": 26,
+      "matched": true,
+      "actual_hex": "10 b5 00 22 05 4b 05 e0 1c 68 64 06 fc d5 84 5c 5c 60 52 1c 8a 42 f7 d3 10 bd",
+      "interpretation": "Poll USART status; write each payload byte to peripheral base + 4."
+    },
+    {
+      "id": "transport_selector",
+      "address": "0x0800361C",
+      "size": 36,
+      "matched": true,
+      "actual_hex": "10 b5 0b 46 01 28 06 d0 02 28 11 46 18 46 07 d0 17 f0 40 f9 10 bd 11 46 18 46 17 f0 c7 fa 10 bd 17 f0 58 fa",
+      "interpretation": "Transport 2 calls 0x0801AAF0; transport 1 calls USB path; default calls USART1 framing."
+    },
+    {
+      "id": "uart3_frame_prefix",
+      "address": "0x0801AAF0",
+      "size": 44,
+      "matched": true,
+      "actual_hex": "f8 b5 0c 46 06 46 fe f7 2f f8 05 46 ab 20 69 46 08 70 cd 20 48 70 8c 70 20 0a c8 70 04 21 68 46 ff f7 de ff 21 46 30 46 ff f7 da ff",
+      "interpretation": "Compute CRC at 0x08018B58; prefix AB CD, little-endian payload length, then payload."
+    },
+    {
+      "id": "uart3_frame_suffix",
+      "address": "0x0801AB1C",
+      "size": 26,
+      "matched": true,
+      "actual_hex": "69 46 0d 70 28 0a 48 70 dc 20 88 70 ba 20 c8 70 04 21 68 46 ff f7 ce ff f8 bd",
+      "interpretation": "CRC16 low/high then DC BA trailer sent through 0x0801AAD0."
+    },
+    {
+      "id": "module_toggle",
+      "address": "0x08005610",
+      "size": 26,
+      "matched": true,
+      "actual_hex": "10 b5 06 4c 01 28 04 d0 13 f0 ca f9 00 20 20 70 10 bd 13 f0 b7 f9 01 20 f9 e7",
+      "interpretation": "Input 1 invokes 0x08018994 and state=1; other invokes 0x080189B0 and state=0."
+    },
+    {
+      "id": "module_enable",
+      "address": "0x08018994",
+      "size": 22,
+      "matched": true,
+      "actual_hex": "10 b5 01 21 05 20 ff f7 13 fb 01 20 02 f0 ca f8 01 49 01 20 08 70",
+      "interpretation": "Write RF control register helper with index5,value1; enable PB10 alternate function; software flag 1."
+    },
+    {
+      "id": "module_disable",
+      "address": "0x080189B0",
+      "size": 24,
+      "matched": true,
+      "actual_hex": "10 b5 00 20 02 f0 c0 f8 00 21 05 20 ff f7 02 fb 01 49 00 20 08 70 10 bd",
+      "interpretation": "Disable PB10 alternate function; write RF control helper with index5,value0; software flag 0."
+    },
+    {
+      "id": "rf_control_mask_helper",
+      "address": "0x08017FC4",
+      "size": 32,
+      "matched": true,
+      "actual_hex": "70 b5 07 4d 40 22 6c 88 c2 40 01 29 06 d0 94 43 21 46 33 20 00 f0 b4 fc 6c 80 70 bd 14 43 f7 e7",
+      "interpretation": "Mask=(0x40 >> index); update cached 16-bit register 0x33 via 0x08018944. Index5 means bit1."
+    },
+    {
+      "id": "pb10_pin_argument",
+      "address": "0x0801AB46",
+      "size": 42,
+      "matched": true,
+      "actual_hex": "01 20 80 02 00 90 03 20 02 90 00 21 04 20 03 91 05 90 00 2c 09 d0 02 20 01 90 01 20 04 90 69 46 04 48 00 f0 6a fa 06 b0 10 bd",
+      "interpretation": "PIN=1<<10, GPIOB, AF=4; enable selects alternate function mode. Does not prove PCB destination."
+    },
+    {
+      "id": "state_cmd_0322",
+      "address": "0x08002C08",
+      "size": 14,
+      "matched": true,
+      "actual_hex": "03 49 02 20 08 70 03 49 01 20 08 70 70 47",
+      "interpretation": "Command 0x0322 handler sets 0x20000162 to2 and UI redraw flag."
+    },
+    {
+      "id": "state_cmd_0323",
+      "address": "0x08002BE8",
+      "size": 24,
+      "matched": true,
+      "actual_hex": "01 79 05 48 00 29 05 d0 03 21 01 70 03 49 01 20 08 70 70 47 02 21 f8 e7",
+      "interpretation": "Command 0x0323 handler uses payload[4]: nonzero state3, zero state2. Avoid claiming pairing semantics."
+    },
+    {
+      "id": "metadata_cmd_0320",
+      "address": "0x08002C20",
+      "size": 66,
+      "matched": true,
+      "actual_hex": "10 b5 04 46 01 1d 86 b0 10 22 0e 48 ff f7 00 fb 21 46 06 22 14 31 0c 48 ff f7 fa fa 18 21 68 46 ff f7 0f fb 09 48 69 46 08 80 14 20 48 80 08 48 01 ac 0f c8 0f c4 18 22 69 46 02 20 00 f0 de fc 06 b0",
+      "interpretation": "Copy16 bytes from request+4 and6 bytes from request+0x14; reply0x0321,20-byte payload via transport2."
+    },
+    {
+      "id": "command_dispatch_0320_0323",
+      "address": "0x08003556",
+      "size": 16,
+      "matched": true,
+      "actual_hex": "ff f7 63 fb 10 bd ff f7 54 fb 10 bd ff f7 41 fb",
+      "interpretation": "Dispatch targets for 0x0320,0x0322,0x0323."
+    },
+    {
+      "id": "adc_dma_source_buffer",
+      "address": "0x080172F6",
+      "size": 12,
+      "matched": true,
+      "actual_hex": "15 4b 15 4a 01 21 20 46 03 f0 ad fd",
+      "interpretation": "Configure DMA from ADC data register 0x40012450 to 0x20002160."
+    },
+    {
+      "id": "adc_dma_count",
+      "address": "0x080172E0",
+      "size": 12,
+      "matched": true,
+      "actual_hex": "c0 22 01 21 20 46 1f 3d 03 f0 34 fe",
+      "interpretation": "Configure DMA transfer count192 (0xC0)."
+    },
+    {
+      "id": "dma_count_helper",
+      "address": "0x0801AF54",
+      "size": 20,
+      "matched": true,
+      "actual_hex": "05 4b 59 18 20 39 c9 7f 00 1d 0b 58 1b 0c 1b 04 13 43 0b 50",
+      "interpretation": "DMA counter setter, context establishes argument is count rather than byte length."
+    },
+    {
+      "id": "adc_sample_start",
+      "address": "0x080174E2",
+      "size": 42,
+      "matched": true,
+      "actual_hex": "0c 4a 00 90 0f 4b 50 32 01 21 28 46 03 f0 b5 fc 01 21 28 46 03 f0 fb fc 01 20 30 70 a1 68 01 43 a1 60 08 49 0a 68 02 43 0a 60",
+      "interpretation": "Re-arm ADC DMA source/destination; start DMA, set active flag, ADC and timer enable."
+    },
+    {
+      "id": "adc_buffer_literal",
+      "address": "0x0801734C",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "60 21 00 20",
+      "interpretation": "ADC DMA buffer = 0x20002160."
+    },
+    {
+      "id": "adc_data_register_literal",
+      "address": "0x08017350",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "50 24 01 40",
+      "interpretation": "ADC data register = 0x40012450."
+    },
+    {
+      "id": "adc_timer_init",
+      "address": "0x08017590",
+      "size": 34,
+      "matched": true,
+      "actual_hex": "10 b5 01 20 00 04 03 f0 55 fc 06 48 01 21 81 62 05 49 c1 62 42 68 20 21 70 23 9a 43 0a 43 42 60 10 bd",
+      "interpretation": "Timer base0x40014000: PSC(+0x28)=1, ARR(+0x2C)=2499, CR2 MMS bits=010."
+    },
+    {
+      "id": "adc_timer_base_literal",
+      "address": "0x080175B4",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "00 40 01 40",
+      "interpretation": "Timer register base0x40014000; exact peripheral name must follow PY32F071 map."
+    },
+    {
+      "id": "adc_timer_arr_literal",
+      "address": "0x080175B8",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "c3 09 00 00",
+      "interpretation": "ARR value2499 (0x9C3)."
+    },
+    {
+      "id": "nominal_core_clock_literal",
+      "address": "0x0801BBF4",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "00 6c dc 02",
+      "interpretation": "48,000,000 passed to the nominal clock setter, not an oscillator/timer measurement."
+    },
+    {
+      "id": "adc_dma_irq_second_half",
+      "address": "0x08017198",
+      "size": 18,
+      "matched": true,
+      "actual_hex": "02 20 60 60 28 78 01 28 0b d1 7e 70 13 48 ed f7 ad fb",
+      "interpretation": "DMA completion branch passes0x20002220 to0x08004904."
+    },
+    {
+      "id": "adc_dma_irq_first_half",
+      "address": "0x080171C2",
+      "size": 20,
+      "matched": true,
+      "actual_hex": "04 20 60 60 28 78 01 28 0d d1 09 48 3e 70 c0 38 ed f7 97 fb",
+      "interpretation": "DMA half branch passes0x20002220-0xC0=0x20002160 to0x08004904."
+    },
+    {
+      "id": "demod_mix_phase",
+      "address": "0x0800495A",
+      "size": 24,
+      "matched": true,
+      "actual_hex": "30 78 60 21 11 30 fd f7 c6 fb 6d 1c 64 1c e4 b2 31 70 ed b2 60 2c d6 d3",
+      "interpretation": "Quadrature oscillator phase increments17 modulo96; block loop96 samples."
+    },
+    {
+      "id": "demod_fir_41tap",
+      "address": "0x080049B6",
+      "size": 40,
+      "matched": true,
+      "actual_hex": "0d 18 6d 00 02 9e ae 46 76 5f b4 4d 47 00 c0 35 ef 5f 75 46 7e 43 f3 18 01 9e 40 1c 75 5f c0 b2 7d 43 aa 18 29 28 eb d3",
+      "interpretation": "Two signed-sample FIR sums with41 taps before discriminator."
+    },
+    {
+      "id": "demod_block_tail",
+      "address": "0x08004C70",
+      "size": 26,
+      "matched": true,
+      "actual_hex": "06 48 01 79 49 1c 49 07 49 0f 01 71 7f 1c ff b2 60 2f 00 d2 cb e6 05 b0 f0 bd",
+      "interpretation": "Block loop terminates after96 samples."
+    },
+    {
+      "id": "hdlc_flag_bits",
+      "address": "0x0801EB96",
+      "size": 8,
+      "matched": true,
+      "actual_hex": "00 01 01 01 01 01 01 00",
+      "interpretation": "Bit vector 0,1,1,1,1,1,1,0 (0x7E flag)."
+    },
+    {
+      "id": "packet_destuff",
+      "address": "0x08004240",
+      "size": 30,
+      "matched": true,
+      "actual_hex": "08 22 2a 49 28 46 fe f7 3c f8 00 28 07 d0 f0 7a 29 78 05 28 24 d3 64 1e a4 b2 f7 72 3e e0",
+      "interpretation": "Compare8-bit flag vector; five consecutive ones trigger removal of stuffed bit."
+    },
+    {
+      "id": "packet_crc_and_ready",
+      "address": "0x0800426E",
+      "size": 44,
+      "matched": true,
+      "actual_hex": "30 8b 02 28 12 d9 80 1e 81 b2 1b 48 31 83 20 30 14 f0 6b fc 19 49 32 8b 20 31 89 18 4a 78 0b 78 11 02 19 43 81 42 01 d1 01 20 b0 73",
+      "interpretation": "Remove2 FCS bytes, compute CRC0x08018B58, compare, set frame-ready flag0x20000322."
+    },
+    {
+      "id": "packet_bytes",
+      "address": "0x080042C6",
+      "size": 18,
+      "matched": true,
+      "actual_hex": "08 49 30 8b 72 7b 20 31 0a 54 37 73 77 73 40 1c 30 83",
+      "interpretation": "Build packet byte buffer0x20003724 and increment packet length at0x2000032C."
+    },
+    {
+      "id": "packet_task_call",
+      "address": "0x0800D08E",
+      "size": 16,
+      "matched": true,
+      "actual_hex": "b4 4d 00 24 28 78 01 28 02 d1 f7 f7 02 fe 2c 70",
+      "interpretation": "Main task reads frame-ready flag0x20000322; calls0x08004CA0 and clears flag."
+    },
+    {
+      "id": "packet_to_transport",
+      "address": "0x08004CBC",
+      "size": 8,
+      "matched": true,
+      "actual_hex": "6a 49 28 8b fe f7 c0 fc",
+      "interpretation": "Call0x08003644(length from0x2000032C, bytes at0x20003724)."
+    },
+    {
+      "id": "packet_forward_02e1",
+      "address": "0x08003644",
+      "size": 62,
+      "matched": true,
+      "actual_hex": "00 b5 0f 4a a3 b0 12 7b 01 2a 16 d1 0d 4a 12 78 03 2a 12 d1 0c 4a 6b 46 1a 80 84 22 5a 80 80 28 00 d9 80 20 98 80 02 46 18 46 08 30 fe f7 de fd 88 22 69 46 02 20 ff f7 cf ff 23 b0 00 bd",
+      "interpretation": "Requires enabled field and state3; command0x02E1, max128 input bytes, send via transport2."
+    },
+    {
+      "id": "packet_parser",
+      "address": "0x080046FE",
+      "size": 66,
+      "matched": true,
+      "actual_hex": "28 46 00 22 31 1d 37 60 ff f7 f3 fd 31 46 10 31 e8 1d 00 22 02 91 ff f7 ec fd 0e 27 0b e0 0c 20 60 43 81 19 e8 19 01 22 1c 31 ff f7 e2 fd ff 1d 64 1c bf b2 e4 b2 00 28 01 d0 08 2c ef d3 bf 1c bc b2",
+      "interpretation": "Decode source/destination and additional7-byte address fields, skip2 control/PID bytes."
+    },
+    {
+      "id": "aprs_type_dispatch",
+      "address": "0x08004758",
+      "size": 68,
+      "matched": true,
+      "actual_hex": "3a 28 39 d0 10 dc 27 28 3a d0 06 dc 21 28 1c d0 23 28 20 d0 24 28 5d d1 23 e0 29 28 2a d0 2a 28 19 d0 2f 28 56 d1 18 e0 40 28 18 d0 06 dc 3b 28 1e d0 3d 28 07 d0 3e 28 4c d1 1f e0 5f 28 0a d0 60 28 47 d1",
+      "interpretation": "Dispatch APRS information identifiers !,=,/,@,: etc; semantic interpretation, not CPU emulation."
+    },
+    {
+      "id": "ax25_tx_control_pid",
+      "address": "0x080048DE",
+      "size": 30,
+      "matched": true,
+      "actual_hex": "88 42 f8 d3 62 18 10 46 20 38 c3 7f 01 25 2b 43 c3 77 03 20 60 54 f0 20 50 70 89 1c 88 b2",
+      "interpretation": "Companion frame builder terminates address extension then writes control0x03 and PID0xF0."
+    },
+    {
+      "id": "crc16_core",
+      "address": "0x08018B58",
+      "size": 50,
+      "matched": true,
+      "actual_hex": "30 b5 0c 4a 0c 4c 0d e0 03 78 5a 40 00 23 40 1c d5 07 02 d0 52 08 62 40 00 e0 52 08 5b 1c db b2 08 2b f5 d3 0b 46 49 1e 89 b2 00 2b ec d1 d0 43 80 b2",
+      "interpretation": "Reflected CRC16 with init0xFFFF, polynomial0x8408, final complement."
+    },
+    {
+      "id": "si4732_probe_powerup",
+      "address": "0x08019C84",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "01 10 05 00",
+      "interpretation": "Probe POWER_UP template starts01 10 05; this check establishes template bytes only, not an audio route or output waveform."
+    },
+    {
+      "id": "si4732_am_powerup",
+      "address": "0x08019D34",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "01 10 05 00",
+      "interpretation": "AM/FM POWER_UP template01 10 05; this check establishes template bytes only, not an audio route or output waveform."
+    },
+    {
+      "id": "si4732_ssb_powerup",
+      "address": "0x0801A0CC",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "01 31 05 00",
+      "interpretation": "SSB patch power-up template01 31 05 retains analog-output selector05.; this check establishes template bytes only, not an audio route or output waveform."
+    },
+    {
+      "id": "adc_gpio_analog_setup",
+      "address": "0x080173BC",
+      "size": 20,
+      "matched": true,
+      "actual_hex": "03 22 01 21 28 46 03 f0 c6 fe 03 22 02 21 28 46 03 f0 c1 fe",
+      "interpretation": "Configure pin masks1 and2 on GPIOB with mode3; PB0/PB1 analog mode."
+    },
+    {
+      "id": "adc_gpio_base_literal",
+      "address": "0x08017474",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "00 04 00 50",
+      "interpretation": "GPIOB base 0x50000400 for the PB0/PB1 mode calls."
+    },
+    {
+      "id": "adc_dma_channel9_call",
+      "address": "0x080174AC",
+      "size": 12,
+      "matched": true,
+      "actual_hex": "1a 4d 49 00 2a 46 20 46 03 f0 3c fc",
+      "interpretation": "Load channel constant 0x05B00009 and pass it to sequence helper 0x0801AD30."
+    },
+    {
+      "id": "adc_dma_channel9_literal",
+      "address": "0x08017518",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "09 00 b0 05",
+      "interpretation": "DMA/AFSK conversion channel constant 0x05B00009; low5bits select channel9."
+    },
+    {
+      "id": "adc_idle_channel8_call",
+      "address": "0x0801755C",
+      "size": 12,
+      "matched": true,
+      "actual_hex": "0b 4e 49 00 32 46 20 46 03 f0 e4 fb",
+      "interpretation": "Load channel constant 0x05800008 and pass it to the same sequence helper."
+    },
+    {
+      "id": "adc_idle_channel8_literal",
+      "address": "0x0801758C",
+      "size": 4,
+      "matched": true,
+      "actual_hex": "08 00 80 05",
+      "interpretation": "Other/ordinary conversion channel constant 0x05800008; low5bits select channel8."
+    },
+    {
+      "id": "adc_sequence_channel_field",
+      "address": "0x0801AD70",
+      "size": 10,
+      "matched": true,
+      "actual_hex": "f3 06 db 0e 8b 40 1a 43 02 63",
+      "interpretation": "Extract low5bits of channel argument and place into ADC conversion sequence slot; corroborates channel decoding."
+    }
+  ],
+  "conditional_calculations": {
+    "timer_input_hz_assumption": 48000000,
+    "psc": 1,
+    "arr": 2499,
+    "sample_rate_hz_if_assumption_holds": 9600,
+    "dma_sample_count": 192,
+    "sample_storage_bytes": 2,
+    "dma_buffer_bytes": 384,
+    "half_buffer_samples": 96,
+    "half_buffer_ms_if_assumption_holds": 10,
+    "uart_requested_baud": 115200,
+    "uart_payload_ceiling_bytes_per_second_if_8n1": 11520,
+    "raw_sample_bytes_per_second_if_9600_s16": 19200
+  },
+  "confidence_and_limits": {
+    "instruction_and_data_anchor_values": "high: exact fixed-sample bytes",
+    "adc_to_decoded_packet_to_transport2_chain": "high static evidence; analog source and BLE on-air behavior unmeasured",
+    "AFSK_AX25_APRS_interpretation": "high static interpretation from quadrature demodulation, 8-sample symbol processing, 0x7E bit flags, destuffing, CRC, 7-byte addresses, 0x03/0xF0, APRS information identifiers",
+    "headset_audio_implementation": "not established by this audit; forwarding decoded packets is not PCM/voice streaming",
+    "physical_wiring": "no new proof of connections among PHY6235SC, MCU ADC, BK4829, Si4732, LM4898"
+  }
+}

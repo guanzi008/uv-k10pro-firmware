@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-28",
+  "review_timezone": "Asia/Shanghai",
+  "owner_identity": {
+    "part": "PHY6235SC",
+    "source": "owner-hardware-20261127.json",
+    "board_connections_measured": false
+  },
+  "manufacturer_document": {
+    "title": "PHY6235 Product Specification v1.0",
+    "author": "Phyplus Microelectronics Limited",
+    "revision_table": "2024.5 First Edition",
+    "file_metadata_creation_date": "2024-08-11",
+    "download_url": "https://www.dnsj88.com/filedownload/2972840",
+    "distributor_page": "https://www.dnsj88.com/PHY6235_xxzl",
+    "manufacturer_product_page": "https://www.phyplusinc.com/product_detail/17.html",
+    "sha256": "3fce0054ed8fd72981ec0dc39cb762333ce34d8796a703e367b2da1d52c7cb70",
+    "size_bytes": 2290068,
+    "physical_pages": 40,
+    "visually_reviewed_physical_pages": [
+      9,
+      10,
+      35
+    ],
+    "page_convention": "Body page numbers are 5 less than 1-based physical PDF pages.",
+    "official_20240926_document": "Official CDN URL returned HTTP 403; not assumed identical to the obtained document."
+  },
+  "confirmed_device_reference": {
+    "cpu": "N205 32-bit RISC-V",
+    "cpu_max_mhz": 48,
+    "sram_kb": 8,
+    "rom_kb": 80,
+    "sc_order_codes": [
+      {
+        "part": "PHY6235SC-W02C",
+        "package": "SOP16",
+        "flash_kb": 256
+      },
+      {
+        "part": "PHY6235SC-W02I",
+        "package": "SOP16",
+        "flash_kb": 256
+      },
+      {
+        "part": "PHY6235SC-W04I",
+        "package": "SOP16",
+        "flash_kb": 512
+      }
+    ],
+    "owner_exact_flash_variant": "unknown; owner report omits suffix after SC",
+    "wireless": "BLE 5.4, LE 1M/2M PHY, proprietary 2.4 GHz FSK",
+    "uart_max_baud_in_section_4_7": 1000000,
+    "adc": "12-bit SAR; generic ADC availability is not a completed audio subsystem",
+    "adc_rate_caveat": "Front-page 800kHz claim and section 4.10 manual-mode maximum 320kHz differ; no unconditional unified maximum adopted.",
+    "i2s_caveat": "Only glossary occurrence observed; no I2S peripheral support established by block diagram, peripheral chapters or address map.",
+    "sop16_reference": [
+      {
+        "pin": 1,
+        "signal": "P08"
+      },
+      {
+        "pin": 2,
+        "signal": "P00/VPP"
+      },
+      {
+        "pin": 3,
+        "signal": "P02"
+      },
+      {
+        "pin": 4,
+        "signal": "P03"
+      },
+      {
+        "pin": 5,
+        "signal": "P04",
+        "adc_channel": 1
+      },
+      {
+        "pin": 6,
+        "signal": "P05",
+        "adc_channel": 7
+      },
+      {
+        "pin": 7,
+        "signal": "P06",
+        "adc_channel": 2
+      },
+      {
+        "pin": 8,
+        "signal": "P07/Vbat"
+      },
+      {
+        "pin": 9,
+        "signal": "P12",
+        "adc_channel": 4
+      },
+      {
+        "pin": 10,
+        "signal": "P13",
+        "adc_channel": 10
+      },
+      {
+        "pin": 11,
+        "signal": "P14",
+        "adc_channel": 5
+      },
+      {
+        "pin": 12,
+        "signal": "XTAL16M_I"
+      },
+      {
+        "pin": 13,
+        "signal": "XTAL16M_O"
+      },
+      {
+        "pin": 14,
+        "signal": "VDD3"
+      },
+      {
+        "pin": 15,
+        "signal": "VSS"
+      },
+      {
+        "pin": 16,
+        "signal": "RF"
+      }
+    ],
+    "sop16_pin_reference_source_body_pages": [
+      4,
+      5,
+      22,
+      30
+    ]
+  },
+  "unsupported_inferences": [
+    "BLE 5.4 by itself establishes LE Audio or ISO support.",
+    "Private GATT FF12/FFF2/FFF3 is A2DP or HFP.",
+    "A2DP Sink can substitute for A2DP Source when sending radio audio to a headset.",
+    "A glossary I2S entry proves an implemented I2S peripheral.",
+    "A 6-byte metadata field necessarily represents a Bluetooth address.",
+    "115200 is the PHY6235 hardware UART limit.",
+    "MCU ADC presence proves routing of all BK4829/Si4732/BK1080 receiver audio.",
+    "8 KB SRAM alone proves all LC3 implementations mathematically impossible."
+  ],
+  "remaining_evidence_gaps": [
+    "PHY6235SC internal firmware and compatible SDK.",
+    "Controller ISO/CIS support and audio profile roles.",
+    "PCB wiring, supply, reset, UART and ADC signal source.",
+    "Real BLE throughput, audio quality, latency and headset interoperability."
+  ],
+  "scope": "Device reference and feasibility research, no firmware audio implementation or hardware validation."
+}
