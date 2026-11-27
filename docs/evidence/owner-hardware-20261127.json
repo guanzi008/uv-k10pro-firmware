@@ -1,0 +1,95 @@
+{
+  "recorded_on": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "source_kind": "user-report",
+  "scope": "Hardware supplied for this UV-K10 Pro research target; not generalized to all production variants",
+  "new_photograph_or_measurement": false,
+  "user_statements": [
+    "补充硬件BK4829、CS6150XC",
+    "收音机是BK1080",
+    "蓝牙是PHY6235SC，BLE 5.4 协议，RISC-V 内核"
+  ],
+  "components": [
+    {
+      "reported_model": "BK4829",
+      "research_role": "main_rf_transceiver_target",
+      "role_basis": "User-supplied part identity and existing RF research; the replay alone does not uniquely identify the chip",
+      "full_package_marking": null,
+      "physical_pin_continuity_verified": false,
+      "complete_register_map_verified": false
+    },
+    {
+      "reported_model": "BK1080",
+      "reported_role": "fm_radio_receiver",
+      "full_suffix": null,
+      "board_i2c_address": null,
+      "mcu_pin_mapping": null,
+      "clock_connection": null,
+      "audio_routing": null
+    },
+    {
+      "reported_model": "CS6150XC",
+      "manufacturer": null,
+      "function": null,
+      "pinout": null,
+      "host_interface": null,
+      "official_exact_model_source": null
+    },
+    {
+      "reported_model": "PHY6235SC",
+      "reported_role": "bluetooth_soc",
+      "reported_protocol": "BLE 5.4",
+      "reported_cpu_architecture": "RISC-V",
+      "manufacturer_family": "PHY6235",
+      "exact_suffix_configuration_verified": false,
+      "board_package": null,
+      "board_flash_capacity_bytes": null,
+      "mcu_host_interface": null,
+      "mcu_pin_mapping": null,
+      "reset_wake_power_mapping": null,
+      "on_chip_firmware_obtained": false
+    }
+  ],
+  "role_clarification": {
+    "latest_fm_receiver": "BK1080",
+    "historical_receiver_report": "Si4732",
+    "historical_source": "owner-hardware-20261126.json",
+    "preserve_historical_report": true,
+    "simultaneous_population_verified": false,
+    "receiver_variant_relationship": "unresolved",
+    "historical_bus_evidence_does_not_transfer_to_bk1080": true
+  },
+  "manufacturer_references": {
+    "bk1080": {
+      "product_url": "https://www.bekencorp.com/index/goods/detail/cid/34.html",
+      "verified_reference_fields": [
+        "FM receiver",
+        "I2C control",
+        "32.768 kHz crystal support"
+      ],
+      "scope": "Product page is titled BK1080 but its body also names BK1080H; no exact suffix or package assignment"
+    },
+    "phy6235": {
+      "manufacturer": "奉加科技（上海）股份有限公司 / Phyplus",
+      "product_url": "https://www.phyplusinc.com/product_detail/17.html",
+      "scope": "PHY6235 family specifications; not an independently verified PHY6235SC ordering-code table",
+      "verified_protocol": "BLE 5.4",
+      "verified_cpu_architecture": "32-bit RISC-V",
+      "family_max_cpu_mhz": 48,
+      "exact_sc_pinout_verified": false,
+      "datasheet_url": "https://omo-oss-file.thefastfile.com/portal-saas/new2023112720123779343/cms/file/phy6235_ble_soc_datasheet_v1.0_20240926.pdf",
+      "datasheet_version_advertised": "v1.0 / 2024-09-26",
+      "datasheet_retrieval": "HTTP 403; no PDF body or file hash obtained",
+      "sdk_catalog_url": "https://www.phyplusinc.com/support/4.html",
+      "matching_sdk_verified": false
+    }
+  },
+  "software_evidence": {
+    "main_mcu_analysis_target": "PY32F071 / ARM Thumb",
+    "bluetooth_cpu_is_not_main_mcu": true,
+    "web_ble_reference_commit": "8840949154fdb4766dac36fb132b0d0c8465c293",
+    "web_ble_reference_url": "https://github.com/guanzi008/uv-k10pro-web/blob/8840949154fdb4766dac36fb132b0d0c8465c293/docs/ble-profile.md",
+    "gatt_identity_source": "Official Android K8 AOT references, independent of the owner's chip identity report",
+    "transport2_to_bluetooth_physical_connection_verified": false
+  }
+}

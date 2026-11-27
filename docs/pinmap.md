@@ -151,7 +151,10 @@ multiple-key shorts, ghosting behavior or external switch/connector numbering.
 The owner reported Si4732 in this research unit on 2026-11-26. This records
 component population as a user report, not a new measurement of the bus below
 or a claim that every K10 Pro variant includes it. The full suffix, package,
-reset/power routing and reference-clock wiring remain unresolved.
+reset/power routing and reference-clock wiring remain unresolved. On 2026-11-27
+the owner explicitly identified the FM radio as BK1080. The earlier Si4732
+report and the stock Si4732 code path remain recorded separately; coexistence,
+variant selection and audio routing are not established by those reports alone.
 
 | Signal or field | Mapping | Evidence |
 | --- | --- | --- |
@@ -188,7 +191,20 @@ The stock image contains an additional path at `0x08019AF4` that transfers
 external patch is not present in the MCU download and is not used or distributed
 here. AM/SSB and this patch path remain outside the initial driver.
 
-## Main RF register bus: recovered, not a hardware-validated driver
+## BK1080 FM receiver: owner-reported component
+
+On 2026-11-27 the owner identified the FM receiver as **BK1080**. Beken's
+[official product page][bk1080] documents an I²C-controlled FM family with
+32.768 kHz crystal support. Its body also names BK1080H; it does not establish
+the exact suffix or package fitted to this radio.
+
+The board's BK1080 SCL/SDA pins, I²C address, power/reset, reference clock and
+audio connections remain unresolved. The PB8/PB9 and `0x11` Si4732 mapping above
+must not be copied into a BK1080 driver without matching evidence. This project
+has no independent BK1080 firmware driver yet. The shared FM preset storage
+layout belongs to the host configuration model, not a proof of shared chip pins.
+
+## Main RF register bus: BK4829 target, firmware-derived pins
 
 The stock functions `0x08018944(reg, value16)` and `0x08018248(reg)` use the
 port at `0x50001400`. The [Puya CMSIS definitions][puya-header] identify this as
@@ -203,9 +219,10 @@ GPIOF. Actual instruction replay with an explicit GPIO register model confirms:
 | Read format | `reg | 0x80`, then 16 input bits | Artificial `A5 5A` returns `0xA55A` |
 | 32-bit register pair | Low word to `0x38`, high word to `0x39` | Actual helper `0x08018480` |
 
-This is compatible with a BK48xx-style three-wire interface. It does not uniquely
-identify BK4819 or BK4829, establish a complete register map, or measure electrical
-timing. See [the replay and its limitations](emulation.md) and
+The owner supplied the **BK4829** part identity on 2026-11-27. This is a separate
+source from the replay: the observed BK48xx-style three-wire interface cannot
+uniquely distinguish BK4819 from BK4829, establish a complete register map or
+measure electrical timing. See [the replay and its limitations](emulation.md) and
 [manufacturer/teardown sources](hardware-research.md). No main-RF driver has been
 enabled in the experimental firmware on the strength of this model alone.
 
@@ -221,6 +238,20 @@ The common framing and each transport's checksum/XOR behavior are documented in
 [programming-protocol.md](programming-protocol.md). A USB VID by itself does not
 identify the MCU. The descriptor text `K8 CPS` is a product/software clue; no
 assumption about an interchangeable K8 radio follows from that string.
+
+## PHY6235SC Bluetooth SoC and unresolved CS6150XC
+
+The owner identified **PHY6235SC**, **BLE 5.4** and **RISC-V** on 2026-11-27.
+The [PHY6235 family page][phy6235] supports BLE 5.4 and a 32-bit RISC-V CPU;
+this does not change the PY32F071 main-MCU architecture. See
+[Bluetooth hardware and programming links](bluetooth-hardware.md) for the
+family specifications and application-level evidence.
+
+No PHY6235SC package pad, host UART/SPI/USB interface, reset, wake-up or power
+signal has been mapped to the K10 board. In particular, the USART3/PB10/PB11
+stock configuration above is not sufficient to assign that UART to Bluetooth.
+The separate owner-reported marking **CS6150XC** remains functionally unresolved;
+no pin or peripheral definition is assigned to it.
 
 ## Owner-reported GNSS, crystal and antenna components
 
@@ -259,3 +290,5 @@ from an arbitrary previously running receiver firmware.
 [gd-nor]: https://download.gigadevice.com/Datasheet/DS-00088-GD25Q32C-Rev4.1.pdf
 [wb-nor]: https://devzone.nordicsemi.com/cfs-file/__key/communityserver-discussions-components-files/4/W25Q32JV-RevI-05042021-Plus.pdf
 [an332]: https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/application-notes/AN332.pdf
+[bk1080]: https://www.bekencorp.com/index/goods/detail/cid/34.html
+[phy6235]: https://www.phyplusinc.com/product_detail/17.html

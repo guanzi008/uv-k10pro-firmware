@@ -36,7 +36,7 @@
 | `1` | `0x0801ABC8` | `0x20001D9E`，384 字节 | 原生 USB；下游 `0x0801D7F8` 以端点 `0x81` 发送 |
 | `2` | `0x0801AAF0` | `0x200022F8`，200 字节 | 辅助 UART 基址 `0x40004800`；初始化 `0x0801A994`，PB11 AF4；PB10 AF4 由 `0x0801AB38` 控制 |
 
-按 PY32F071 外设映射，第三条 UART 对应 USART3；其真实连接到哪个板载模块仍需原理图或走线确认。厂商应用支持 K10 Pro 蓝牙写频这一事实，与“transport 2 就是蓝牙”不是同一级证据，不能直接互相替代。相关厂商资料见 [hardware-research.md](hardware-research.md)。
+按 PY32F071 外设映射，第三条 UART 对应 USART3；其真实连接到哪个板载模块仍需原理图或走线确认。厂商应用支持 K10 Pro 蓝牙写频这一事实，与“transport 2 就是蓝牙”不是同一级证据，不能直接互相替代。2026-11-27 用户明确蓝牙芯片为 PHY6235SC、BLE 5.4、RISC-V；它补足了器件身份，仍未证明 USART3/PB10/PB11 与该芯片的物理连接。已恢复的应用 GATT 配置与芯片规格的对应范围见 [bluetooth-hardware.md](bluetooth-hardware.md)，相关厂商资料见 [hardware-research.md](hardware-research.md)。
 
 USART1 的模式选择函数 `0x0801A93C` 可向初始化函数传入 `38400` 或 `115200`。这些是代码中的配置值，没有测量物理串口。USB 通道有自己的 ring 和端点，不能因为它在电脑上表现为串口就把 USART1 波特率当作 USB 数据传输速率。
 
